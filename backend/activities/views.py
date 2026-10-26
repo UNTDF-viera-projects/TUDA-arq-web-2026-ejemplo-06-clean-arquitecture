@@ -1,6 +1,5 @@
 from uuid import UUID
 
-from django.db import transaction
 from django.db.models import Count
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import OpenApiParameter, OpenApiResponse, extend_schema
@@ -9,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .emails import send_enrollment_confirmation
+from .application.inscribir import inscribir
 from .models import Activity, Enrollment, Participant
 from .serializers import (
     ActivityOutSerializer,
@@ -167,37 +166,21 @@ class EnrollmentDetailView(APIView):
         if request.body:
             return Response(INVALID_REQUEST, status=status.HTTP_400_BAD_REQUEST)
 
-        with transaction.atomic():
-            try:
-                activity = Activity.objects.select_for_update().get(id=activity_id)
-            except Activity.DoesNotExist:
-                return Response(
-                    ACTIVITY_NOT_FOUND,
-                    status=status.HTTP_404_NOT_FOUND,
-                )
+        resultado = inscribir(participant, activity_id)
 
-            enrollment = Enrollment.objects.filter(
-                participant=participant,
-                activity=activity,
-            ).first()
-            if enrollment is not None:
-                return Response(EnrollmentOutSerializer(enrollment).data)
+        if resultado.estado == "actividad_inexistente":
+            return Response(ACTIVITY_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
+        if resultado.estado == "sin_cupo":
+            return Response(CAPACITY_EXHAUSTED, status=status.HTTP_409_CONFLICT)
 
-            if activity.enrollments.count() >= activity.capacity:
-                return Response(
-                    CAPACITY_EXHAUSTED,
-                    status=status.HTTP_409_CONFLICT,
-                )
-
-            enrollment = Enrollment.objects.create(
-                participant=participant,
-                activity=activity,
-            )
-
-        send_enrollment_confirmation(request.user, activity)
+        status_code = (
+            status.HTTP_201_CREATED
+            if resultado.estado == "creada"
+            else status.HTTP_200_OK
+        )
         return Response(
-            EnrollmentOutSerializer(enrollment).data,
-            status=status.HTTP_201_CREATED,
+            EnrollmentOutSerializer(resultado.inscripcion).data,
+            status=status_code,
         )
 
     @extend_schema(
