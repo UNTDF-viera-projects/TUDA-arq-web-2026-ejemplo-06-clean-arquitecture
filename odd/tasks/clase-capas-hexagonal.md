@@ -31,6 +31,8 @@ Repo: `modular-capas-v2`. Base code: `../modular-capas` commits `63d3cb5` (activ
 - [ ] T10 (S8) Archify evaluation (offline) and pieces
 - [x] T11 (S2, S6) `scripts/verificar-ramas.sh`: tests on every branch — all 15 green (11→30 tests)
 
+- [x] T12 (S4) Optional gRPC input adapter branch `opcional-entrada-grpc` — inline — 2eb6624 (33 tests; real server smoke OK)
+
 ## Log
 
 - L1: "Soy Leonel Viera, docente investigador de la universidad nacional de tierra del Fuego (UNTDF). Estoy dando la materia de Arquitecturas Web con un ejemplo de inscripciones a actividades. Ahora estaba introduciendo a los chicos al concecpto de arquitectura de capas / hexagonal, que proponen y sus componentes. Ellos nunca vieron como organizar esto y quiero primero plantearlo a nivel concepto y luego a nivel código. [...] Me puedes ayudar a planificar esta clase, su slide (storyboard y el código de apoyo). Una vez lleguemos a un acuerdo general comenzamos a generar"
@@ -41,3 +43,6 @@ Repo: `modular-capas-v2`. Base code: `../modular-capas` commits `63d3cb5` (activ
 - L6: Evidence: base 63d3cb5 had 2 stale tests (empty activities/urls.py) → cleanup commit in e00. emails.py swallows SMTP errors (201 + log): contract kept on every branch, so the "fallo" adapter yields 201 + log (storyboard 9.6 updated). import-linter must run in a subprocess inside tests (it reconfigures logging). Slice boundaries: each eNN branch is one reviewable unit.
 - L7: "Las slides estarían disponibles en todas las ramas? No quiero tener que cambiar de rama para ver como sigue la slide" → slides stay on main (code embedded at build time); scripts/etapa.sh shows any stage in a separate worktree ../modular-capas-v2-codigo.
 - L8: "Hay algo que no me termina de convencer antes de colorear la vista gorda [...] no explicamos nada de los conceptos de capaz ... como van a saber los alumnos qué colorear? faltarían un par de slides teóricas creo yo" → storyboard block 1 gains 1.4 (responsabilidad = pregunta) and 1.5 (cuatro preguntas para clasificar); H1 → 1.6 with legend; 4.1 becomes a recap. Sent to worker mvpgl510-2-tn4f.
+- L9: "los chicos vieron grpc, creo qeu sería un mejor ejemplo de presentación/entrada eso que cli ? no te parece? al menos en el gráfico de la slide 2" → hexagon in 0.3 shows gRPC; teacher chose "Rama opcional (recomendado)": e13 keeps CLI, `opcional-entrada-grpc` from e14; storyboard 11.3 added.
+- L10: "Al script de etapas podés agregarle un selector así puedo solo escribir ./scripts/etapa.sh y que me ofrezca una lista con cuál etapa quiero ir" → done (0888a32).
+- L11: "instalalo pero solo localmente para este repo con pnpm" (archify) → project-local install; A1/A2 generated in archify/.

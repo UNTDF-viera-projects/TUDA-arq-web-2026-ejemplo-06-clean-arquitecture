@@ -104,6 +104,7 @@ Cada rama sale de la anterior y tiene **un commit chico**. En **todas** pasan lo
 | `ejercicio-cancelar-consultar` | 14 | Sale de `e14`: consigna + tests que fallan | Aplicar el patrón |
 | `solucion-cancelar-consultar` | — | Solución de referencia | — |
 | `opcional-monolito-modular` | 13 | Sale de `e14`: `notificaciones/` como módulo con `api.py` público | Corte vertical |
+| `opcional-entrada-grpc` | 11 | Sale de `e14`: `inscripciones.proto` + `ServicioInscripciones` + servicio `grpc` en compose (puerto 50051), identidad JWT en la metadata | Otro adaptador de entrada, otro proceso |
 | `main` | — | `e14` + `slides/` + `storyboard.md` | — |
 
 ## A dónde llegamos: estructura final (`e14`)
@@ -217,11 +218,11 @@ cada encuentro. Cada bloque cierra una idea, así que cualquier frontera entre b
 | 8 | Arquitectura hexagonal | 6 | 20 |
 | 9 | Puerto de salida: notificar | 6 | 25 |
 | 10 | Puerto de persistencia | 5 | 20 |
-| 11 | Otra entrada: CLI | 2 | 8 |
+| 11 | Otra entrada: CLI y gRPC | 3 | 12 |
 | 12 | La regla como test | 2 | 8 |
 | 13 | Corte vertical: monolito modular | 3 | 10 |
 | 14 | Cierre, límites y ejercicio | 4 | 10 |
-| | **Total** | **64** | **241** |
+| | **Total** | **65** | **245** |
 
 ---
 
@@ -344,12 +345,13 @@ Notas 9.6: es el momento de mencionar que el fallo ocurre **después del commit*
 | 10.4 | Probar el interior completo 🧪 | `RepositorioEnMemoria` + `NotificadorMemoria`: tests del caso de uso sin Django. Comparar tiempos | Anatomía `e12:tests/test_inscribir.py` + terminal; **P1 ☑** | `e12` |
 | 10.5 | ¿Vale la pena? | Costos: mapeo duplicado, más archivos, el ORM de Django ya es casi un repositorio. Cuándo sí: reglas ricas, varios mecanismos, tests rápidos. Cuándo no: CRUD simple | Balanza ganancias / costos |
 
-## Bloque 11 — Otra entrada: CLI (2 slides · 8 min)
+## Bloque 11 — Otra entrada: CLI y gRPC (3 slides · 12 min)
 
 | # | Slide | Contenido | Visual | Rama |
 | --- | --- | --- | --- | --- |
 | 11.1 | Anatomía del comando | `manage.py inscribir ada <uuid>` usa el **mismo** `Inscribir` armado en `composition.py`. Traduce errores a mensajes y exit codes | Anatomía `e13:management/commands/inscribir.py` + terminal 🧪; **P3 ☑** | `e13` |
 | 11.2 | 🛠 Dos entradas, un interior | H3 con el selector en CLI: cambia el adaptador de entrada, el interior queda igual | 🛠 **H3** | `e13` |
+| 11.3 | Y si la entrada es gRPC (rama opcional) | Lo vieron en la materia: `opcional-entrada-grpc` expone el mismo `Inscribir` por gRPC. Anatomía de `servicio.py`: ① identidad desde la metadata (mismo JWT) ② traducir el pedido ③ llamar al caso de uso ④ errores del dominio → códigos gRPC (`NOT_FOUND`, `FAILED_PRECONDITION`, `UNAUTHENTICATED`). Es otro **proceso** (servicio `grpc` en compose) con las mismas capas: capa ≠ tier, otra vez | Anatomía `opcional-entrada-grpc:backend/activities/presentation/grpc/servicio.py` + terminal con `grpcurl` | `opcional-entrada-grpc` |
 
 ## Bloque 12 — La regla como test (2 slides · 8 min)
 
