@@ -1,6 +1,5 @@
 from uuid import UUID
 
-from django.db import transaction
 from django.db.models import Count
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import OpenApiParameter, OpenApiResponse, extend_schema
@@ -9,8 +8,10 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .emails import send_enrollment_confirmation
-from .models import Activity, Enrollment, Participant
+from ...domain.errores import ActividadNoEncontrada, CupoAgotado
+from ...composition import construir_inscribir
+from ..identidad import participante_actual
+from ...models import Activity, Enrollment, Participant
 from .serializers import (
     ActivityOutSerializer,
     EnrollmentOutSerializer,
@@ -53,6 +54,15 @@ def current_participant(user):
         defaults={"name": user.get_full_name() or user.username},
     )
     return participant
+
+
+def inscripcion_a_json(inscripcion):
+    """Traduce la entidad del dominio a los nombres del contrato HTTP."""
+    return {
+        "activity_id": inscripcion.actividad_id,
+        "participant_id": inscripcion.participante_id,
+        "enrolled_at": inscripcion.creada_en,
+    }
 
 
 def parse_activity_id(activity_id):
@@ -163,41 +173,24 @@ class EnrollmentDetailView(APIView):
         if activity_id is None:
             return Response(REQUEST_NOT_VALID, status=status.HTTP_400_BAD_REQUEST)
 
-        participant = current_participant(request.user)
+        participante = participante_actual(request.user)
         if request.body:
             return Response(INVALID_REQUEST, status=status.HTTP_400_BAD_REQUEST)
 
-        with transaction.atomic():
-            try:
-                activity = Activity.objects.select_for_update().get(id=activity_id)
-            except Activity.DoesNotExist:
-                return Response(
-                    ACTIVITY_NOT_FOUND,
-                    status=status.HTTP_404_NOT_FOUND,
-                )
+        try:
+            inscribir = construir_inscribir()
+            resultado = inscribir.ejecutar(participante, activity_id)
+        except ActividadNoEncontrada:
+            return Response(ACTIVITY_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
+        except CupoAgotado:
+            return Response(CAPACITY_EXHAUSTED, status=status.HTTP_409_CONFLICT)
 
-            enrollment = Enrollment.objects.filter(
-                participant=participant,
-                activity=activity,
-            ).first()
-            if enrollment is not None:
-                return Response(EnrollmentOutSerializer(enrollment).data)
-
-            if activity.enrollments.count() >= activity.capacity:
-                return Response(
-                    CAPACITY_EXHAUSTED,
-                    status=status.HTTP_409_CONFLICT,
-                )
-
-            enrollment = Enrollment.objects.create(
-                participant=participant,
-                activity=activity,
-            )
-
-        send_enrollment_confirmation(request.user, activity)
+        status_code = (
+            status.HTTP_201_CREATED if resultado.creada else status.HTTP_200_OK
+        )
         return Response(
-            EnrollmentOutSerializer(enrollment).data,
-            status=status.HTTP_201_CREATED,
+            EnrollmentOutSerializer(inscripcion_a_json(resultado.inscripcion)).data,
+            status=status_code,
         )
 
     @extend_schema(

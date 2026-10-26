@@ -28,6 +28,27 @@ docker compose up --build
 
 En la interfaz: iniciar sesión con `demo` / `demo`, inscribirse en una actividad y revisar el email en Mailpit.
 
+El notificador se elige con `NOTIFICADOR` (`smtp` por defecto, `memoria` o `fallo`):
+
+```bash
+NOTIFICADOR=fallo docker compose up --build
+```
+
+Con `fallo`, la inscripción se confirma igual (201) y el error queda en el log del backend.
+
+También se puede inscribir desde la terminal, con el mismo caso de uso que usa la API:
+
+```bash
+docker compose exec backend python manage.py inscribir demo <uuid-de-la-actividad>
+```
+
+La regla de dependencias entre capas está en `backend/.importlinter` y se verifica con los tests
+(`python manage.py test`) o directamente:
+
+```bash
+docker compose exec backend lint-imports
+```
+
 Detener:
 
 ```bash

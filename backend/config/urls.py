@@ -12,7 +12,7 @@ urlpatterns = [
         TokenRefreshView.as_view(),
         name="token_refresh",
     ),
-    path("api/v1/", include("activities.api_urls")),
+    path("api/v1/", include("activities.presentation.http.urls")),
     path(
         "api/v1/openapi.json",
         SpectacularJSONAPIView.as_view(),

@@ -99,6 +99,9 @@ EMAIL_HOST = os.environ.get("EMAIL_HOST", "localhost")
 EMAIL_PORT = int(os.environ.get("EMAIL_PORT", "1025"))
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = False
+# Qué adaptador usa el puerto Notificador: smtp, memoria o fallo.
+NOTIFICADOR = os.environ.get("NOTIFICADOR", "smtp")
+
 DEFAULT_FROM_EMAIL = os.environ.get(
     "DEFAULT_FROM_EMAIL",
     "actividades@untdf.local",
