@@ -48,6 +48,29 @@ services:
     volumes:
       - ./backend:/app
 
+  # Otro adaptador de entrada: mismo código e imagen, otro proceso y otro protocolo.
+  grpc:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: db
+      EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
+      EMAIL_HOST: mailpit
+      EMAIL_PORT: "1025"
+      DEFAULT_FROM_EMAIL: actividades@untdf.local
+      NOTIFICADOR: "${NOTIFICADOR:-smtp}"
+    command: python manage.py servidor_grpc --puerto 50051
+    depends_on:
+      backend:
+        condition: service_started
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./backend:/app
+
   frontend:
     build:
       context: ./frontend

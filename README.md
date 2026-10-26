@@ -42,6 +42,23 @@ También se puede inscribir desde la terminal, con el mismo caso de uso que usa 
 docker compose exec backend python manage.py inscribir demo <uuid-de-la-actividad>
 ```
 
+### Entrada gRPC (rama opcional)
+
+`compose.yaml` levanta también el servicio `grpc` (puerto 50051): el mismo caso de uso `Inscribir`
+detrás de otro protocolo. La identidad es el mismo access JWT de la API HTTP, en la metadata
+`authorization`. Con [grpcurl](https://github.com/fullstorydev/grpcurl):
+
+```bash
+TOKEN=$(curl -s -X POST http://127.0.0.1:8000/api/v1/token/ \
+  -H 'Content-Type: application/json' -d '{"username":"demo","password":"demo"}' \
+  | python3 -c 'import json,sys; print(json.load(sys.stdin)["access"])')
+
+grpcurl -plaintext -proto backend/activities/presentation/grpc/inscripciones.proto \
+  -H "authorization: Bearer $TOKEN" \
+  -d '{"actividad_id": "<uuid-de-la-actividad>"}' \
+  localhost:50051 inscripciones.v1.Inscripciones/Inscribir
+```
+
 La regla de dependencias entre capas está en `backend/.importlinter` y se verifica con los tests
 (`python manage.py test`) o directamente:
 
