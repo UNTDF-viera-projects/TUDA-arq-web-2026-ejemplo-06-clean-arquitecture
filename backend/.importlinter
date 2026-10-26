@@ -1,0 +1,42 @@
+# La regla de dependencias, verificable: `lint-imports` (o `python manage.py test`).
+
+[importlinter]
+root_package = activities
+include_external_packages = True
+
+[importlinter:contract:dominio]
+name = El dominio no depende de nada: ni de Django ni de otras capas
+type = forbidden
+source_modules =
+    activities.domain
+forbidden_modules =
+    django
+    rest_framework
+    activities.application
+    activities.infrastructure
+    activities.presentation
+    activities.composition
+    activities.models
+
+[importlinter:contract:aplicacion]
+name = La aplicación conoce el dominio y sus puertos, no los mecanismos
+type = forbidden
+source_modules =
+    activities.application
+forbidden_modules =
+    django
+    rest_framework
+    activities.infrastructure
+    activities.presentation
+    activities.composition
+    activities.models
+
+[importlinter:contract:capas]
+name = Las capas solo dependen hacia adentro
+type = layers
+layers =
+    activities.presentation
+    activities.composition
+    activities.infrastructure
+    activities.application
+    activities.domain

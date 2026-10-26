@@ -42,6 +42,13 @@ También se puede inscribir desde la terminal, con el mismo caso de uso que usa 
 docker compose exec backend python manage.py inscribir demo <uuid-de-la-actividad>
 ```
 
+La regla de dependencias entre capas está en `backend/.importlinter` y se verifica con los tests
+(`python manage.py test`) o directamente:
+
+```bash
+docker compose exec backend lint-imports
+```
+
 Detener:
 
 ```bash
