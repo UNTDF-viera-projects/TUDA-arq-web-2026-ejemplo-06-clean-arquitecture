@@ -29,3 +29,18 @@ Las ramas se escriben cortas (`e01`) o completas (`e01-email-en-la-vista`); si n
 Si falta una rama o archivo, el build termina con un mensaje claro.
 
 Cada `<section>` puede declarar para el minimapa: `data-rama="e01"`, `data-p1|p2|p3="no|parcial|si"` (si existe `data-p1` se muestran las preguntas) y `data-contrato="si"`.
+
+## Slides y código en paralelo
+
+Las slides viven solo en `main`, pero no hace falta cambiar de rama para seguirlas:
+`build.py` copia el código de cada etapa dentro de `index.html` al generarlo.
+
+Para mostrar o correr una etapa sin salir de `main`, usá una carpeta aparte:
+
+```bash
+scripts/etapa.sh e05          # deja ../modular-capas-v2-codigo en e05-reglas-de-dominio
+cd ../modular-capas-v2-codigo && docker compose up --build
+scripts/etapa.sh e06          # avanza la misma carpeta a la etapa siguiente
+```
+
+Esta carpeta (`main`) no cambia nunca de rama, así que las slides siguen abiertas.
