@@ -26,7 +26,7 @@ Repo: `modular-capas-v2`. Base code: `../modular-capas` commits `63d3cb5` (activ
 - [ ] T5 (S1, S3, S4) Slides blocks 0-5 — blocks 0-1 done (worker), blocks 2-5 pending
 - [x] T6 (S6, S7) Branches e07-e14 (ports and adapters) — inline — c9979f1 … 4fac3cc
 - [ ] T7 (S1, S3, S4) Slides blocks 6-14
-- [ ] T8 (S10, S11) Exercise branches cancel/query + optional modular monolith branch
+- [x] T8 (S10, S11) Exercise branches cancel/query + optional modular monolith branch — inline — ejercicio-cancelar-consultar (fc61579, red on purpose), solucion-cancelar-consultar (a25836e, on top of ejercicio), opcional-monolito-modular
 - [ ] T9 (S4) Interactive tools H2-H5 (H1 done)
 - [ ] T10 (S8) Archify evaluation (offline) and pieces
 - [x] T11 (S2, S6) `scripts/verificar-ramas.sh`: tests on every branch — all 15 green (11→30 tests)
@@ -39,3 +39,5 @@ Repo: `modular-capas-v2`. Base code: `../modular-capas` commits `63d3cb5` (activ
 - L4: "osea el monolito modular sería conceptual + opcional a nivel de código"
 - L5: "Creo que no hay un problema en el storyboard planteado pero te menciono por las dudas que no lo plantees así. No quiero que dividas las slides por \"día\". Yo lo iré regulando ayándome en los bloques. 1 me gusta la discución sobre repositorio. 2 no te preocupes, puedo hacer otra clase si es necesario. Tengo hasta 4 clases para terminar el tema. arranquemos" → S5 rewritten, storyboard reorganized by blocks only.
 - L6: Evidence: base 63d3cb5 had 2 stale tests (empty activities/urls.py) → cleanup commit in e00. emails.py swallows SMTP errors (201 + log): contract kept on every branch, so the "fallo" adapter yields 201 + log (storyboard 9.6 updated). import-linter must run in a subprocess inside tests (it reconfigures logging). Slice boundaries: each eNN branch is one reviewable unit.
+- L7: "Las slides estarían disponibles en todas las ramas? No quiero tener que cambiar de rama para ver como sigue la slide" → slides stay on main (code embedded at build time); scripts/etapa.sh shows any stage in a separate worktree ../modular-capas-v2-codigo.
+- L8: "Hay algo que no me termina de convencer antes de colorear la vista gorda [...] no explicamos nada de los conceptos de capaz ... como van a saber los alumnos qué colorear? faltarían un par de slides teóricas creo yo" → storyboard block 1 gains 1.4 (responsabilidad = pregunta) and 1.5 (cuatro preguntas para clasificar); H1 → 1.6 with legend; 4.1 becomes a recap. Sent to worker mvpgl510-2-tn4f.

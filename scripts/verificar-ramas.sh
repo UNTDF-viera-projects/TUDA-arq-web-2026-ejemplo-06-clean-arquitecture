@@ -18,6 +18,9 @@ for rama in $ramas; do
   git -C "$raiz" archive "$rama" backend | tar -x -C "$destino"
   if salida=$(cd "$destino/backend" && "$python" manage.py test 2>&1); then
     printf '✔ %-34s %s\n' "$rama" "$(grep -E '^Ran ' <<<"$salida")"
+  elif [[ "$rama" == ejercicio-* ]]; then
+    # El ejercicio trae tests que fallan hasta que se resuelva.
+    printf '○ %-34s %s (esperado)\n' "$rama" "$(grep -E '^(Ran |FAILED)' <<<"$salida" | tr '\n' ' ')"
   else
     printf '✘ %-34s %s\n' "$rama" "$(grep -E '^(Ran |FAILED)' <<<"$salida" | tr '\n' ' ')"
     fallas=$((fallas + 1))

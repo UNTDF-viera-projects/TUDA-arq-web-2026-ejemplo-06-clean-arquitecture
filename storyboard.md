@@ -207,7 +207,7 @@ cada encuentro. Cada bloque cierra una idea, así que cualquier frontera entre b
 | Bloque | Tema | Slides | Min |
 | --- | --- | --- | --- |
 | 0 | Apertura y destino | 4 | 10 |
-| 1 | El caso y el dolor | 5 | 20 |
+| 1 | El caso y el dolor (con las cuatro preguntas para clasificar) | 7 | 28 |
 | 2 | Vocabulario: arquitectura, cohesión, acoplamiento, ejes | 6 | 20 |
 | 3 | Red de seguridad | 2 | 10 |
 | 4 | Capas, paso a paso | 9 | 40 |
@@ -221,7 +221,7 @@ cada encuentro. Cada bloque cierra una idea, así que cualquier frontera entre b
 | 12 | La regla como test | 2 | 8 |
 | 13 | Corte vertical: monolito modular | 3 | 10 |
 | 14 | Cierre, límites y ejercicio | 4 | 10 |
-| | **Total** | **62** | **233** |
+| | **Total** | **64** | **241** |
 
 ---
 
@@ -232,21 +232,23 @@ cada encuentro. Cada bloque cierra una idea, así que cualquier frontera entre b
 | 0.1 | Portada | "Organizar el código: de la vista gorda a puertos y adaptadores" · Arquitecturas Web · UNTDF | Fondo rojo; hexágono blanco que se arma con piezas de colores |
 | 0.2 | Hoja de ruta | Los bloques en orden: del monolito a las capas (bloques 1–5), de las capas a puertos y adaptadores (6–12), el corte vertical (13). Un repo, una rama por paso | Línea de ramas `e00 … e14` con los bloques encima |
 | 0.3 | **A dónde llegamos** | Árbol final coloreado + hexágono con nuestros componentes. "No hace falta entenderlo hoy: es el mapa." | 🛠 **H2** en modo "solo mirar" |
-| 0.4 | Cómo seguir la clase | `git clone …` · `git checkout e00-base` · `docker compose up` · el minimapa y las tres preguntas (P1–P3 aparecen recién en 1.5) | Terminal + minimapa explicado con flechas |
+| 0.4 | Cómo seguir la clase | `git clone …` · las slides quedan abiertas en `main` · `scripts/etapa.sh e00` deja el código de la etapa en `../modular-capas-v2-codigo` · `docker compose up` ahí · el minimapa y las tres preguntas (P1–P3 aparecen recién en 1.7) | Terminal + minimapa explicado con flechas |
 
 Notas: insistir en que el contrato HTTP no va a cambiar en todo el recorrido. El frontend es un testigo.
 
-## Bloque 1 — El caso y el dolor (5 slides · 20 min)
+## Bloque 1 — El caso y el dolor (7 slides · 28 min)
 
 | # | Slide | Contenido | Visual | Rama |
 | --- | --- | --- | --- | --- |
 | 1.1 | El proyecto que ya conocen | Actividades, inscripciones `PUT/DELETE /me/enrollments/{id}`, JWT, PostgreSQL. Lo que ya hicimos: contrato OpenAPI, Docker | Diagrama de tiers navegador → Django → PostgreSQL | `e00` |
 | 1.2 | Nueva funcionalidad: comprobante por correo 🧪 | "Cuando alguien se inscribe, le mandamos un correo." Se agrega Mailpit al compose. Demo: inscribirse en la UI y ver el correo en `:8025` | Terminal + captura de Mailpit | `e01` |
 | 1.3 | ¿Dónde lo pusimos? Anatomía de la vista | `put()` completo con callouts: ① parsear el UUID ② identidad ③ transacción y bloqueo ④ regla de duplicado ⑤ regla de cupo ⑥ crear ⑦ enviar correo ⑧ respuesta HTTP | Anatomía, `data-incluir="e01:…/views.py"` + `emails.py` al costado | `e01` |
-| 1.4 | 🛠 Coloreá la vista gorda | Actividad: entre todos clasificamos cada línea. Al final: "una sola función conoce los 4 tipos de responsabilidad" | 🛠 **H1** | `e01` |
-| 1.5 | Tres preguntas que esta vista no puede responder | P1, P2, P3 (ver arriba). Quedan fijas en el minimapa hasta el final | Tres tarjetas grandes con ☐ | — |
+| 1.4 | Una responsabilidad es una pregunta que el código responde | Cada línea del `put()` responde una pregunta: "¿qué devuelvo si el UUID es inválido?" (HTTP), "¿se puede inscribir si no hay cupo?" (negocio), "¿cómo le hablo a Mailpit?" (mecanismo). Si una función responde preguntas de naturaleza distinta, cualquier cambio en una de ellas obliga a tocarla | Tres líneas reales del `put()` de `e01`, cada una con su globo de pregunta | `e01` |
+| 1.5 | Cuatro preguntas para clasificar cada línea | Tabla con capa · pregunta · pistas en el código · ejemplo del `put()`. **Presentación**: ¿cómo entra el pedido y cómo sale la respuesta? (request, `Response`, `status`, serializers, parsear la URL). **Aplicación**: ¿en qué orden se hacen los pasos? (transacción, "primero… después…", llamar a otras partes). **Dominio**: ¿qué regla del negocio se cumple, sin importar la tecnología? (cupo, duplicado). **Infraestructura**: ¿con qué tecnología concreta? (ORM, `send_mail`, `settings`). Aviso: una línea puede mezclar dos (la condición de cupo usa el ORM para contar), y eso también es una señal. "Capa = tipo de responsabilidad; no es carpeta ni servidor (bloque 2)" | Tabla de 4 filas con los colores de la paleta; cada ejemplo es una línea real de `e01` | `e01` |
+| 1.6 | 🛠 Coloreá la vista gorda | Actividad: entre todos clasificamos cada línea con las cuatro preguntas de 1.5 (quedan visibles como leyenda). Al final: "una sola función conoce los 4 tipos de responsabilidad" | 🛠 **H1** | `e01` |
+| 1.7 | Tres preguntas que esta vista no puede responder | P1, P2, P3 (ver arriba). Quedan fijas en el minimapa hasta el final | Tres tarjetas grandes con ☐ | — |
 
-Notas: en 1.4 dejar que discutan; hay líneas ambiguas (¿`select_for_update` es regla o mecanismo?) y es bueno que
+Notas: en 1.6 dejar que discutan; hay líneas ambiguas (¿`select_for_update` es regla o mecanismo?) y es bueno que
 aparezca la ambigüedad.
 
 ## Bloque 2 — Vocabulario (6 slides · 20 min)
@@ -271,7 +273,7 @@ aparezca la ambigüedad.
 
 | # | Slide | Contenido | Visual | Rama |
 | --- | --- | --- | --- | --- |
-| 4.1 | Las cuatro capas | Presentación (¿cómo entra y sale?) · Aplicación (¿cómo coordinamos?) · Dominio (¿qué reglas valen?) · Infraestructura (¿con qué mecanismo?) | Pila de 4 bandas con los colores de la paleta | — |
+| 4.1 | De las cuatro preguntas a cuatro capas | Retomamos la tabla de 1.5 y el resultado de H1: ahora cada pregunta va a tener su lugar en el código. Presentación (¿cómo entra y sale?) · Aplicación (¿cómo coordinamos?) · Dominio (¿qué reglas valen?) · Infraestructura (¿con qué mecanismo?) | Pila de 4 bandas con los colores de la paleta; al lado, la vista coloreada de H1 en miniatura | — |
 | 4.2 | Paso 1: un caso de uso | Movemos el cuerpo del `put()` a `application/inscribir.py`. La vista llama `inscribir(participante, actividad_id)` | **Diff** `e02..e03` (views.py se achica, aparece inscribir.py) | `e03` |
 | 4.3 | Anatomía del caso de uso (v1) | ① recibe datos, no un request ② transacción ③ reglas ④ crear ⑤ notificar (todavía `send_mail`) ⑥ devuelve un resultado. Problema: ¿cómo devuelve el 409? | Anatomía | `e03` |
 | 4.4 | Paso 2: la aplicación habla en errores, la vista en HTTP | `raise CupoAgotado()` en la aplicación; `except CupoAgotado: return 409` en la vista | Split: anatomía de `errores.py` + anatomía de la vista delgada (traducción error → status) | `e04` |
