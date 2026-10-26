@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .application.errores import ActividadNoEncontrada, CupoAgotado
 from .application.inscribir import inscribir
 from .models import Activity, Enrollment, Participant
 from .serializers import (
@@ -166,17 +167,15 @@ class EnrollmentDetailView(APIView):
         if request.body:
             return Response(INVALID_REQUEST, status=status.HTTP_400_BAD_REQUEST)
 
-        resultado = inscribir(participant, activity_id)
-
-        if resultado.estado == "actividad_inexistente":
+        try:
+            resultado = inscribir(participant, activity_id)
+        except ActividadNoEncontrada:
             return Response(ACTIVITY_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)
-        if resultado.estado == "sin_cupo":
+        except CupoAgotado:
             return Response(CAPACITY_EXHAUSTED, status=status.HTTP_409_CONFLICT)
 
         status_code = (
-            status.HTTP_201_CREATED
-            if resultado.estado == "creada"
-            else status.HTTP_200_OK
+            status.HTTP_201_CREATED if resultado.creada else status.HTTP_200_OK
         )
         return Response(
             EnrollmentOutSerializer(resultado.inscripcion).data,

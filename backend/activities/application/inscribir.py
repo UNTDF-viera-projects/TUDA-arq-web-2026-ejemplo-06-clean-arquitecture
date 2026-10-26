@@ -4,31 +4,31 @@ from django.db import transaction
 
 from ..emails import send_enrollment_confirmation
 from ..models import Activity, Enrollment
+from .errores import ActividadNoEncontrada, CupoAgotado
 
 
 @dataclass
 class ResultadoInscripcion:
-    # "creada", "existente", "actividad_inexistente" o "sin_cupo"
-    estado: str
-    inscripcion: Enrollment | None = None
+    inscripcion: Enrollment
+    creada: bool
 
 
 def inscribir(participante, actividad_id):
     with transaction.atomic():
         try:
             actividad = Activity.objects.select_for_update().get(id=actividad_id)
-        except Activity.DoesNotExist:
-            return ResultadoInscripcion("actividad_inexistente")
+        except Activity.DoesNotExist as error:
+            raise ActividadNoEncontrada() from error
 
         inscripcion = Enrollment.objects.filter(
             participant=participante,
             activity=actividad,
         ).first()
         if inscripcion is not None:
-            return ResultadoInscripcion("existente", inscripcion)
+            return ResultadoInscripcion(inscripcion, creada=False)
 
         if actividad.enrollments.count() >= actividad.capacity:
-            return ResultadoInscripcion("sin_cupo")
+            raise CupoAgotado()
 
         inscripcion = Enrollment.objects.create(
             participant=participante,
@@ -36,4 +36,4 @@ def inscribir(participante, actividad_id):
         )
 
     send_enrollment_confirmation(participante.user, actividad)
-    return ResultadoInscripcion("creada", inscripcion)
+    return ResultadoInscripcion(inscripcion, creada=True)
