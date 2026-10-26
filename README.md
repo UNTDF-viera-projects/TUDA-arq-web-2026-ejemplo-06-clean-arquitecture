@@ -36,6 +36,12 @@ NOTIFICADOR=fallo docker compose up --build
 
 Con `fallo`, la inscripción se confirma igual (201) y el error queda en el log del backend.
 
+También se puede inscribir desde la terminal, con el mismo caso de uso que usa la API:
+
+```bash
+docker compose exec backend python manage.py inscribir demo <uuid-de-la-actividad>
+```
+
 Detener:
 
 ```bash
