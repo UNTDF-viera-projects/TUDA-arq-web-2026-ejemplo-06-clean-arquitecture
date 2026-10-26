@@ -7,6 +7,7 @@ from django.utils import timezone
 from ..application.inscribir import Inscribir
 from ..domain.errores import CupoAgotado
 from ..domain.modelos import Participante
+from ..infrastructure.db.repositorio_django import RepositorioDjango
 from ..infrastructure.notificaciones.fallo import NotificadorFallo
 from ..infrastructure.notificaciones.memoria import NotificadorMemoria
 from ..models import Activity, Enrollment, Participant
@@ -32,8 +33,8 @@ class InscribirTests(TestCase):
     def test_pide_notificar_una_vez_con_los_datos_de_la_inscripcion(self):
         notificador = NotificadorMemoria()
 
-        Inscribir(notificador).ejecutar(self.participante, self.actividad.id)
-        Inscribir(notificador).ejecutar(self.participante, self.actividad.id)
+        Inscribir(RepositorioDjango(), notificador).ejecutar(self.participante, self.actividad.id)
+        Inscribir(RepositorioDjango(), notificador).ejecutar(self.participante, self.actividad.id)
 
         self.assertEqual(len(notificador.enviadas), 1)
         confirmacion = notificador.enviadas[0]
@@ -47,13 +48,13 @@ class InscribirTests(TestCase):
         notificador = NotificadorMemoria()
 
         with self.assertRaises(CupoAgotado):
-            Inscribir(notificador).ejecutar(self.participante, self.actividad.id)
+            Inscribir(RepositorioDjango(), notificador).ejecutar(self.participante, self.actividad.id)
 
         self.assertEqual(notificador.enviadas, [])
 
     def test_si_el_notificador_falla_la_inscripcion_se_conserva(self):
         with self.assertLogs("activities", level="ERROR"):
-            resultado = Inscribir(NotificadorFallo()).ejecutar(
+            resultado = Inscribir(RepositorioDjango(), NotificadorFallo()).ejecutar(
                 self.participante, self.actividad.id
             )
 

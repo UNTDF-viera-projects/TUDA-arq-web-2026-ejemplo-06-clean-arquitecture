@@ -4,6 +4,7 @@ from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 
 from .application.inscribir import Inscribir
+from .infrastructure.db.repositorio_django import RepositorioDjango
 from .infrastructure.notificaciones.fallo import NotificadorFallo
 from .infrastructure.notificaciones.memoria import NotificadorMemoria
 from .infrastructure.notificaciones.smtp import NotificadorSMTP
@@ -26,4 +27,7 @@ def construir_notificador():
 
 
 def construir_inscribir() -> Inscribir:
-    return Inscribir(notificador=construir_notificador())
+    return Inscribir(
+        repositorio=RepositorioDjango(),
+        notificador=construir_notificador(),
+    )
