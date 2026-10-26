@@ -9,6 +9,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from .emails import send_enrollment_confirmation
 from .models import Activity, Enrollment, Participant
 from .serializers import (
     ActivityOutSerializer,
@@ -193,6 +194,7 @@ class EnrollmentDetailView(APIView):
                 activity=activity,
             )
 
+        send_enrollment_confirmation(request.user, activity)
         return Response(
             EnrollmentOutSerializer(enrollment).data,
             status=status.HTTP_201_CREATED,

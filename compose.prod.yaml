@@ -1,4 +1,4 @@
-# Topología objetivo: Nginx (único punto de entrada) + Gunicorn + PostgreSQL.
+# Topología objetivo: Nginx (punto de entrada de la app) + Gunicorn + PostgreSQL + Mailpit.
 # Uso: cp .env.example .env && docker compose -f compose.prod.yaml up --build
 
 services:
@@ -16,6 +16,11 @@ services:
       timeout: 5s
       retries: 10
 
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+
   backend:
     build:
       context: ./backend
@@ -26,6 +31,10 @@ services:
       POSTGRES_HOST: db
       DJANGO_DEBUG: "0"
       DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1,backend,nginx"
+      EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
+      EMAIL_HOST: mailpit
+      EMAIL_PORT: "1025"
+      DEFAULT_FROM_EMAIL: actividades@untdf.local
     command: >-
       sh -c "python manage.py migrate --noinput &&
       python manage.py seed_activities &&
@@ -33,6 +42,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      mailpit:
+        condition: service_started
     # Sin puertos al host: solo alcanzable por la red interna.
 
   nginx:

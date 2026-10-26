@@ -11,6 +11,7 @@ from activities.models import Activity, Participant
 DEMO_USER = {
     "username": "demo",
     "password": "demo",
+    "email": "demo@example.com",
 }
 DEMO_PARTICIPANT = {
     "id": UUID("a3d8c92e-4f1a-4e5b-8c7d-9e0f1a2b3c4d"),
@@ -47,7 +48,7 @@ class Command(BaseCommand):
         User = get_user_model()
         user, _ = User.objects.update_or_create(
             username=DEMO_USER["username"],
-            defaults={"is_active": True},
+            defaults={"is_active": True, "email": DEMO_USER["email"]},
         )
         user.set_password(DEMO_USER["password"])
         user.save()

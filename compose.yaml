@@ -1,4 +1,4 @@
-# Modo desarrollo: Vite + runserver + PostgreSQL.
+# Modo desarrollo: Vite + runserver + PostgreSQL + Mailpit.
 # Uso: cp .env.example .env && docker compose up --build
 
 services:
@@ -16,6 +16,11 @@ services:
       timeout: 5s
       retries: 10
 
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+
   backend:
     build:
       context: ./backend
@@ -24,6 +29,10 @@ services:
       - .env
     environment:
       POSTGRES_HOST: db
+      EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
+      EMAIL_HOST: mailpit
+      EMAIL_PORT: "1025"
+      DEFAULT_FROM_EMAIL: actividades@untdf.local
     command: >-
       sh -c "python manage.py migrate --noinput &&
       python manage.py seed_activities &&
@@ -31,6 +40,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      mailpit:
+        condition: service_started
     ports:
       - "8000:8000"
     volumes:

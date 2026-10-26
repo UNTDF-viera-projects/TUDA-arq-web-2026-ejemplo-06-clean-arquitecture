@@ -8,7 +8,103 @@ h1 {
   margin-bottom: 0.5rem;
 }
 
+h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+}
+
 p {
   color: #52606d;
   font-size: 1.125rem;
+}
+
+.hint,
+.error,
+.notice {
+  font-size: 1rem;
+}
+
+.error {
+  color: #9b1c1c;
+}
+
+.notice {
+  color: #0b6e4f;
+}
+
+.session-bar,
+.login-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  align-items: end;
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid #d9e2ec;
+  border-radius: 0.5rem;
+}
+
+.login-form {
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 24rem;
+}
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+.login-form input {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid #cbd2d9;
+  border-radius: 0.35rem;
+}
+
+button {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid #1992d4;
+  border-radius: 0.35rem;
+  background: #1992d4;
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  border-color: #cbd2d9;
+  background: #e4e7eb;
+  color: #7b8794;
+  cursor: not-allowed;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid #e4e7eb;
+  text-align: left;
+  vertical-align: middle;
+}
+
+th:first-child,
+td:first-child {
+  position: sticky;
+  left: 0;
+  background: #fff;
+  min-width: 10rem;
+}
+
+th {
+  font-size: 0.875rem;
+  color: #52606d;
 }
