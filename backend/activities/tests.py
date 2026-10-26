@@ -2,7 +2,9 @@ from datetime import datetime
 from uuid import UUID, uuid4
 
 from django.contrib.auth import get_user_model
-from django.test import TestCase
+from django.core import mail
+from django.core.mail.backends.base import BaseEmailBackend
+from django.test import TestCase, override_settings
 from django.utils import timezone
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -10,6 +12,14 @@ from .models import Activity, Enrollment, Participant
 
 
 User = get_user_model()
+LOCMEM_EMAIL = "django.core.mail.backends.locmem.EmailBackend"
+
+
+class FailingEmailBackend(BaseEmailBackend):
+    """Simula un servidor SMTP caído."""
+
+    def send_messages(self, email_messages):
+        raise ConnectionRefusedError("SMTP no disponible")
 
 
 def bearer_headers(user):
@@ -160,6 +170,45 @@ class ApiContractTests(TestCase):
                 activity=self.activity,
             ).count(),
             1,
+        )
+
+    @override_settings(EMAIL_BACKEND=LOCMEM_EMAIL)
+    def test_put_sends_email_only_when_enrollment_is_created(self):
+        self.user.email = "ada@example.com"
+        self.user.save(update_fields=["email"])
+
+        created_response = self.client.put(self.enrollment_url, **self.headers)
+        repeated_response = self.client.put(self.enrollment_url, **self.headers)
+
+        self.assertEqual(created_response.status_code, 201)
+        self.assertEqual(repeated_response.status_code, 200)
+        self.assertEqual(len(mail.outbox), 1)
+        self.assertEqual(mail.outbox[0].to, ["ada@example.com"])
+        self.assertIn(self.activity.title, mail.outbox[0].subject)
+
+    @override_settings(EMAIL_BACKEND=LOCMEM_EMAIL)
+    def test_put_without_user_email_enrolls_without_sending(self):
+        response = self.client.put(self.enrollment_url, **self.headers)
+
+        self.assertEqual(response.status_code, 201)
+        self.assertEqual(len(mail.outbox), 0)
+
+    @override_settings(
+        EMAIL_BACKEND="activities.tests.FailingEmailBackend",
+    )
+    def test_put_keeps_the_enrollment_when_email_fails(self):
+        self.user.email = "ada@example.com"
+        self.user.save(update_fields=["email"])
+
+        with self.assertLogs("activities", level="ERROR"):
+            response = self.client.put(self.enrollment_url, **self.headers)
+
+        self.assertEqual(response.status_code, 201)
+        self.assertTrue(
+            Enrollment.objects.filter(
+                participant=self.participant,
+                activity=self.activity,
+            ).exists()
         )
 
     def test_put_rejects_a_body_and_an_activity_without_capacity(self):
