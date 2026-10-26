@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organizar el código: de la vista gorda a puertos y adaptadores · UNTDF</title>
+    <link rel="stylesheet" href="vendor/reveal/reset.css" />
+    <link rel="stylesheet" href="vendor/reveal/reveal.css" />
+    <link rel="stylesheet" href="vendor/reveal/plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="untdf.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- ================= BLOQUE 0 · APERTURA Y DESTINO ================= -->
+
+        <!-- 0.1 Portada -->
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="Apertura">
+          <svg class="portada-hex" viewBox="0 0 200 200" aria-hidden="true">
+            <polygon class="pieza" fill="#7B5EA7" points="100,100 100,10 177.9,55" />
+            <polygon class="pieza" fill="#2F6DB5" points="100,100 177.9,55 177.9,145" />
+            <polygon class="pieza" fill="#2E8B57" points="100,100 177.9,145 100,190" />
+            <polygon class="pieza" fill="#6F6F6E" points="100,100 100,190 22.1,145" />
+            <polygon class="pieza" fill="#C98A1B" points="100,100 22.1,145 22.1,55" />
+            <polygon class="pieza" fill="#ffffff" points="100,100 22.1,55 100,10" />
+          </svg>
+          <div style="margin-top: 90px; max-width: 800px">
+            <img class="portada-logo" src="assets/logo-untdf-white.svg" alt="UNTDF" />
+            <h1 style="font-size: 2.1em">Organizar el código</h1>
+            <h2 style="font-weight: 400">De la vista gorda a puertos y adaptadores</h2>
+            <p style="margin-top: 2em; font-size: 0.8em">
+              Arquitecturas Web · Leonel Viera<br />
+              Universidad Nacional de Tierra del Fuego, A. e I.A.S.
+            </p>
+          </div>
+          <aside class="notes">
+            Presentarse. Esta clase no tiene un tema nuevo de tecnología: tiene un problema de organización. Vamos a
+            tomar un proyecto que ya funciona (el de inscripciones) y a reorganizarlo paso a paso, sin romper nada.
+            Pedir que tengan el repo clonado y Docker abierto si quieren seguir el recorrido.
+          </aside>
+        </section>
+
+        <!-- 0.2 Hoja de ruta -->
+        <section>
+          <h2>Hoja de ruta</h2>
+          <div class="ruta">
+            <div><b>1–5</b>Del monolito a las capas<br /><small>el dolor, la red de seguridad, cuatro capas</small></div>
+            <div><b>6–12</b>De las capas a puertos y adaptadores<br /><small>inversión, hexágono, notificar, persistir, CLI, regla como test</small></div>
+            <div><b>13</b>El corte vertical<br /><small>monolito modular (conceptual + rama opcional)</small></div>
+            <div><b>14</b>Cierre y ejercicio<br /><small>límites y consigna</small></div>
+          </div>
+          <div class="linea-ramas">
+            <div class="tramo" style="grid-column: 1 / span 7; --tramo: var(--capa-aplicacion)"><b>Capas</b>e00 → e06</div>
+            <div class="tramo" style="grid-column: 8 / span 8; --tramo: var(--capa-puerto)"><b>Puertos y adaptadores</b>e07 → e14</div>
+            <div class="punto" style="grid-column: 1; --tramo: var(--capa-aplicacion)">e00</div>
+            <div class="punto" style="grid-column: 2; --tramo: var(--capa-aplicacion)">e01</div>
+            <div class="punto" style="grid-column: 3; --tramo: var(--capa-aplicacion)">e02</div>
+            <div class="punto" style="grid-column: 4; --tramo: var(--capa-aplicacion)">e03</div>
+            <div class="punto" style="grid-column: 5; --tramo: var(--capa-aplicacion)">e04</div>
+            <div class="punto" style="grid-column: 6; --tramo: var(--capa-aplicacion)">e05</div>
+            <div class="punto" style="grid-column: 7; --tramo: var(--capa-aplicacion)">e06</div>
+            <div class="punto" style="grid-column: 8; --tramo: var(--capa-puerto)">e07</div>
+            <div class="punto" style="grid-column: 9; --tramo: var(--capa-puerto)">e08</div>
+            <div class="punto" style="grid-column: 10; --tramo: var(--capa-puerto)">e09</div>
+            <div class="punto" style="grid-column: 11; --tramo: var(--capa-puerto)">e10</div>
+            <div class="punto" style="grid-column: 12; --tramo: var(--capa-puerto)">e11</div>
+            <div class="punto" style="grid-column: 13; --tramo: var(--capa-puerto)">e12</div>
+            <div class="punto" style="grid-column: 14; --tramo: var(--capa-puerto)">e13</div>
+            <div class="punto" style="grid-column: 15; --tramo: var(--capa-puerto)">e14</div>
+          </div>
+          <p class="muted chico" style="margin-top: 1.2em">
+            <strong>Un repo, una rama por paso.</strong> Cada rama sale de la anterior, tiene un commit chico y los
+            tests de contrato pasan en todas. Además: <code>opcional-monolito-modular</code> y
+            <code>ejercicio-cancelar-consultar</code>.
+          </p>
+          <aside class="notes">
+            No son tres clases: es una sola presentación en bloques y yo regulo dónde cortamos. Lo importante es que
+            cada rama es un paso chico que pueden abrir y mirar. La primera mitad (bloques 1 a 5) son capas; la segunda
+            (6 a 12) lleva esas capas hasta puertos y adaptadores. El bloque 13 mira el otro eje: cortar por
+            capacidades del negocio.
+          </aside>
+        </section>
+
+        <!-- 0.3 A dónde llegamos -->
+        <section data-titulo="0 · Apertura y destino">
+          <h2>A dónde llegamos <span class="herramienta">🛠 H2 · solo mirar</span></h2>
+          <div class="dos-col" style="grid-template-columns: 1fr 1.05fr; gap: 0.6em">
+            <div>
+              <ul class="arbol">
+                <li class="dir"><span class="nombre">backend/activities/</span>
+                  <ul>
+                    <li class="hoja capa-composicion"><span class="nombre">composition.py</span></li>
+                    <li class="hoja capa-infraestructura"><span class="nombre">models.py</span></li>
+                    <li class="dir"><span class="nombre">domain/</span>
+                      <ul>
+                        <li class="hoja capa-dominio"><span class="nombre">modelos.py</span></li>
+                        <li class="hoja capa-dominio"><span class="nombre">reglas.py</span></li>
+                        <li class="hoja capa-dominio"><span class="nombre">errores.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">application/</span>
+                      <ul>
+                        <li class="hoja capa-puerto"><span class="nombre">puertos.py</span></li>
+                        <li class="hoja capa-aplicacion"><span class="nombre">dto.py</span></li>
+                        <li class="hoja capa-aplicacion"><span class="nombre">inscribir.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">infrastructure/</span>
+                      <ul>
+                        <li class="hoja capa-infraestructura"><span class="nombre">db/repositorio_django.py</span></li>
+                        <li class="hoja capa-infraestructura"><span class="nombre">notificaciones/smtp.py</span></li>
+                        <li class="hoja capa-infraestructura"><span class="nombre">notificaciones/memoria.py</span></li>
+                        <li class="hoja capa-infraestructura"><span class="nombre">notificaciones/fallo.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">presentation/http/</span>
+                      <ul>
+                        <li class="hoja capa-presentacion"><span class="nombre">views.py</span></li>
+                        <li class="hoja capa-presentacion"><span class="nombre">serializers.py</span></li>
+                        <li class="hoja capa-presentacion"><span class="nombre">urls.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">management/commands/</span>
+                      <ul>
+                        <li class="hoja capa-presentacion"><span class="nombre">inscribir.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">tests/</span>
+                      <ul>
+                        <li class="hoja capa-tests"><span class="nombre">test_contrato_api.py</span></li>
+                        <li class="hoja capa-tests"><span class="nombre">test_reglas.py · test_inscribir.py · fakes.py</span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <svg class="hexagono" viewBox="0 0 580 420" role="img" aria-label="Hexágono con nuestros componentes">
+                <defs>
+                  <marker id="punta-azul" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                    <path d="M0,0 L10,5 L0,10 z" fill="#2F6DB5" />
+                  </marker>
+                </defs>
+                <polygon class="borde" points="190,50 350,50 430,210 350,370 190,370 110,210" />
+                <!-- interior -->
+                <rect x="190" y="125" width="150" height="62" rx="10" fill="#2F6DB5" />
+                <text x="265" y="162">Inscribir</text>
+                <rect x="190" y="210" width="150" height="56" rx="10" fill="#2E8B57" />
+                <text x="265" y="243">reglas</text>
+                <text class="rotulo" x="265" y="85" style="fill: #6f6f6e">interior: aplicación + dominio</text>
+                <!-- entradas (izquierda) -->
+                <rect x="6" y="110" width="84" height="40" rx="8" fill="#7B5EA7" />
+                <text x="48" y="136">HTTP</text>
+                <rect x="6" y="190" width="84" height="40" rx="8" fill="#7B5EA7" />
+                <text x="48" y="216">CLI</text>
+                <rect x="6" y="270" width="84" height="40" rx="8" fill="#7B5EA7" />
+                <text x="48" y="296">Tests</text>
+                <line class="flecha-azul" x1="90" y1="130" x2="150" y2="130" />
+                <line class="flecha-azul" x1="90" y1="210" x2="112" y2="210" />
+                <line class="flecha-azul" x1="90" y1="290" x2="150" y2="290" />
+                <!-- puertos (rojo) -->
+                <rect x="352" y="116" width="82" height="28" rx="14" fill="#BE1C1D" />
+                <text x="393" y="136" style="font-size: 13px">Notificar</text>
+                <rect x="352" y="276" width="82" height="28" rx="14" fill="#BE1C1D" />
+                <text x="393" y="296" style="font-size: 13px">Persistir</text>
+                <!-- salidas (derecha) -->
+                <rect x="462" y="100" width="114" height="60" rx="8" fill="#6F6F6E" />
+                <text x="519" y="125" style="font-size: 13px">SMTP</text>
+                <text x="519" y="145" style="font-size: 13px">Memoria · Fallo</text>
+                <rect x="462" y="266" width="114" height="40" rx="8" fill="#6F6F6E" />
+                <text x="519" y="292">ORM</text>
+                <line class="flecha-azul" x1="434" y1="130" x2="462" y2="130" />
+                <line class="flecha-azul" x1="434" y1="290" x2="462" y2="290" />
+                <text class="rotulo" x="48" y="95">entradas</text>
+                <text class="rotulo" x="519" y="85">salidas</text>
+              </svg>
+              <div class="leyenda-capas">
+                <span class="chip-capa capa-presentacion">presentación</span>
+                <span class="chip-capa capa-aplicacion">aplicación</span>
+                <span class="chip-capa capa-dominio">dominio</span>
+                <span class="chip-capa capa-puerto">puertos</span>
+                <span class="chip-capa capa-infraestructura">infraestructura</span>
+                <span class="chip-capa capa-composicion">composición</span>
+              </div>
+            </div>
+          </div>
+          <p class="chico centro" style="margin: 0.3em 0 0"><strong>No hace falta entenderlo hoy: es el mapa.</strong></p>
+          <aside class="notes">
+            Mostrar el destino antes del camino. Sin explicar todavía qué es un puerto ni un adaptador: solo que cada
+            archivo tiene un color y que el interior (azul y verde) no toca nada de afuera (gris). Que anoten las
+            palabras que no conocen; las vamos a ir resolviendo. Más adelante esta misma pantalla será interactiva
+            (H2: clic en un archivo y se ilumina su lugar en el hexágono). Aclarar que las carpetas usan el vocabulario
+            en inglés de la bibliografía (domain, application…) y los archivos del dominio van en español; el framework
+            también opina: models.py y management/commands/ quedan donde Django los busca.
+          </aside>
+        </section>
+
+        <!-- 0.4 Cómo seguir la clase -->
+        <section data-sincronizar>
+          <h2 class="mano">Cómo seguir la clase</h2>
+          <div class="dos-col" style="grid-template-columns: 1.2fr 1fr">
+            <div class="terminal">
+              <div class="barra"><i></i><i></i><i></i><span>terminal</span></div>
+              <div class="cuerpo"><div class="fragment"><div class="cmd">git clone &lt;url-del-repo&gt; &amp;&amp; cd modular-capas-v2</div></div><div class="fragment"><div class="cmd">git checkout e00-base</div><div class="comentario"># una rama por paso: git checkout e01-email-en-la-vista, …</div></div><div class="fragment"><div class="cmd">cp .env.example .env &amp;&amp; docker compose up --build</div><div class="comentario"># frontend :5173 · API :8000 · Mailpit :8025</div></div></div>
+            </div>
+            <div>
+              <div class="minimapa estatico" data-rama="e03" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si"></div>
+              <ul class="callouts">
+                <li class="fragment" data-n="1" data-marca="m1">Puntitos <b>e00 … e14</b>: la rama en la que estamos va en rojo.</li>
+                <li class="fragment" data-n="2" data-marca="m2"><b>P1 P2 P3</b>: tres preguntas; <b>☐</b> abierta · <b>◐</b> a medias · <b>☑</b> resuelta. Aparecen recién en 1.5.</li>
+                <li class="fragment" data-n="3" data-marca="m3"><b>contrato ✔</b>: los tests de la API pasan en esa rama.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="chico muted">En cada slide de código vas a ver la etiqueta de la rama para que la sigas en tu máquina.</p>
+          <aside class="notes">
+            Insistir en que el contrato HTTP no va a cambiar en todo el recorrido: el frontend es un testigo. Si la UI
+            sigue andando igual en cada rama, reorganizamos sin romper. El minimapa de la imagen es un ejemplo (rama e03,
+            P1 a medias); en las slides reales aparece arriba a la derecha y se actualiza solo.
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 1 · EL CASO Y EL DOLOR ================= -->
+
+        <!-- 1.1 El proyecto que ya conocen -->
+        <section data-rama="e00" data-titulo="1 · El caso y el dolor">
+          <div class="rama-etiqueta">git checkout <b>e00-base</b></div>
+          <h2>El proyecto que ya conocen</h2>
+          <div class="flujo" style="margin: 0.6em 0 1em">
+            <div class="caja">Navegador<small>React · Vite</small></div>
+            <div class="flecha">→<small>HTTP · JWT</small></div>
+            <div class="caja roja">Django<small>DRF · <code>activities</code></small></div>
+            <div class="flecha">→<small>SQL</small></div>
+            <div class="caja">PostgreSQL</div>
+          </div>
+          <div class="dos-col">
+            <ul class="chico">
+              <li>Actividades con <strong>cupo</strong> limitado.</li>
+              <li>Inscripciones: <code>PUT</code> / <code>DELETE /me/enrollments/{id}</code>.</li>
+              <li>Autenticación con JWT.</li>
+            </ul>
+            <ul class="chico">
+              <li>Ya hicimos el <strong>contrato OpenAPI</strong>.</li>
+              <li>Ya lo pusimos en <strong>Docker</strong> con Compose.</li>
+              <li>Hoy no agregamos tecnología: agregamos <em>orden</em>.</li>
+            </ul>
+          </div>
+          <aside class="notes">
+            Repaso rápido de lo que ya conocen: nada nuevo. Es el mismo proyecto de las actividades anteriores. Pedir
+            que hagan checkout de e00-base y levanten el compose; lo vamos a necesitar en el próximo paso.
+          </aside>
+        </section>
+
+        <!-- 1.2 Comprobante por correo -->
+        <section data-rama="e01" data-titulo="1 · El caso y el dolor">
+          <div class="rama-etiqueta">git checkout <b>e01-email-en-la-vista</b></div>
+          <h2 class="mano">Nueva funcionalidad: comprobante por correo</h2>
+          <p class="chico" style="margin: 0.2em 0 0.4em">
+            “Cuando alguien se inscribe, le mandamos un correo.” Sumamos <strong>Mailpit</strong>, un servidor SMTP de
+            prueba, al <code>compose.yaml</code>:
+          </p>
+          <div class="dos-col" style="grid-template-columns: 1.2fr 1fr">
+            <div>
+              <span class="archivo">compose.yaml · e00 → e01</span>
+              <div class="diff" data-contexto="1" data-diff="e00-base..e01-email-en-la-vista:compose.yaml"></div>
+            </div>
+            <div>
+              <div class="terminal" style="font-size: 0.5em">
+                <div class="barra"><i></i><i></i><i></i><span>terminal</span></div>
+                <div class="cuerpo"><div class="cmd">docker compose up --build</div><div class="comentario"># inscribirse en la UI (:5173) y abrir http://localhost:8025</div></div>
+              </div>
+              <div class="fragment">
+                <div class="mailpit">
+                  <header>Mailpit · Bandeja de entrada</header>
+                  <div class="correo"><b>Inscripción confirmada: Taller de Django</b><span>actividades@untdf.local → ada@untdf.local</span></div>
+                </div>
+                <p class="muted" style="font-size: 0.45em">Maqueta ilustrativa de la bandeja; en vivo se ve la real.</p>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Demo en vivo: inscribirse en la UI y mostrar el correo en Mailpit (:8025). La bandeja de la slide es una
+            maqueta. Preguntar: ¿dónde creen que escribimos este envío? Con la intuición de cada uno vamos a la
+            siguiente slide, a ver dónde lo pusimos nosotros.
+          </aside>
+        </section>
+
+        <!-- 1.3 Anatomía de la vista -->
+        <section data-sincronizar data-rama="e01" data-titulo="1 · El caso y el dolor">
+          <div class="rama-etiqueta">git checkout <b>e01-email-en-la-vista</b></div>
+          <h2>¿Dónde lo pusimos? Anatomía de la vista</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/views.py · <code style="background: none; color: #fff">put()</code></span>
+              <pre class="chico"><code class="python" data-line-numbers="2-4|6-8|10-17|19-24|26-30|32-35|37|38-41" data-incluir="e01:backend/activities/views.py" data-lineas="161-201"></code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Parsear</b> el UUID de la URL.</li>
+                <li data-step="2" data-n="2"><b>Identidad</b> del participante y body vacío.</li>
+                <li data-step="3" data-n="3"><b>Transacción y bloqueo</b> de la actividad.</li>
+                <li data-step="4" data-n="4"><b>Regla</b>: si ya estaba inscripto, no repetir.</li>
+                <li data-step="5" data-n="5"><b>Regla</b>: si no hay cupo, rechazar.</li>
+                <li data-step="6" data-n="6"><b>Crear</b> la inscripción.</li>
+                <li data-step="7" data-n="7"><b>Enviar el correo</b> (<code>emails.py</code>).</li>
+                <li data-step="8" data-n="8"><b>Respuesta HTTP</b> 201.</li>
+              </ul>
+              <span class="archivo">backend/activities/emails.py</span>
+              <pre class="emails"><code class="python" data-incluir="e01:backend/activities/emails.py" data-lineas="9-28"></code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            Recorrer los ocho pasos con las flechas. La vista parsea, autentica, abre una transacción, bloquea la fila,
+            decide reglas de negocio, escribe en la base, manda un correo y arma una respuesta HTTP. Todo en una función.
+            Al lado, emails.py: el mecanismo de SMTP que la vista llama directo. Acá no hay nada "mal" en el sentido de
+            que funcione: los tests pasan. Lo que vamos a ver es qué cuesta cambiarlo. (En el código real, put() está
+            en el archivo views.py de la rama e01, líneas 161 a 201.)
+          </aside>
+        </section>
+
+        <!-- 1.4 H1 -->
+        <section data-rama="e01" data-titulo="1 · El caso y el dolor">
+          <div class="rama-etiqueta">git checkout <b>e01-email-en-la-vista</b></div>
+          <h2>Coloreá la vista gorda <span class="herramienta">🛠 H1</span></h2>
+          <div class="h1" id="h1">
+            <div class="h1-barra">
+              <span>Clic en una línea para clasificarla:</span>
+              <span class="h1-leyenda">
+                <span class="chip-capa capa-presentacion">presentación</span>
+                <span class="chip-capa capa-aplicacion">aplicación</span>
+                <span class="chip-capa capa-dominio">dominio</span>
+                <span class="chip-capa capa-infraestructura">infraestructura</span>
+              </span>
+              <button type="button" data-h1="propuesta">Ver propuesta</button>
+              <button type="button" class="sec" data-h1="limpiar">Limpiar</button>
+              <span class="contador">capas que conoce esta función: <b data-h1="contador">0</b></span>
+            </div>
+            <div class="h1-codigo" data-h1="codigo"></div>
+            <div class="h1-nota" data-h1="nota">Cada clic avanza: presentación → aplicación → dominio → infraestructura → sin color.</div>
+            <textarea hidden data-h1="fuente" data-incluir="e01:backend/activities/views.py" data-lineas="161-201"></textarea>
+            <script type="application/json" data-h1="propuesta-datos">
+              {
+                "lineas": {
+                  "1": "presentacion", "2": "presentacion", "3": "presentacion", "4": "presentacion",
+                  "6": "presentacion", "7": "presentacion", "8": "presentacion",
+                  "10": "aplicacion",
+                  "12": "infraestructura",
+                  "13": "infraestructura",
+                  "14": "presentacion", "15": "presentacion", "16": "presentacion", "17": "presentacion",
+                  "19": "infraestructura", "20": "infraestructura", "21": "infraestructura", "22": "infraestructura",
+                  "23": "dominio",
+                  "24": "presentacion",
+                  "26": "dominio",
+                  "27": "presentacion", "28": "presentacion", "29": "presentacion", "30": "presentacion",
+                  "32": "infraestructura", "33": "infraestructura", "34": "infraestructura", "35": "infraestructura",
+                  "37": "aplicacion",
+                  "38": "presentacion", "39": "presentacion", "40": "presentacion", "41": "presentacion"
+                },
+                "notas": {
+                  "10": "Debatible: abrir la transacción es decidir la unidad de trabajo (aplicación), pero atomic() es mecanismo del ORM.",
+                  "12": "Debatible: select_for_update evita que dos personas tomen el último cupo (¿regla?) pero es un mecanismo de la base (infraestructura). La marcamos como infraestructura.",
+                  "13": "El except depende de la excepción del modelo Django: mecanismo de persistencia.",
+                  "23": "Regla: inscribirse dos veces es idempotente. La consulta de arriba (infraestructura) alimenta la regla.",
+                  "26": "Regla de cupo. Debatible: el conteo usa el ORM (enrollments.count()), la comparación es dominio puro.",
+                  "37": "Decidir que, después de inscribir, se avisa: coordinar es aplicación. El cómo se envía está en emails.py (infraestructura)."
+                }
+              }
+            </script>
+          </div>
+          <aside class="notes">
+            Dejar que discutan: hay líneas ambiguas. ¿select_for_update es regla o mecanismo? ¿abrir la transacción es
+            aplicación o infraestructura? Está bien que aparezca la ambigüedad. Al final, mostrar la propuesta y el
+            contador: una sola función conoce los cuatro tipos de responsabilidad. Eso es lo que vamos a desarmar.
+          </aside>
+        </section>
+
+        <!-- 1.5 Tres preguntas -->
+        <section data-rama="e01" data-p1="no" data-p2="no" data-p3="no" data-titulo="1 · El caso y el dolor">
+          <h2>Tres preguntas que esta vista no puede responder</h2>
+          <div class="tres-col" style="margin-top: 0.8em">
+            <div class="tarjeta pregunta" data-p="P1" style="font-size: 0.85em">
+              ¿Cómo pruebo la <strong>regla de cupo</strong> sin levantar HTTP, base de datos ni SMTP?
+            </div>
+            <div class="tarjeta pregunta gris" data-p="P2" style="font-size: 0.85em">
+              Si mañana el correo sale por una <strong>API</strong> (o por WhatsApp), ¿qué código tengo que tocar?
+            </div>
+            <div class="tarjeta pregunta alerta" data-p="P3" style="font-size: 0.85em">
+              Si quiero inscribir desde la <strong>terminal</strong> (o desde un script de carga), ¿reescribo la lógica?
+            </div>
+          </div>
+          <p class="chico muted" style="margin-top: 1.2em">
+            Quedan fijas en el minimapa (arriba a la derecha) hasta el final: cada rama que las resuelve las tilda.
+          </p>
+          <aside class="notes">
+            Estas tres preguntas son el hilo conductor de todo el recorrido. P1 se resuelve en parte en e05 y del todo
+            en e12; P2 entre e07 y e09; P3 en e13. Pedirles que anoten sus propias hipótesis de cómo las resolverían:
+            las comparamos al final.
+          </aside>
+        </section>
+      </div>
+    </div>
+
+    <div class="minimapa flotante oculto" id="minimapa"></div>
+
+    <footer class="pie">
+      <img src="assets/logo-untdf.svg" alt="UNTDF" />
+      <span class="seccion-actual"></span>
+    </footer>
+
+    <script src="vendor/reveal/reveal.js"></script>
+    <script src="vendor/reveal/plugin/highlight.js"></script>
+    <script src="vendor/reveal/plugin/notes.js"></script>
+    <script src="vendor/reveal/plugin/zoom.js"></script>
+    <script>
+      Reveal.initialize({
+        width: 1280,
+        height: 720,
+        margin: 0.05,
+        center: false,
+        hash: true,
+        slideNumber: 'c/t',
+        transition: 'slide',
+        plugins: [RevealHighlight, RevealNotes, RevealZoom],
+      })
+
+      // Callouts sincronizados con el paso actual del código o del comando
+      function sincronizar() {
+        const slide = Reveal.getCurrentSlide()
+        if (!slide || !slide.hasAttribute('data-sincronizar')) return
+
+        // a) Bloques de código con pasos (data-line-numbers="a|b|c")
+        slide.querySelectorAll('.anatomia').forEach((grupo) => {
+          const pre = grupo.querySelector('pre code[data-line-numbers]')?.parentElement
+          if (!pre) return
+          const paso = pre.querySelectorAll('code.fragment.visible').length
+          grupo.querySelectorAll('.callouts li[data-step]').forEach((li) => {
+            const n = Number(li.dataset.step)
+            li.classList.toggle('activo', n === paso)
+            li.classList.toggle('visto', n < paso)
+          })
+        })
+
+        // b) Comandos y listas con fragments: cada callout marca su parte
+        const marcas = [...slide.querySelectorAll('.callouts li[data-marca]')]
+        if (marcas.length) {
+          const visibles = marcas.filter((li) => li.classList.contains('visible'))
+          const actual = visibles.at(-1)
+          marcas.forEach((li) => {
+            li.classList.toggle('activo', li === actual)
+            li.classList.toggle('visto', li !== actual && visibles.includes(li))
+          })
+          slide.querySelectorAll('.comando .p').forEach((p) => {
+            p.classList.toggle('activo', actual?.dataset.marca === p.dataset.id)
+          })
+        }
+      }
+
+      // Nombre de la sección actual en el pie
+      function actualizarPie() {
+        const actual = Reveal.getIndices().h
+        let titulo = ''
+        document.querySelectorAll('.reveal .slides > section').forEach((s, i) => {
+          if (i <= actual && s.dataset.titulo) titulo = s.dataset.titulo
+        })
+        document.querySelector('.pie .seccion-actual').textContent = 'Organizar el código · ' + titulo
+      }
+
+      // Minimapa de ramas: se dibuja desde data-rama / data-p1..p3 / data-contrato
+      const RAMAS = Array.from({ length: 15 }, (_, i) => 'e' + String(i).padStart(2, '0'))
+      const ESTADO = { no: '☐', parcial: '◐', si: '☑' }
+
+      function pintarMinimapa(el, datos) {
+        const actual = RAMAS.indexOf(datos.rama)
+        const puntos = RAMAS.map(
+          (r, i) => `<i class="${i === actual ? 'actual' : i < actual ? 'pasada' : ''}" title="${r}"></i>`,
+        ).join('')
+        const preguntas = datos.p1
+          ? `<div class="mm-preguntas">${['p1', 'p2', 'p3']
+              .map((p) => `<span data-estado="${datos[p] || 'no'}">${p.toUpperCase()} ${ESTADO[datos[p] || 'no']}</span>`)
+              .join('')}</div>`
+          : ''
+        const contrato = datos.contrato === 'si' ? '<div class="mm-contrato">contrato ✔</div>' : ''
+        el.innerHTML = `<div class="mm-ramas">${puntos}</div><div class="mm-actual">${datos.rama || ''}</div>${preguntas}${contrato}`
+      }
+
+      function actualizarMinimapa() {
+        const slide = Reveal.getCurrentSlide()
+        const mm = document.getElementById('minimapa')
+        if (!slide || !slide.dataset.rama) {
+          mm.classList.add('oculto')
+          return
+        }
+        pintarMinimapa(mm, slide.dataset)
+        mm.classList.remove('oculto')
+      }
+
+      document.querySelectorAll('.minimapa.estatico').forEach((el) => pintarMinimapa(el, el.dataset))
+
+      ;['ready', 'slidechanged', 'fragmentshown', 'fragmenthidden'].forEach((evento) =>
+        Reveal.on(evento, () => {
+          sincronizar()
+          actualizarPie()
+          actualizarMinimapa()
+        }),
+      )
+
+      // H1 · Coloreá la vista gorda
+      ;(function () {
+        const raiz = document.getElementById('h1')
+        const q = (k) => raiz.querySelector(`[data-h1="${k}"]`)
+        const codigo = q('codigo')
+        const contador = q('contador')
+        const nota = q('nota')
+        const fuente = q('fuente').value.split('\n')
+        const propuesta = JSON.parse(q('propuesta-datos').textContent)
+        const CICLO = ['presentacion', 'aplicacion', 'dominio', 'infraestructura', '']
+        const AYUDA = nota.textContent
+        const estado = {} // número de línea -> capa
+
+        fuente.forEach((texto, i) => {
+          const n = i + 1
+          const linea = document.createElement('div')
+          linea.className = 'h1-linea' + (texto.trim() ? '' : ' vacia')
+          linea.dataset.n = n
+          linea.innerHTML = '<span class="num"></span><span class="txt"></span>'
+          linea.children[0].textContent = n
+          linea.children[1].textContent = texto
+          codigo.appendChild(linea)
+        })
+
+        function pintar() {
+          codigo.querySelectorAll('.h1-linea').forEach((l) => {
+            CICLO.filter(Boolean).forEach((c) => l.classList.remove('capa-' + c))
+            if (estado[l.dataset.n]) l.classList.add('capa-' + estado[l.dataset.n])
+          })
+          contador.textContent = new Set(Object.values(estado).filter(Boolean)).size
+        }
+
+        raiz.addEventListener('click', (e) => {
+          e.stopPropagation() // no interferir con reveal; el teclado no se toca
+          const boton = e.target.closest('button')
+          if (boton) {
+            if (boton.dataset.h1 === 'propuesta') {
+              Object.assign(estado, propuesta.lineas)
+              const notas = propuesta.notas
+              codigo.querySelectorAll('.h1-linea').forEach((l) => l.classList.toggle('nota', !!notas[l.dataset.n]))
+              nota.textContent = 'Pasá el mouse o hacé clic en una línea con ⚠ para leer la discusión.'
+            } else {
+              Object.keys(estado).forEach((k) => delete estado[k])
+              codigo.querySelectorAll('.h1-linea').forEach((l) => l.classList.remove('nota'))
+              nota.textContent = AYUDA
+            }
+            pintar()
+            boton.blur() // que Espacio/Enter sigan siendo de reveal
+            return
+          }
+          const linea = e.target.closest('.h1-linea')
+          if (!linea || linea.classList.contains('vacia')) return
+          const n = linea.dataset.n
+          estado[n] = CICLO[(CICLO.indexOf(estado[n] || '') + 1) % CICLO.length]
+          if (propuesta.notas[n]) nota.textContent = propuesta.notas[n]
+          pintar()
+        })
+
+        codigo.addEventListener('mouseover', (e) => {
+          const linea = e.target.closest('.h1-linea.nota')
+          if (linea) nota.textContent = propuesta.notas[linea.dataset.n]
+        })
+      })()
+    </script>
+  </body>
+</html>

@@ -19,17 +19,17 @@ Repo: `modular-capas-v2`. Base code: `../modular-capas` commits `63d3cb5` (activ
 
 ## Tasks
 
-- [x] T1 (S1-S11) Write `storyboard.md` — inline — uncommitted (waits for branch layout)
-- [ ] T2 (S2, S9) Branches e00-e02 from modular-capas — inline
-- [ ] T3 (S4) Slides infrastructure: build.py with branch refs, diffs, import graph; UNTDF theme — inline
-- [ ] T4 (S6, S7) Branches e03-e06 (layers) — inline
-- [ ] T5 (S1, S3, S4) Slides class 1 — inline
-- [ ] T6 (S6, S7) Branches e07-e14 (ports and adapters) — inline
-- [ ] T7 (S1, S3, S4) Slides class 2 — inline
-- [ ] T8 (S10, S11) Exercise branches cancel/query + optional modular monolith branch — inline
-- [ ] T9 (S4) Interactive tools H1-H5 — inline
-- [ ] T10 (S8) Archify evaluation (offline) and pieces — inline
-- [ ] T11 (S2, S6) Per-branch verification script (tests + compose) — inline
+- [x] T1 (S1-S11) Write `storyboard.md` — inline — main
+- [x] T2 (S2, S9) Branches e00-e02 from modular-capas — inline — e00-base (cb7e714, c4d9023), e01 (eb468d8), e02 (b5d81cb)
+- [x] T3 (S4) Slides infrastructure: build.py with branch refs, diffs, tree, import graph; UNTDF theme; minimap — worker — main (slides/)
+- [x] T4 (S6, S7) Branches e03-e06 (layers) — inline — 682e0ca, 7c6ac20, fc92f07, d99f1c1
+- [ ] T5 (S1, S3, S4) Slides blocks 0-5 — blocks 0-1 done (worker), blocks 2-5 pending
+- [x] T6 (S6, S7) Branches e07-e14 (ports and adapters) — inline — c9979f1 … 4fac3cc
+- [ ] T7 (S1, S3, S4) Slides blocks 6-14
+- [ ] T8 (S10, S11) Exercise branches cancel/query + optional modular monolith branch
+- [ ] T9 (S4) Interactive tools H2-H5 (H1 done)
+- [ ] T10 (S8) Archify evaluation (offline) and pieces
+- [x] T11 (S2, S6) `scripts/verificar-ramas.sh`: tests on every branch — all 15 green (11→30 tests)
 
 ## Log
 
@@ -38,3 +38,4 @@ Repo: `modular-capas-v2`. Base code: `../modular-capas` commits `63d3cb5` (activ
 - L3: "Me gusta lo de la propuesta de cancelar y consultar para los alumnos. Punto 3. Hagamos el monolito modular al final y pondemos crear una branch "opcional" dónde mostramos esto. [...] Comencemos con el storyboard"
 - L4: "osea el monolito modular sería conceptual + opcional a nivel de código"
 - L5: "Creo que no hay un problema en el storyboard planteado pero te menciono por las dudas que no lo plantees así. No quiero que dividas las slides por \"día\". Yo lo iré regulando ayándome en los bloques. 1 me gusta la discución sobre repositorio. 2 no te preocupes, puedo hacer otra clase si es necesario. Tengo hasta 4 clases para terminar el tema. arranquemos" → S5 rewritten, storyboard reorganized by blocks only.
+- L6: Evidence: base 63d3cb5 had 2 stale tests (empty activities/urls.py) → cleanup commit in e00. emails.py swallows SMTP errors (201 + log): contract kept on every branch, so the "fallo" adapter yields 201 + log (storyboard 9.6 updated). import-linter must run in a subprocess inside tests (it reconfigures logging). Slice boundaries: each eNN branch is one reviewable unit.

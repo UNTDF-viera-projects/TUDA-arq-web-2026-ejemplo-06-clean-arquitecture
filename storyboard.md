@@ -91,7 +91,7 @@ Cada rama sale de la anterior y tiene **un commit chico**. En **todas** pasan lo
 | `e02-red-de-seguridad` | 3 | Test del correo con backend `locmem` | Refactor = cambiar estructura sin cambiar comportamiento |
 | `e03-caso-de-uso` | 4 | La lógica del `PUT` pasa a `application/inscribir.py` | Capa de aplicación |
 | `e04-errores-de-aplicacion` | 4 | El caso de uso lanza `CupoAgotado` / `ActividadNoEncontrada`; la vista traduce a HTTP | Presentación delgada |
-| `e05-reglas-de-dominio` | 4 | `hay_cupo`, `ya_inscripto` como funciones puras + tests sin base | Capa de dominio |
+| `e05-reglas-de-dominio` | 4 | `hay_cupo`, `exigir_cupo` como funciones puras; los errores pasan a `domain/errores.py`; tests sin base | Capa de dominio |
 | `e06-carpetas-por-capa` | 4 | `presentation/`, `infrastructure/email.py` explícitos | Capas tradicionales (dependencias hacia abajo) |
 | `e07-puerto-notificador` | 9 | `Notificador` (Protocol) + `ConfirmacionInscripcion`; `Inscribir` lo recibe por constructor | DIP + DI, puerto de salida |
 | `e08-adaptadores-memoria-y-fallo` | 9 | `NotificadorMemoria`, `NotificadorFallo` + tests | Un puerto, varias implementaciones |
@@ -119,7 +119,7 @@ backend/
 
     domain/                        # DOMINIO — sin imports de Django
       modelos.py                   #   @dataclass Actividad, Inscripcion
-      reglas.py                    #   hay_cupo(), ya_inscripto()
+      reglas.py                    #   hay_cupo(), exigir_cupo()
       errores.py                   #   CupoAgotado, ActividadNoEncontrada
 
     application/                   # APLICACIÓN — coordina, depende solo de domain + puertos
@@ -275,7 +275,7 @@ aparezca la ambigüedad.
 | 4.2 | Paso 1: un caso de uso | Movemos el cuerpo del `put()` a `application/inscribir.py`. La vista llama `inscribir(participante, actividad_id)` | **Diff** `e02..e03` (views.py se achica, aparece inscribir.py) | `e03` |
 | 4.3 | Anatomía del caso de uso (v1) | ① recibe datos, no un request ② transacción ③ reglas ④ crear ⑤ notificar (todavía `send_mail`) ⑥ devuelve un resultado. Problema: ¿cómo devuelve el 409? | Anatomía | `e03` |
 | 4.4 | Paso 2: la aplicación habla en errores, la vista en HTTP | `raise CupoAgotado()` en la aplicación; `except CupoAgotado: return 409` en la vista | Split: anatomía de `errores.py` + anatomía de la vista delgada (traducción error → status) | `e04` |
-| 4.5 | Paso 3: reglas de dominio | `hay_cupo(capacidad, inscriptos)` y `ya_inscripto(...)`: funciones puras. Primer test **sin base de datos** 🧪 (milisegundos) | Anatomía de `reglas.py` + `test_reglas.py`; **P1 pasa a ◐** | `e05` |
+| 4.5 | Paso 3: reglas de dominio | `hay_cupo(capacidad, inscriptos)` y `exigir_cupo(...)`: funciones puras. Los errores se mudan de `application/` a `domain/`: son conceptos del negocio. Primer test **sin base de datos** 🧪 (5 tests en ~0 ms) | Anatomía de `reglas.py` + `test_reglas.py`; **P1 pasa a ◐** | `e05` |
 | 4.6 | Paso 4: carpetas por capa | Movemos a `presentation/` e `infrastructure/email.py`. Árbol coloreado: ya se parece al destino | Árbol de `e06` al lado del árbol final (H2 en miniatura) | `e06` |
 | 4.7 | Anatomía de la vista delgada | Lo que queda: ① parsear ② identidad ③ llamar al caso de uso ④ traducir resultado o error a HTTP. "Esto es un adaptador de entrada, aunque todavía no le pusimos nombre" | Anatomía `e06:presentation/views.py` | `e06` |
 | 4.8 | 🛠 ¿Hacia dónde apuntan los imports? | Comparar `e01` (todo en un nodo) con `e06` (capas, flechas hacia abajo: presentación → aplicación → infraestructura) | 🛠 **H4** con el deslizador entre e01 y e06 | `e06` |
@@ -328,7 +328,7 @@ Pensado para abrir un encuentro nuevo; si los bloques 5 y 7 se dan seguidos, se 
 | 9.3 | Anatomía del adaptador SMTP | ① implementa el puerto ② traduce el DTO a un mensaje ③ usa `send_mail` ④ traduce `SMTPException` a `ErrorNotificacion`. Lo que significa "éxito": el servidor aceptó, no que alguien lo leyó | Anatomía `e07:infrastructure/notificaciones/smtp.py` | `e07` |
 | 9.4 | Memoria y fallo | Dos adaptadores de 5 líneas. Test: el caso de uso pide notificar con los datos correctos, sin SMTP | Anatomía de los dos + `test_inscribir.py` | `e08` |
 | 9.5 | La composición | `composition.py`: único lugar que conoce las implementaciones. Elige por `NOTIFICADOR` | Anatomía `e09:composition.py`; **P2 ☑** | `e09` |
-| 9.6 | 🛠 Cambiá el adaptador 🧪 | Simulación (H5) y después en vivo: `NOTIFICADOR=fallo docker compose up backend` → 500, pero `GET /me/enrollments` muestra la inscripción | 🛠 **H5** + terminal | `e09` |
+| 9.6 | 🛠 Cambiá el adaptador 🧪 | Simulación (H5) y después en vivo: `NOTIFICADOR=fallo docker compose up backend` → igual responde 201 y `GET /me/enrollments` muestra la inscripción, pero el correo se perdió y solo queda en el log. Así se comportaba ya `e01` (`emails.py` atrapaba la excepción) y la red de seguridad lo fija | 🛠 **H5** + terminal | `e09` |
 
 Notas 9.6: es el momento de mencionar que el fallo ocurre **después del commit**; se retoma en 14.3.
 
