@@ -150,15 +150,18 @@
                 <text x="265" y="243">reglas</text>
                 <text class="rotulo" x="265" y="85" style="fill: #6f6f6e">interior: aplicación + dominio</text>
                 <!-- entradas (izquierda) -->
-                <rect x="6" y="110" width="84" height="40" rx="8" fill="#7B5EA7" />
-                <text x="48" y="136">HTTP</text>
-                <rect x="6" y="190" width="84" height="40" rx="8" fill="#7B5EA7" />
-                <text x="48" y="216">CLI</text>
-                <rect x="6" y="270" width="84" height="40" rx="8" fill="#7B5EA7" />
-                <text x="48" y="296">Tests</text>
-                <line class="flecha-azul" x1="90" y1="130" x2="150" y2="130" />
-                <line class="flecha-azul" x1="90" y1="210" x2="112" y2="210" />
-                <line class="flecha-azul" x1="90" y1="290" x2="150" y2="290" />
+                <rect x="6" y="102" width="84" height="36" rx="8" fill="#7B5EA7" />
+                <text x="48" y="126">HTTP</text>
+                <rect x="6" y="162" width="84" height="36" rx="8" fill="#7B5EA7" />
+                <text x="48" y="186">gRPC</text>
+                <rect x="6" y="222" width="84" height="36" rx="8" fill="#7B5EA7" />
+                <text x="48" y="246">CLI</text>
+                <rect x="6" y="282" width="84" height="36" rx="8" fill="#7B5EA7" />
+                <text x="48" y="306">Tests</text>
+                <line class="flecha-azul" x1="90" y1="120" x2="150" y2="120" />
+                <line class="flecha-azul" x1="90" y1="180" x2="120" y2="180" />
+                <line class="flecha-azul" x1="90" y1="240" x2="120" y2="240" />
+                <line class="flecha-azul" x1="90" y1="300" x2="150" y2="300" />
                 <!-- puertos (rojo) -->
                 <rect x="352" y="116" width="82" height="28" rx="14" fill="#BE1C1D" />
                 <text x="393" y="136" style="font-size: 13px">Notificar</text>
@@ -192,7 +195,8 @@
             palabras que no conocen; las vamos a ir resolviendo. Más adelante esta misma pantalla será interactiva
             (H2: clic en un archivo y se ilumina su lugar en el hexágono). Aclarar que las carpetas usan el vocabulario
             en inglés de la bibliografía (domain, application…) y los archivos del dominio van en español; el framework
-            también opina: models.py y management/commands/ quedan donde Django los busca.
+            también opina: models.py y management/commands/ quedan donde Django los busca. Entre las entradas aparece gRPC
+            porque ya lo vieron: es un ejemplo de adaptador de entrada; el código de ese adaptador no está en las ramas.
           </aside>
         </section>
 
@@ -202,22 +206,24 @@
           <div class="dos-col" style="grid-template-columns: 1.2fr 1fr">
             <div class="terminal">
               <div class="barra"><i></i><i></i><i></i><span>terminal</span></div>
-              <div class="cuerpo"><div class="fragment"><div class="cmd">git clone &lt;url-del-repo&gt; &amp;&amp; cd modular-capas-v2</div></div><div class="fragment"><div class="cmd">git checkout e00-base</div><div class="comentario"># una rama por paso: git checkout e01-email-en-la-vista, …</div></div><div class="fragment"><div class="cmd">cp .env.example .env &amp;&amp; docker compose up --build</div><div class="comentario"># frontend :5173 · API :8000 · Mailpit :8025</div></div></div>
+              <div class="cuerpo"><div class="fragment"><div class="cmd">git clone &lt;url-del-repo&gt; &amp;&amp; cd modular-capas-v2</div><div class="comentario"># esta carpeta queda en <b>main</b>: acá viven las slides y no cambia nunca de rama</div></div><div class="fragment"><div class="cmd">scripts/etapa.sh e00</div><div class="comentario"># deja el código de la etapa en ../modular-capas-v2-codigo · para avanzar: scripts/etapa.sh e01, e02, …</div></div><div class="fragment"><div class="cmd">cd ../modular-capas-v2-codigo &amp;&amp; docker compose up --build</div><div class="comentario"># frontend :5173 · API :8000 · Mailpit :8025</div></div></div>
             </div>
             <div>
               <div class="minimapa estatico" data-rama="e03" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si"></div>
               <ul class="callouts">
                 <li class="fragment" data-n="1" data-marca="m1">Puntitos <b>e00 … e14</b>: la rama en la que estamos va en rojo.</li>
-                <li class="fragment" data-n="2" data-marca="m2"><b>P1 P2 P3</b>: tres preguntas; <b>☐</b> abierta · <b>◐</b> a medias · <b>☑</b> resuelta. Aparecen recién en 1.5.</li>
+                <li class="fragment" data-n="2" data-marca="m2"><b>P1 P2 P3</b>: tres preguntas; <b>☐</b> abierta · <b>◐</b> a medias · <b>☑</b> resuelta. Aparecen recién en 1.7.</li>
                 <li class="fragment" data-n="3" data-marca="m3"><b>contrato ✔</b>: los tests de la API pasan en esa rama.</li>
               </ul>
             </div>
           </div>
-          <p class="chico muted">En cada slide de código vas a ver la etiqueta de la rama para que la sigas en tu máquina.</p>
+          <p class="chico muted">En cada slide de código vas a ver la etiqueta con el comando de la etapa (<code>scripts/etapa.sh eNN</code>): corrélo desde esta carpeta y las slides siguen abiertas.</p>
           <aside class="notes">
             Insistir en que el contrato HTTP no va a cambiar en todo el recorrido: el frontend es un testigo. Si la UI
             sigue andando igual en cada rama, reorganizamos sin romper. El minimapa de la imagen es un ejemplo (rama e03,
-            P1 a medias); en las slides reales aparece arriba a la derecha y se actualiza solo.
+            P1 a medias); en las slides reales aparece arriba a la derecha y se actualiza solo. Flujo en paralelo: las slides
+            quedan abiertas en main; el código de cada etapa se muestra en otra carpeta con scripts/etapa.sh eNN (crea
+            o mueve ../modular-capas-v2-codigo), y ahí se corre docker compose up --build. No hace falta cambiar de rama.
           </aside>
         </section>
 
@@ -225,7 +231,7 @@
 
         <!-- 1.1 El proyecto que ya conocen -->
         <section data-rama="e00" data-titulo="1 · El caso y el dolor">
-          <div class="rama-etiqueta">git checkout <b>e00-base</b></div>
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e00</b> <small>e00-base</small></div>
           <h2>El proyecto que ya conocen</h2>
           <div class="flujo" style="margin: 0.6em 0 1em">
             <div class="caja">Navegador<small>React · Vite</small></div>
@@ -248,13 +254,13 @@
           </div>
           <aside class="notes">
             Repaso rápido de lo que ya conocen: nada nuevo. Es el mismo proyecto de las actividades anteriores. Pedir
-            que hagan checkout de e00-base y levanten el compose; lo vamos a necesitar en el próximo paso.
+            que corran scripts/etapa.sh e00 y levanten el compose en la carpeta del código; lo vamos a necesitar en el próximo paso.
           </aside>
         </section>
 
         <!-- 1.2 Comprobante por correo -->
         <section data-rama="e01" data-titulo="1 · El caso y el dolor">
-          <div class="rama-etiqueta">git checkout <b>e01-email-en-la-vista</b></div>
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e01</b> <small>e01-email-en-la-vista</small></div>
           <h2 class="mano">Nueva funcionalidad: comprobante por correo</h2>
           <p class="chico" style="margin: 0.2em 0 0.4em">
             “Cuando alguien se inscribe, le mandamos un correo.” Sumamos <strong>Mailpit</strong>, un servidor SMTP de
@@ -288,7 +294,7 @@
 
         <!-- 1.3 Anatomía de la vista -->
         <section data-sincronizar data-rama="e01" data-titulo="1 · El caso y el dolor">
-          <div class="rama-etiqueta">git checkout <b>e01-email-en-la-vista</b></div>
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e01</b> <small>e01-email-en-la-vista</small></div>
           <h2>¿Dónde lo pusimos? Anatomía de la vista</h2>
           <div class="anatomia vista">
             <div>
@@ -319,22 +325,113 @@
           </aside>
         </section>
 
-        <!-- 1.4 H1 -->
+        <!-- 1.4 Una responsabilidad es una pregunta -->
         <section data-rama="e01" data-titulo="1 · El caso y el dolor">
-          <div class="rama-etiqueta">git checkout <b>e01-email-en-la-vista</b></div>
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e01</b> <small>e01-email-en-la-vista</small></div>
+          <h2>Una responsabilidad es una pregunta que el código responde</h2>
+          <div class="fila-pregunta fragment">
+            <div>
+              <span class="archivo">views.py · put()</span>
+              <pre class="chico"><code class="python" data-incluir="e01:backend/activities/views.py" data-lineas="164-164"></code></pre>
+            </div>
+            <p class="globo">¿Qué devuelvo si el UUID es inválido?<small>una pregunta sobre <b>HTTP</b></small></p>
+          </div>
+          <div class="fila-pregunta fragment">
+            <div>
+              <span class="archivo">views.py · put()</span>
+              <pre class="chico"><code class="python" data-incluir="e01:backend/activities/views.py" data-lineas="186-186"></code></pre>
+            </div>
+            <p class="globo">¿Se puede inscribir si ya no hay cupo?<small>una pregunta sobre el <b>negocio</b></small></p>
+          </div>
+          <div class="fila-pregunta fragment">
+            <div>
+              <span class="archivo">emails.py · llamado desde put()</span>
+              <pre class="chico"><code class="python" data-incluir="e01:backend/activities/emails.py" data-lineas="26-32"></code></pre>
+            </div>
+            <p class="globo">¿Cómo le hablo al servidor de correo (Mailpit)?<small>una pregunta sobre un <b>mecanismo</b></small></p>
+          </div>
+          <p class="fragment frase" style="font-size: 0.85em; margin-top: 0.4em">
+            Si una función responde preguntas de naturaleza distinta, <em>cualquier cambio en una de ellas obliga a tocarla</em>.
+          </p>
+          <aside class="notes">
+            Antes de clasificar nada, una idea: una responsabilidad es una pregunta que el código responde. Tres líneas
+            reales de la rama e01: la primera contesta qué devolvemos por HTTP si el UUID está mal; la segunda, una regla
+            del negocio (no se inscribe a nadie si no hay cupo); la tercera, cómo se habla con el servidor de correo. Son
+            tres preguntas de naturaleza distinta, y hoy viven en el mismo flujo. Si cambia el protocolo HTTP, la regla
+            de cupo o el proveedor de correo, hay que abrir la misma función. En la próxima slide ponemos nombre a esos
+            tipos de pregunta.
+          </aside>
+        </section>
+
+        <!-- 1.5 Cuatro preguntas para clasificar -->
+        <section data-rama="e01" data-titulo="1 · El caso y el dolor">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e01</b> <small>e01-email-en-la-vista</small></div>
+          <h2>Cuatro preguntas para clasificar cada línea</h2>
+          <table class="tabla-capas">
+            <thead>
+              <tr><th>Capa</th><th>La pregunta</th><th>Pistas en el código</th><th>Una línea real de <code>put()</code></th></tr>
+            </thead>
+            <tbody>
+              <tr class="capa-presentacion fragment">
+                <td><span class="chip-capa">presentación</span></td>
+                <td>¿Cómo entra el pedido y cómo sale la respuesta?</td>
+                <td><code>request</code>, <code>Response</code>, <code>status</code>, serializers, parsear la URL</td>
+                <td><code class="ej" data-incluir="e01:backend/activities/views.py" data-lineas="164-164"></code></td>
+              </tr>
+              <tr class="capa-aplicacion fragment">
+                <td><span class="chip-capa">aplicación</span></td>
+                <td>¿En qué orden se hacen los pasos?</td>
+                <td>transacción, “primero… después…”, llamar a otras partes</td>
+                <td><code class="ej" data-incluir="e01:backend/activities/views.py" data-lineas="197-197"></code></td>
+              </tr>
+              <tr class="capa-dominio fragment">
+                <td><span class="chip-capa">dominio</span></td>
+                <td>¿Qué regla del negocio se cumple, sin importar la tecnología?</td>
+                <td>cupo, duplicados: condiciones que un humano entiende sin código</td>
+                <td><code class="ej" data-incluir="e01:backend/activities/views.py" data-lineas="186-186"></code></td>
+              </tr>
+              <tr class="capa-infraestructura fragment">
+                <td><span class="chip-capa">infraestructura</span></td>
+                <td>¿Con qué tecnología concreta?</td>
+                <td>ORM, <code>send_mail</code>, <code>settings</code>, SQL</td>
+                <td><code class="ej" data-incluir="e01:backend/activities/views.py" data-lineas="172-172"></code></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="chico fragment" style="margin: 0.5em 0 0">
+            <strong>Ojo:</strong> una línea puede mezclar dos. La condición de cupo es una regla (dominio) que usa el ORM para
+            contar (infraestructura): esa mezcla también es una señal.
+          </p>
+          <p class="chico muted" style="margin: 0.3em 0 0">
+            Una capa es un <em>tipo de responsabilidad</em>: no es una carpeta ni un servidor (lo vemos en el bloque 2).
+          </p>
+          <aside class="notes">
+            Esta tabla es la herramienta para la actividad que sigue. Cada fila es una pregunta; la columna de pistas
+            ayuda a reconocerla en el código; la última columna son líneas reales de put() en la rama e01. Antes de
+            pasar a la actividad, leer los ejemplos: parsear/responder HTTP es presentación; llamar al envío del correo
+            después de crear es coordinar, aplicación; la condición de cupo es la regla, dominio, aunque use el ORM
+            para contar (ahí aparece una mezcla); select_for_update es un mecanismo de la base, infraestructura (aunque
+            discutible, y está bien que lo discutan). Aclarar que capa no significa carpeta ni servidor: eso se
+            desarma en el bloque 2.
+          </aside>
+        </section>
+
+        <!-- 1.6 H1 -->
+        <section data-rama="e01" data-titulo="1 · El caso y el dolor">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e01</b> <small>e01-email-en-la-vista</small></div>
           <h2>Coloreá la vista gorda <span class="herramienta">🛠 H1</span></h2>
           <div class="h1" id="h1">
             <div class="h1-barra">
-              <span>Clic en una línea para clasificarla:</span>
-              <span class="h1-leyenda">
-                <span class="chip-capa capa-presentacion">presentación</span>
-                <span class="chip-capa capa-aplicacion">aplicación</span>
-                <span class="chip-capa capa-dominio">dominio</span>
-                <span class="chip-capa capa-infraestructura">infraestructura</span>
-              </span>
+              <span>Clic en una línea para clasificarla con las cuatro preguntas de 1.5:</span>
               <button type="button" data-h1="propuesta">Ver propuesta</button>
               <button type="button" class="sec" data-h1="limpiar">Limpiar</button>
               <span class="contador">capas que conoce esta función: <b data-h1="contador">0</b></span>
+            </div>
+            <div class="h1-preguntas">
+              <span class="capa-presentacion"><b>Presentación</b> ¿Cómo entra el pedido y sale la respuesta?</span>
+              <span class="capa-aplicacion"><b>Aplicación</b> ¿En qué orden se hacen los pasos?</span>
+              <span class="capa-dominio"><b>Dominio</b> ¿Qué regla del negocio se cumple?</span>
+              <span class="capa-infraestructura"><b>Infraestructura</b> ¿Con qué tecnología concreta?</span>
             </div>
             <div class="h1-codigo" data-h1="codigo"></div>
             <div class="h1-nota" data-h1="nota">Cada clic avanza: presentación → aplicación → dominio → infraestructura → sin color.</div>
@@ -375,7 +472,7 @@
           </aside>
         </section>
 
-        <!-- 1.5 Tres preguntas -->
+        <!-- 1.7 Tres preguntas -->
         <section data-rama="e01" data-p1="no" data-p2="no" data-p3="no" data-titulo="1 · El caso y el dolor">
           <h2>Tres preguntas que esta vista no puede responder</h2>
           <div class="tres-col" style="margin-top: 0.8em">
@@ -398,6 +495,696 @@
             las comparamos al final.
           </aside>
         </section>
+        <!-- ================= BLOQUE 2 · VOCABULARIO ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="2 · Vocabulario">
+          <div class="numero">2</div>
+          <h2>Vocabulario</h2>
+          <p>Arquitectura, cohesión, acoplamiento y dos ejes para cortar un sistema</p>
+          <aside class="notes">
+            Un bloque corto de palabras. Sin ellas, las capas y los puertos son solo carpetas. Lo importante es que
+            acordemos qué significa cada término antes de usarlo.
+          </aside>
+        </section>
+
+        <!-- 2.1 Qué es arquitectura -->
+        <section data-rama="e01" data-p1="no" data-p2="no" data-p3="no" data-titulo="2 · Vocabulario">
+          <h2>Qué es arquitectura (y qué es diseño)</h2>
+          <div class="tres-col" style="margin-top: 0.6em">
+            <div class="tarjeta fragment">
+              <h3>Sistema</h3>
+              <div class="flujo" style="margin: 0.3em 0; gap: 0.2em">
+                <div class="caja" style="font-size: 0.6em">Navegador</div>
+                <div class="flecha">→</div>
+                <div class="caja roja" style="font-size: 0.6em">Django</div>
+                <div class="flecha">→</div>
+                <div class="caja" style="font-size: 0.6em">PostgreSQL</div>
+              </div>
+              ¿Qué procesos hay y cómo se hablan?
+            </div>
+            <div class="tarjeta fragment">
+              <h3>Componente</h3>
+              <div class="flujo" style="margin: 0.3em 0; gap: 0.2em">
+                <div class="caja roja" style="font-size: 0.6em"><code style="background: none; color: #fff">activities</code><small>vistas · modelos · correo</small></div>
+              </div>
+              ¿Qué partes tiene y qué hace cada una?
+            </div>
+            <div class="tarjeta fragment">
+              <h3>Colaboración</h3>
+              <div class="flujo" style="margin: 0.3em 0; gap: 0.2em">
+                <div class="caja" style="font-size: 0.55em"><code style="background: none">put()</code></div>
+                <div class="flecha">→</div>
+                <div class="caja" style="font-size: 0.55em"><code style="background: none">emails.py</code></div>
+                <div class="flecha">→</div>
+                <div class="caja" style="font-size: 0.55em">SMTP</div>
+              </div>
+              ¿Quién le pide qué a quién?
+            </div>
+          </div>
+          <p class="frase fragment" style="font-size: 1.05em; margin-top: 0.9em">
+            <em>Arquitectura</em> = las decisiones <em>caras de cambiar</em> sobre las partes, sus responsabilidades y sus dependencias.
+          </p>
+          <p class="chico muted fragment" style="margin-top: 0.4em">
+            <strong>Diseño</strong>: decisiones más baratas dentro de una parte (el nombre de una función, un algoritmo, el orden de dos líneas).
+          </p>
+          <aside class="notes">
+            Tres niveles de zoom sobre el mismo sistema: el sistema (navegador, Django, PostgreSQL), un componente (el
+            paquete activities) y una colaboración (put() llama a emails.py, que habla con SMTP). La arquitectura se
+            reconoce porque cambiarla es caro: obliga a tocar muchas partes. El diseño es lo que cambia sin dolor dentro
+            de una parte. No hay una frontera exacta; lo que importa es el criterio de “cuánto cuesta cambiarlo”.
+          </aside>
+        </section>
+
+        <!-- 2.2 Patrones, principios, técnicas, criterios -->
+        <section data-rama="e01" data-p1="no" data-p2="no" data-p3="no" data-titulo="2 · Vocabulario">
+          <h2>Patrones, principios, técnicas y criterios</h2>
+          <table>
+            <thead>
+              <tr><th>Es un…</th><th>Término</th><th>Responde a</th></tr>
+            </thead>
+            <tbody>
+              <tr class="fragment"><td><strong>Patrón</strong></td><td>Capas · Puertos y adaptadores</td><td>¿Cómo organizo el código?</td></tr>
+              <tr class="fragment"><td><strong>Organización</strong></td><td>Monolito modular</td><td>¿Qué límites internos tiene un único deploy?</td></tr>
+              <tr class="fragment"><td><strong>Principio</strong></td><td>DIP · inversión de dependencias</td><td>¿De qué depende cada parte?</td></tr>
+              <tr class="fragment"><td><strong>Técnica</strong></td><td>DI · inyección de dependencias</td><td>¿Cómo le llega a una parte lo que necesita?</td></tr>
+              <tr class="fragment"><td><strong>Criterios</strong></td><td>Cohesión · acoplamiento</td><td>¿Esta organización es buena o mala?</td></tr>
+            </tbody>
+          </table>
+          <p class="chico muted" style="margin: 0.6em 0 0.3em">
+            <em>Clean Architecture</em> y <em>Onion</em> son parientes de puertos y adaptadores (dependencias hacia el centro): no son sinónimos.
+          </p>
+          <div class="mochila fragment"><span>🎒 La mochila</span> <i>capas</i> <i>puertos y adaptadores</i> <i>monolito modular</i> <i>DIP</i> <i>DI</i> <i>cohesión</i> <i>acoplamiento</i> <small>→ vuelven en el machete final</small></div>
+          <aside class="notes">
+            No son lo mismo y se mezclan mucho: un patrón es una forma de organizar; un principio es una guía sobre
+            dependencias; una técnica es un mecanismo concreto; los criterios sirven para juzgar. DIP y DI se confunden
+            todo el tiempo: DIP decide de qué depende una parte, DI decide cómo le llega (lo vemos en el bloque 7). Los
+            términos van a la “mochila” y reaparecen en el machete final.
+          </aside>
+        </section>
+
+        <!-- 2.3 Cohesión -->
+        <section data-rama="e01" data-p1="no" data-p2="no" data-p3="no" data-titulo="2 · Vocabulario">
+          <h2>Cohesión: lo que cambia junto, vive junto</h2>
+          <div class="dos-col" style="margin-top: 0.4em">
+            <div class="tarjeta fragment" style="border-top-color: var(--capa-dominio)">
+              <h3>“Inscribir”: coherente</h3>
+              <ul class="chico" style="margin-bottom: 0.5em">
+                <li>Regla de duplicado</li>
+                <li>Regla de cupo</li>
+                <li>Crear la inscripción</li>
+              </ul>
+              Cambian juntas cuando cambia <strong>la política de inscripción</strong>.
+            </div>
+            <div class="tarjeta alerta fragment">
+              <h3><code>put()</code> de <code>e01</code>: hace de todo</h3>
+              <ul class="chico" style="margin-bottom: 0.5em">
+                <li>Parsear el UUID y armar la respuesta HTTP</li>
+                <li>Transacción y bloqueo</li>
+                <li>Regla de cupo</li>
+                <li>Disparar el correo (<code>emails.py</code>)</li>
+              </ul>
+              Cada razón de cambio tira de la misma función.
+            </div>
+          </div>
+          <p class="chico fragment" style="margin-top: 0.8em">
+            La regla de cupo cambia por razones del <strong>negocio</strong>; el asunto del correo, por razones de
+            <strong>comunicación</strong>. Hoy se tocan en el mismo flujo.
+          </p>
+          <aside class="notes">
+            Cohesión: qué tan relacionado está lo que vive junto. Una función cohesiva tiene una razón para cambiar. En
+            e01, put() decide el cupo y además dispara el correo (cuyo asunto es “Inscripción confirmada: …”): dos
+            razones de cambio distintas atadas al mismo flujo. No decimos todavía cómo separarlas, solo que el síntoma
+            es “cada cambio toca la misma función”.
+          </aside>
+        </section>
+
+        <!-- 2.4 Acoplamiento -->
+        <section data-rama="e01" data-p1="no" data-p2="no" data-p3="no" data-titulo="2 · Vocabulario">
+          <h2 style="font-size: 1.3em">Acoplamiento: qué necesita saber una parte de otra</h2>
+          <table>
+            <thead>
+              <tr><th>Qué sabe</th><th>Pregunta</th><th>En nuestro código (<code>e01</code>)</th></tr>
+            </thead>
+            <tbody>
+              <tr class="fragment"><td><strong>Formato</strong></td><td>¿En qué forma viaja el dato?</td><td><code>emails.py</code> espera <code>user.email</code> como texto y llama a <code>activity.starts_at.isoformat()</code></td></tr>
+              <tr class="fragment"><td><strong>Modelo</strong></td><td>¿Qué conceptos comparten?</td><td>La vista y <code>emails.py</code> conocen los modelos Django <code>Activity</code> y <code>Enrollment</code></td></tr>
+              <tr class="fragment"><td><strong>Configuración</strong></td><td>¿Qué ajustes externos necesita?</td><td>El envío depende de <code>EMAIL_HOST</code>, <code>EMAIL_PORT</code> y <code>EMAIL_BACKEND</code>; la vista los conoce <em>indirectamente</em></td></tr>
+              <tr class="fragment"><td><strong>Comportamiento</strong></td><td>¿Qué hace la otra parte? (bloquea, falla)</td><td><code>send_mail</code> bloquea la petición hasta que SMTP responde; si falla, <code>emails.py</code> registra el error y la vista responde 201 igual</td></tr>
+            </tbody>
+          </table>
+          <p class="chico muted" style="margin-top: 0.6em">Menos acoplamiento = menos cosas que una parte necesita saber de la otra.</p>
+          <aside class="notes">
+            Cuatro cosas que una parte puede necesitar saber de otra. La vista no menciona EMAIL_HOST, pero depende de
+            él: llama a emails.py, que usa settings. Lo del comportamiento es clave para más adelante: send_mail es
+            síncrono, así que la petición espera. Y si falla, emails.py atrapa la excepción y la vista igual responde 201
+            (hay un test que lo fija en e02).
+          </aside>
+        </section>
+
+        <!-- 2.5 Capa ≠ tier -->
+        <section data-rama="e01" data-p1="no" data-p2="no" data-p3="no" data-titulo="2 · Vocabulario">
+          <h2>Capa ≠ tier</h2>
+          <div class="dos-col" style="margin-top: 0.4em">
+            <div>
+              <h3 style="font-size: 0.8em">Capas: cómo se organiza el código</h3>
+              <div class="capas-vs-tiers">
+                <div class="proceso"><b>un solo proceso</b>
+                  <div class="banda capa-presentacion">presentación</div>
+                  <div class="banda capa-aplicacion">aplicación</div>
+                  <div class="banda capa-dominio">dominio</div>
+                  <div class="banda capa-infraestructura">infraestructura</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 style="font-size: 0.8em">Tiers: dónde corre cada cosa</h3>
+              <div class="capas-vs-tiers">
+                <div class="tiers">
+                  <div class="caja">Navegador<small>frontend</small></div>
+                  <div class="caja roja">Django<small>contenedor <code style="background: none; color: #fff">backend</code></small></div>
+                  <div class="caja">PostgreSQL<small>contenedor <code style="background: none">db</code></small></div>
+                  <div class="caja">Mailpit<small>contenedor <code style="background: none">mailpit</code></small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="chico fragment" style="margin-top: 0.8em">
+            <strong>Capa</strong> = organización lógica del código. <strong>Tier</strong> = proceso o máquina donde corre.
+            Nuestras cuatro capas viven dentro de <em>un mismo proceso</em> (el backend).
+          </p>
+          <aside class="notes">
+            La confusión clásica: “tres capas” a veces se dice por tres tiers (navegador, servidor, base). Acá hablamos
+            de capas de código: pueden estar todas en el mismo proceso. El docker compose del proyecto tiene los
+            servicios db, mailpit, backend y frontend: esos son tiers (o, mejor, procesos); las capas se ven dentro del
+            backend.
+          </aside>
+        </section>
+
+        <!-- 2.6 Dos ejes -->
+        <section data-rama="e01" data-p1="no" data-p2="no" data-p3="no" data-titulo="2 · Vocabulario">
+          <h2>Dos ejes: horizontal y vertical</h2>
+          <div class="grilla-ejes">
+            <div class="celdas">
+            <div class="enc"></div>
+            <div class="enc">Actividades</div>
+            <div class="enc">Inscripciones</div>
+            <div class="enc">Notificaciones</div>
+
+            <div class="fil capa-presentacion">presentación</div>
+            <div class="cel"><code>ActivityListView</code></div>
+            <div class="cel"><code>EnrollmentDetailView</code></div>
+            <div class="cel">—</div>
+
+            <div class="fil capa-aplicacion">aplicación</div>
+            <div class="cel">listar, consultar</div>
+            <div class="cel">inscribir</div>
+            <div class="cel">enviar confirmación</div>
+
+            <div class="fil capa-dominio">dominio</div>
+            <div class="cel">capacidad</div>
+            <div class="cel">reglas de cupo</div>
+            <div class="cel">—</div>
+
+            <div class="fil capa-infraestructura">infraestructura</div>
+            <div class="cel">tabla <code>Activity</code></div>
+            <div class="cel">tabla <code>Enrollment</code></div>
+            <div class="cel">SMTP · Mailpit</div>
+            </div>
+            <div class="resaltes">
+              <div class="resalte fila fragment fade-in-then-out" data-fragment-index="1"></div>
+              <div class="resalte columna fragment" data-fragment-index="2"></div>
+            </div>
+          </div>
+          <div class="pie-ejes">
+            <p class="fragment fade-in-then-out" data-fragment-index="1"><strong>Horizontal</strong> (capas): cortamos por <em>tipo de responsabilidad</em>. Es el eje del recorrido principal.</p>
+            <p class="fragment" data-fragment-index="2"><strong>Vertical</strong> (módulos): cortamos por <em>capacidad del negocio</em>. Un deploy, límites internos: <strong>monolito modular</strong>.</p>
+          </div>
+          <p class="chico muted" style="margin: 0.2em 0 0">Primero recorremos el eje horizontal; al final volvemos al vertical.</p>
+          <aside class="notes">
+            Dos formas de cortar el mismo sistema. Primero iluminamos una fila: todo lo que es aplicación, sin importar
+            de qué capacidad del negocio. Después una columna: todo lo de notificaciones, atravesando todas las capas.
+            El recorrido de esta clase es horizontal; el corte vertical (monolito modular) es el bloque 13, conceptual y
+            con una rama opcional. Vale la pena decir que no son excluyentes: se combinan.
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 3 · RED DE SEGURIDAD ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="3 · Red de seguridad">
+          <div class="numero">3</div>
+          <h2>Red de seguridad</h2>
+          <p>Antes de mover código, fijamos lo que hace hoy</p>
+          <aside class="notes">
+            Refactorizar sin red es adivinar. Este bloque es corto pero es la condición para todo lo que sigue.
+          </aside>
+        </section>
+
+        <!-- 3.1 Refactorizar = cambiar estructura, no comportamiento -->
+        <section data-sincronizar data-rama="e02" data-p1="no" data-p2="no" data-p3="no" data-titulo="3 · Red de seguridad">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e02</b> <small>e02-red-de-seguridad</small></div>
+          <h2>Refactorizar: cambiar la estructura, no el comportamiento</h2>
+          <p class="chico" style="margin: 0 0 0.3em">
+            Los tests de contrato ya existen (<code>test_put_creates_an_idempotent_enrollment</code>, …). En <code>e02</code>
+            sumamos <strong>3 tests del correo</strong> con el backend <code>locmem</code>: <strong>solo cambia <code>tests.py</code></strong> (+50 −1).
+          </p>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/tests.py · e01 → e02</span>
+              <pre class="chico"><code class="python" data-line-numbers="1|6-7|9-13|15-20|22-38" data-incluir="e02:backend/activities/tests.py" data-lineas="175-212"></code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Cambiamos el backend de correo</b> por <code>locmem</code>: los mensajes quedan en <code>mail.outbox</code>.</li>
+                <li data-step="2" data-n="2"><b>Mismo PUT dos veces</b>, por la API real.</li>
+                <li data-step="3" data-n="3"><b>El efecto observable</b>: un solo correo, al destinatario, con el título.</li>
+                <li data-step="4" data-n="4"><b>Sin email de usuario</b>: se inscribe y no se envía nada.</li>
+                <li data-step="5" data-n="5"><b>SMTP caído</b> (<code>FailingEmailBackend</code>): la inscripción se mantiene.</li>
+              </ul>
+              <span class="archivo">FailingEmailBackend</span>
+              <pre class="emails"><code class="python" data-incluir="e02:backend/activities/tests.py" data-lineas="18-22"></code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            Refactorizar es cambiar la estructura sin cambiar el comportamiento. Para saber que no cambió, necesitamos
+            algo que lo mida. Los 11 tests de contrato de la API ya existían (en e00 y e01). En e02 agregamos tres tests
+            del correo, todos en backend/activities/tests.py: uno con el backend locmem (un correo solo cuando la
+            inscripción se crea), otro sin email de usuario, y otro con un backend que simula SMTP caído. Desde acá, cada
+            rama tiene que pasar estos tests.
+          </aside>
+        </section>
+
+        <!-- 3.2 Correr la red -->
+        <section data-rama="e02" data-p1="no" data-p2="no" data-p3="no" data-contrato="si" data-titulo="3 · Red de seguridad">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e02</b> <small>e02-red-de-seguridad</small></div>
+          <h2 class="mano">Correr la red</h2>
+          <div class="dos-col" style="grid-template-columns: 1.4fr 1fr">
+            <div class="terminal">
+              <div class="barra"><i></i><i></i><i></i><span>terminal · ../modular-capas-v2-codigo</span></div>
+              <div class="cuerpo"><div class="fragment"><div class="cmd">docker compose exec backend python manage.py test</div></div><div class="fragment"><div class="salida">Found 14 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+..............
+----------------------------------------------------------------------
+Ran 14 tests in 1.971s
+
+OK
+Destroying test database for alias 'default'...</div></div></div>
+            </div>
+            <div>
+              <ul class="chico" style="margin-top: 0.2em">
+                <li class="fragment"><strong>14 tests</strong>: 11 de la API + 3 del correo.</li>
+                <li class="fragment">Aparece el badge <strong>contrato ✔</strong> en el minimapa (arriba a la derecha).</li>
+                <li class="fragment">Los 14 tests de contrato <strong>no cambian</strong> de acá en adelante; cada rama los tiene que pasar.</li>
+              </ul>
+            </div>
+          </div>
+          <p class="chico muted" style="margin-top: 0.3em">Tiempo de ejemplo medido localmente; en el contenedor puede variar.</p>
+          <aside class="notes">
+            Correr la suite en la carpeta del código (la que deja scripts/etapa.sh). Todo verde. Esta salida es la
+            referencia: en cada rama vamos a correr lo mismo y tiene que dar verde. A medida que sumemos tests nuevos
+            (reglas, caso de uso) el total crece, pero estos 14 de contrato se mantienen. (Con correos de usuarios sin
+            email, la salida real también incluye líneas de log “No se envió email…”, que se pueden ignorar.)
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 4 · CAPAS, PASO A PASO ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="4 · Capas, paso a paso">
+          <div class="numero">4</div>
+          <h2>Capas, paso a paso</h2>
+          <p>Cuatro ramas chicas, cada una con un único movimiento</p>
+          <aside class="notes">
+            De acá en adelante cada slide de código tiene la etiqueta con el comando de la etapa. Vamos a movernos de
+            e02 a e06. En cada paso, los tests de contrato siguen verdes.
+          </aside>
+        </section>
+
+        <!-- 4.1 De las cuatro preguntas a cuatro capas -->
+        <section data-rama="e02" data-p1="no" data-p2="no" data-p3="no" data-contrato="si" data-titulo="4 · Capas, paso a paso">
+          <h2>De las cuatro preguntas a cuatro capas</h2>
+          <div class="dos-col" style="grid-template-columns: 1.7fr 1fr; gap: 1.2em">
+            <div class="pila-capas">
+              <div class="capa-presentacion fragment"><b>Presentación</b><span>¿Cómo entra el pedido y cómo sale la respuesta?</span></div>
+              <div class="capa-aplicacion fragment"><b>Aplicación</b><span>¿Cómo coordinamos los pasos?</span></div>
+              <div class="capa-dominio fragment"><b>Dominio</b><span>¿Qué reglas del negocio valen?</span></div>
+              <div class="capa-infraestructura fragment"><b>Infraestructura</b><span>¿Con qué mecanismo concreto?</span></div>
+            </div>
+            <div>
+              <div class="h1-mini" data-h1-mini></div>
+              <p class="chico muted" style="margin: 0.3em 0 0">El <code>put()</code> de <code>e01</code> coloreado con la propuesta de la actividad (1.6): cuatro colores en una sola función.</p>
+            </div>
+          </div>
+          <p class="chico fragment" style="margin-top: 0.5em">
+            Son las mismas cuatro preguntas de 1.5: ahora cada una va a tener <strong>su lugar en el código</strong>.
+          </p>
+          <aside class="notes">
+            Retomamos la tabla de la slide 1.5 y el resultado de la actividad: la barrita de la derecha es el put() de
+            e01 coloreado con la propuesta del docente (los colores salen de los mismos datos de la herramienta H1).
+            Las cuatro preguntas pasan a ser cuatro capas: presentación, aplicación, dominio e infraestructura. Una
+            capa es un tipo de responsabilidad; la vamos a convertir en una carpeta paso a paso. Cada color de la pila
+            es el mismo que se usa en el resto del material.
+          </aside>
+        </section>
+
+        <!-- 4.2 Paso 1: un caso de uso -->
+        <section data-rama="e03" data-p1="no" data-p2="no" data-p3="no" data-contrato="si" data-titulo="4 · Capas, paso a paso">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e03</b> <small>e03-caso-de-uso</small></div>
+          <h2>Paso 1: un caso de uso</h2>
+          <p class="chico" style="margin: 0 0 0.3em">
+            Movemos el cuerpo del <code>put()</code> a <code>application/inscribir.py</code>. La vista queda llamando a
+            <code>inscribir(participant, activity_id)</code>: <strong>views.py −32 +15</strong> · <strong>inscribir.py +39</strong>.
+          </p>
+          <div class="dos-col" style="grid-template-columns: 1fr 1fr; gap: 0.8em">
+            <div>
+              <span class="archivo">views.py · e02 → e03</span>
+              <div class="diff alto" data-contexto="0" data-diff="e02..e03:backend/activities/views.py"></div>
+            </div>
+            <div>
+              <span class="archivo">application/inscribir.py · nuevo</span>
+              <div class="diff alto" data-diff="e02..e03:backend/activities/application/inscribir.py"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            Primer movimiento: mover, no cambiar. El cuerpo del put() (transacción, reglas, creación, correo) pasa
+            entero a una función nueva en application/inscribir.py. La vista conserva lo que es de HTTP: parsear el
+            UUID, la identidad, y después traducir el resultado a una respuesta. El diff de la izquierda es de views.py
+            (se achica); el de la derecha es el archivo nuevo. Si hace falta, desplazar los paneles con el mouse.
+            Comportamiento: idéntico, y los 14 tests de contrato lo confirman.
+          </aside>
+        </section>
+
+        <!-- 4.3 Anatomía del caso de uso (v1) -->
+        <section data-sincronizar data-rama="e03" data-p1="no" data-p2="no" data-p3="no" data-contrato="si" data-titulo="4 · Capas, paso a paso">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e03</b> <small>e03-caso-de-uso</small></div>
+          <h2>Anatomía del caso de uso (v1)</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/application/inscribir.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="16|17-19|20-21,23-31|33-36|38|9-13,39" data-incluir="e03:backend/activities/application/inscribir.py"></code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Recibe datos</b> (<code>participante</code>, <code>actividad_id</code>), no un request.</li>
+                <li data-step="2" data-n="2"><b>Transacción</b> y bloqueo de la actividad.</li>
+                <li data-step="3" data-n="3"><b>Reglas</b>: actividad inexistente, duplicado, cupo.</li>
+                <li data-step="4" data-n="4"><b>Crea</b> la inscripción.</li>
+                <li data-step="5" data-n="5"><b>Notifica</b>: todavía <code>emails.py</code> → <code>send_mail</code>.</li>
+                <li data-step="6" data-n="6"><b>Devuelve</b> un <code>ResultadoInscripcion</code> con un <code>estado</code> en texto.</li>
+              </ul>
+              <p class="problema fragment"><strong>Problema:</strong> ¿cómo devuelve el 409? Hoy con un texto (<code>"sin_cupo"</code>) que la vista tiene que interpretar.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Recorrer los seis pasos. Notar qué cambió respecto de la vista: no hay request ni Response; recibe datos
+            simples. Pero todavía conoce el ORM, la transacción y el envío del correo. Y hay un problema de diseño: los
+            casos “no pasó nada” se devuelven con un estado de texto (“actividad_inexistente”, “sin_cupo”) y la vista
+            tiene que comparar strings. Eso es frágil: lo arreglamos en la próxima rama.
+          </aside>
+        </section>
+
+        <!-- 4.4 Paso 2: errores -->
+        <section data-sincronizar data-rama="e04" data-p1="no" data-p2="no" data-p3="no" data-contrato="si" data-titulo="4 · Capas, paso a paso">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e04</b> <small>e04-errores-de-aplicacion</small></div>
+          <h2 style="font-size: 1.25em">Paso 2: la aplicación habla en errores, la vista en HTTP</h2>
+          <div class="dos-col" style="grid-template-columns: 1fr 1fr; gap: 0.8em; margin-bottom: 0.2em">
+            <div>
+              <span class="archivo">application/errores.py</span>
+              <pre class="chico"><code class="python" data-incluir="e04:backend/activities/application/errores.py"></code></pre>
+            </div>
+            <div>
+              <span class="archivo">application/inscribir.py · dónde se lanza</span>
+              <pre class="chico"><code class="python" data-incluir="e04:backend/activities/application/inscribir.py" data-lineas="30-31"></code></pre>
+            </div>
+          </div>
+          <div class="anatomia vista baja">
+            <div>
+              <span class="archivo">views.py · put() · traduce error → HTTP</span>
+              <pre class="chico"><code class="python" data-line-numbers="2-4|6-8|10-11|12-15|17-23" data-incluir="e04:backend/activities/views.py" data-lineas="161-183"></code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Parsear</b> el UUID.</li>
+                <li data-step="2" data-n="2"><b>Identidad</b> y body vacío.</li>
+                <li data-step="3" data-n="3"><b>Llamar</b> al caso de uso.</li>
+                <li data-step="4" data-n="4"><b>Traducir el error</b>: <code>CupoAgotado</code> → 409, <code>ActividadNoEncontrada</code> → 404.</li>
+                <li data-step="5" data-n="5"><b>Traducir el resultado</b>: 201 si se creó, 200 si ya existía.</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            El caso de uso ya no devuelve textos: lanza errores con nombre (CupoAgotado, ActividadNoEncontrada), que
+            viven por ahora en application/errores.py. La vista los atrapa y decide el código HTTP: el 409 y el 404
+            son una decisión de presentación, no de la aplicación. El resultado ahora es un ResultadoInscripcion con
+            un booleano “creada”, que la vista convierte en 201 o 200. La aplicación habla en errores; HTTP queda
+            afuera.
+          </aside>
+        </section>
+
+        <!-- 4.5 Paso 3: reglas de dominio -->
+        <section data-sincronizar data-rama="e05" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="4 · Capas, paso a paso">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e05</b> <small>e05-reglas-de-dominio</small></div>
+          <h2>Paso 3: reglas de dominio</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/domain/reglas.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="4-5|8-10|1" data-incluir="e05:backend/activities/domain/reglas.py"></code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><code>hay_cupo(capacidad, inscriptos)</code>: función pura, números adentro, booleano afuera.</li>
+                <li data-step="2" data-n="2"><code>exigir_cupo(…)</code>: lanza <code>CupoAgotado</code> si no hay lugar.</li>
+                <li data-step="3" data-n="3">Los errores se mudaron de <code>application/</code> a <code>domain/errores.py</code>: son conceptos del negocio.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="dos-col" style="grid-template-columns: 1.1fr 1fr; gap: 0.8em; margin-top: 0.2em">
+            <div>
+              <span class="archivo">test_reglas.py</span>
+              <pre class="chico"><code class="python" data-incluir="e05:backend/activities/test_reglas.py" data-lineas="7-17"></code></pre>
+            </div>
+            <div class="terminal" style="font-size: 0.4em">
+              <div class="barra"><i></i><i></i><i></i><span>terminal 🧪</span></div>
+              <div class="cuerpo"><div class="cmd">docker compose exec backend python manage.py test activities.test_reglas</div><div class="salida">Found 5 test(s).
+Skipping setup of unused database(s): default.
+.....
+Ran 5 tests in 0.000s
+
+OK</div></div>
+            </div>
+          </div>
+          <p class="chico fragment" style="margin: 0.2em 0 0"><strong>P1 pasa a ◐:</strong> la regla de cupo ya se prueba sin HTTP, sin base de datos y sin SMTP. Falta poder probar el <em>caso de uso</em> completo.</p>
+          <aside class="notes">
+            Sacamos la regla del cupo de dentro de la función grande: hay_cupo es una comparación pura y exigir_cupo
+            lanza el error. Como no toca el ORM, los tests (5, en test_reglas.py) usan SimpleTestCase, que ni siquiera
+            crea la base: corren en ~0 ms. Es la primera vez que probamos una regla del negocio sin levantar nada.
+            P1 pasa a medias: la regla sí, pero Inscribir todavía necesita base y correo. En la rama, el total de tests
+            es 19 (14 de contrato + 5 de reglas). Los errores ahora viven en domain/errores.py.
+          </aside>
+        </section>
+
+        <!-- 4.6 Paso 4: carpetas por capa -->
+        <section data-rama="e06" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="4 · Capas, paso a paso">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e06</b> <small>e06-carpetas-por-capa</small></div>
+          <h2>Paso 4: carpetas por capa</h2>
+          <div class="dos-col arboles" style="grid-template-columns: 1fr 1.2fr; gap: 1em">
+            <div>
+              <span class="archivo">e06 · hoy</span>
+              <div class="arbol" data-arbol="e06:backend/activities"></div>
+            </div>
+            <div>
+              <span class="archivo">e14 · destino</span>
+              <ul class="arbol">
+                <li class="dir"><span class="nombre">backend/activities/</span>
+                  <ul>
+                    <li class="hoja capa-composicion"><span class="nombre">composition.py</span></li>
+                    <li class="hoja capa-infraestructura"><span class="nombre">models.py</span></li>
+                    <li class="dir"><span class="nombre">domain/</span>
+                      <ul>
+                        <li class="hoja capa-dominio"><span class="nombre">modelos.py</span></li>
+                        <li class="hoja capa-dominio"><span class="nombre">reglas.py</span></li>
+                        <li class="hoja capa-dominio"><span class="nombre">errores.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">application/</span>
+                      <ul>
+                        <li class="hoja capa-puerto"><span class="nombre">puertos.py</span></li>
+                        <li class="hoja capa-aplicacion"><span class="nombre">dto.py</span></li>
+                        <li class="hoja capa-aplicacion"><span class="nombre">inscribir.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">infrastructure/</span>
+                      <ul>
+                        <li class="hoja capa-infraestructura"><span class="nombre">db/repositorio_django.py</span></li>
+                        <li class="hoja capa-infraestructura"><span class="nombre">notificaciones/{smtp,memoria,fallo}.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">presentation/http/</span>
+                      <ul>
+                        <li class="hoja capa-presentacion"><span class="nombre">views.py · serializers.py · urls.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">management/commands/</span>
+                      <ul>
+                        <li class="hoja capa-presentacion"><span class="nombre">inscribir.py</span></li>
+                      </ul>
+                    </li>
+                    <li class="dir"><span class="nombre">tests/</span>
+                      <ul>
+                        <li class="hoja capa-tests"><span class="nombre">test_contrato_api · test_reglas · test_inscribir · fakes</span></li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="leyenda-capas">
+            <span class="chip-capa capa-presentacion">presentación</span>
+            <span class="chip-capa capa-aplicacion">aplicación</span>
+            <span class="chip-capa capa-dominio">dominio</span>
+            <span class="chip-capa capa-puerto">puertos</span>
+            <span class="chip-capa capa-infraestructura">infraestructura</span>
+            <span class="chip-capa capa-composicion">composición</span>
+            <span class="chip-capa capa-tests">tests</span>
+          </div>
+          <p class="chico" style="margin: 0.2em 0 0">Ya se parece al destino. Falta: puertos, adaptadores, composición y un dominio puro.</p>
+          <aside class="notes">
+            Último movimiento de las capas: mover archivos. views, serializers y urls van a presentation/http;
+            emails.py pasa a infrastructure/email.py (y se renombra); los tests se agrupan en tests/. No cambia ni una
+            línea de lógica: cambian 9 líneas en 12 archivos, casi todas son imports y rutas. A la izquierda, el árbol
+            real de esta rama (generado desde git); a la derecha, el destino que vimos al principio. models.py,
+            migrations y management/commands quedan donde Django los busca.
+          </aside>
+        </section>
+
+        <!-- 4.7 Anatomía de la vista delgada -->
+        <section data-sincronizar data-rama="e06" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="4 · Capas, paso a paso">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e06</b> <small>e06-carpetas-por-capa</small></div>
+          <h2>Anatomía de la vista delgada</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/presentation/http/views.py · put()</span>
+              <pre class="chico"><code class="python" data-line-numbers="2-4|6-8|10-11|12-15|17-23" data-incluir="e06:backend/activities/presentation/http/views.py" data-lineas="161-183"></code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Parsear</b> la entrada: el UUID de la URL.</li>
+                <li data-step="2" data-n="2"><b>Identidad</b> del participante y body vacío.</li>
+                <li data-step="3" data-n="3"><b>Llamar</b> al caso de uso, con datos simples.</li>
+                <li data-step="4" data-n="4"><b>Traducir el error</b> a un código HTTP.</li>
+                <li data-step="5" data-n="5"><b>Traducir el resultado</b> a una respuesta.</li>
+              </ul>
+              <p class="problema fragment">Esto es un <strong>adaptador de entrada</strong>, aunque todavía no le pusimos nombre.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Mirar lo que quedó: la vista solo conoce HTTP y el caso de uso. No hay ORM de reglas, no hay SMTP, no hay
+            cupo. Parsea, autentica, llama, traduce. Es un adaptador de entrada: traduce un mecanismo de entrada
+            (HTTP) a una llamada al interior. Más adelante, el comando de terminal (o gRPC, que ya vieron) va a ser otro
+            adaptador de entrada con exactamente la misma forma.
+          </aside>
+        </section>
+
+        <!-- 4.8 H4 -->
+        <section data-rama="e06" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="4 · Capas, paso a paso">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e06</b> <small>e06-carpetas-por-capa</small></div>
+          <h2>¿Hacia dónde apuntan los imports? <span class="herramienta">🛠 H4</span></h2>
+          <div class="h4" data-inicial="e01" data-desde="e01" data-hasta="e06"></div>
+          <aside class="notes">
+            Deslizar de e01 a e06. En e01 hay muy pocas capas: la vista toca el ORM y, a través de emails.py, SMTP. En
+            e06 hay capas, y las flechas van de presentación a aplicación y a dominio: hacia abajo. Pero hay tres
+            flechas rojas: la aplicación importa el correo, los modelos y el ORM. Las rojas son las que violan la regla
+            “el interior no depende de afuera”. Esa regla todavía no la aplicamos: la usamos como vara para medir.
+            Lo de la derecha son las dependencias externas (SMTP y ORM) y la infraestructura que las envuelve.
+          </aside>
+        </section>
+
+        <!-- 4.9 Lo que sigue doliendo -->
+        <section data-rama="e06" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="4 · Capas, paso a paso">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e06</b> <small>e06-carpetas-por-capa</small></div>
+          <h2>Lo que sigue doliendo</h2>
+          <div class="h4" data-inicial="e06" data-fijo data-resaltar="violaciones"></div>
+          <div class="tres-col" style="margin-top: 0.3em">
+            <div class="tarjeta" style="font-size: 0.6em">La aplicación <strong>importa</strong> <code>send_mail</code> (vía <code>infrastructure/email.py</code>) y el ORM.</div>
+            <div class="tarjeta gris" style="font-size: 0.6em">Para probar <code>Inscribir</code> hace falta <strong>una base y un backend de correo</strong>.</div>
+            <div class="tarjeta alerta" style="font-size: 0.6em"><strong>P1 ◐</strong> · <strong>P2 ☐</strong> · <strong>P3 ☐</strong></div>
+          </div>
+          <aside class="notes">
+            Mismo grafo, pero ahora solo se destacan las flechas que molestan: de la aplicación hacia afuera. Dos
+            consecuencias concretas. Primero: probar el caso de uso exige una base de datos y un backend de correo. Segundo:
+            si mañana el correo sale por una API, hay que abrir application/inscribir.py. Repasar el estado de las tres
+            preguntas: P1 a medias, P2 y P3 siguen abiertas. Eso es lo que resolvemos en la segunda mitad del recorrido.
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 5 · PUNTO DE CONTROL: CAPAS ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="5 · Punto de control">
+          <div class="numero">5</div>
+          <h2>Punto de control: capas</h2>
+          <p>Un machete y una pregunta para la segunda parte</p>
+          <aside class="notes">
+            Es un buen lugar para cortar un encuentro: lo que sigue (bloque 6) está pensado para retomar.
+          </aside>
+        </section>
+
+        <!-- 5.1 Machete de capas -->
+        <section data-rama="e06" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="5 · Punto de control">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e06</b> <small>e06-carpetas-por-capa</small></div>
+          <h2>Machete de capas 📸</h2>
+          <table class="tabla-capas machete-capas">
+            <thead>
+              <tr><th>Capa</th><th>La pregunta</th><th>Archivo en <code>e06</code></th><th>Un ejemplo</th></tr>
+            </thead>
+            <tbody>
+              <tr class="capa-presentacion">
+                <td><span class="chip-capa">presentación</span></td>
+                <td>¿Cómo entra el pedido y cómo sale la respuesta?</td>
+                <td><code>presentation/http/views.py</code><br /><code>serializers.py</code> · <code>urls.py</code></td>
+                <td><code class="ej" data-incluir="e06:backend/activities/presentation/http/views.py" data-lineas="174-174"></code></td>
+              </tr>
+              <tr class="capa-aplicacion">
+                <td><span class="chip-capa">aplicación</span></td>
+                <td>¿En qué orden se hacen los pasos?</td>
+                <td><code>application/inscribir.py</code></td>
+                <td><code class="ej" data-incluir="e06:backend/activities/application/inscribir.py" data-lineas="17-17"></code></td>
+              </tr>
+              <tr class="capa-dominio">
+                <td><span class="chip-capa">dominio</span></td>
+                <td>¿Qué regla del negocio vale?</td>
+                <td><code>domain/reglas.py</code><br /><code>domain/errores.py</code></td>
+                <td><code class="ej" data-incluir="e06:backend/activities/domain/reglas.py" data-lineas="8-8"></code></td>
+              </tr>
+              <tr class="capa-infraestructura">
+                <td><span class="chip-capa">infraestructura</span></td>
+                <td>¿Con qué tecnología concreta?</td>
+                <td><code>infrastructure/email.py</code><br /><code>models.py</code> (el ORM)</td>
+                <td><code class="ej" data-incluir="e06:backend/activities/infrastructure/email.py" data-lineas="4-4"></code></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="chico muted" style="margin: 0.5em 0 0">Los tests de contrato (<code>tests/test_contrato_api.py</code>) ven la API desde afuera y no cambian.</p>
+          <aside class="notes">
+            Slide para sacarle una foto. Es la misma tabla de 1.5, pero ahora cada pregunta tiene un lugar en el
+            código real de la rama e06. Cada ejemplo es una línea del archivo de la rama. Un detalle: models.py sigue
+            en la raíz del paquete porque Django lo busca ahí, aunque conceptualmente es infraestructura (el ORM).
+          </aside>
+        </section>
+
+        <!-- 5.2 Pregunta puente -->
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="5 · Punto de control">
+          <h2 style="font-size: 1.9em; max-width: 900px; line-height: 1.2; margin-top: 140px">¿Y si la aplicación no dependiera de SMTP, sino <u>al revés</u>?</h2>
+          <p style="margin-top: 1.4em; font-size: 0.8em">
+            Lectura sugerida: Alistair Cockburn, <em>Hexagonal Architecture</em> (secciones 1 y 2)<br />
+            <code>alistair.cockburn.us/hexagonal-architecture</code>
+          </p>
+          <aside class="notes">
+            Dejar la pregunta en el aire. En e06 la aplicación importa SMTP (a través de emails/infrastructure). ¿Qué
+            pasaría si la aplicación definiera lo que necesita y SMTP se adaptara a eso? Esa inversión es el puente
+            hacia la segunda parte. La lectura sugerida es la fuente original de puertos y adaptadores.
+          </aside>
+        </section>
+
       </div>
     </div>
 
@@ -407,6 +1194,23 @@
       <img src="assets/logo-untdf.svg" alt="UNTDF" />
       <span class="seccion-actual"></span>
     </footer>
+
+    <div id="grafos" hidden>
+      <script type="application/json" data-grafo="e01"></script>
+      <script type="application/json" data-grafo="e02"></script>
+      <script type="application/json" data-grafo="e03"></script>
+      <script type="application/json" data-grafo="e04"></script>
+      <script type="application/json" data-grafo="e05"></script>
+      <script type="application/json" data-grafo="e06"></script>
+      <script type="application/json" data-grafo="e07"></script>
+      <script type="application/json" data-grafo="e08"></script>
+      <script type="application/json" data-grafo="e09"></script>
+      <script type="application/json" data-grafo="e10"></script>
+      <script type="application/json" data-grafo="e11"></script>
+      <script type="application/json" data-grafo="e12"></script>
+      <script type="application/json" data-grafo="e13"></script>
+      <script type="application/json" data-grafo="e14"></script>
+    </div>
 
     <script src="vendor/reveal/reveal.js"></script>
     <script src="vendor/reveal/plugin/highlight.js"></script>
@@ -433,7 +1237,7 @@
         slide.querySelectorAll('.anatomia').forEach((grupo) => {
           const pre = grupo.querySelector('pre code[data-line-numbers]')?.parentElement
           if (!pre) return
-          const paso = pre.querySelectorAll('code.fragment.visible').length
+          const paso = pre.querySelectorAll('code.fragment.visible').length + 1 // el primer paso es el bloque original, que no es un fragment
           grupo.querySelectorAll('.callouts li[data-step]').forEach((li) => {
             const n = Number(li.dataset.step)
             li.classList.toggle('activo', n === paso)
@@ -566,6 +1370,254 @@
         codigo.addEventListener('mouseover', (e) => {
           const linea = e.target.closest('.h1-linea.nota')
           if (linea) nota.textContent = propuesta.notas[linea.dataset.n]
+        })
+      })()
+
+      // H1 en miniatura (slide 4.1): el mismo código y la misma propuesta de H1, como barritas por capa
+      ;(function () {
+        const destino = document.querySelector('[data-h1-mini]')
+        const fuente = document.querySelector('#h1 [data-h1="fuente"]')
+        const datos = document.querySelector('#h1 [data-h1="propuesta-datos"]')
+        if (!destino || !fuente || !datos) return
+        const propuesta = JSON.parse(datos.textContent).lineas
+        fuente.value.split('\n').forEach((texto, i) => {
+          const sangria = texto.length - texto.trimStart().length
+          const barra = document.createElement('div')
+          barra.className = 'mini-linea'
+          const capa = propuesta[i + 1]
+          if (!texto.trim()) barra.classList.add('vacia')
+          else if (capa) barra.classList.add('capa-' + capa)
+          barra.style.marginLeft = sangria * 2.4 + 'px'
+          barra.style.width = Math.max(4, (texto.trim().length) * 2.4) + 'px'
+          destino.appendChild(barra)
+        })
+      })()
+
+      // H4 · Grafo de imports por etapa (reutilizable: <div class="h4" data-inicial data-desde data-hasta data-fijo data-resaltar>)
+      ;(function () {
+        const GRAFOS = {}
+        document.querySelectorAll('#grafos script[data-grafo]').forEach((s) => {
+          GRAFOS[s.dataset.grafo] = JSON.parse(s.textContent)
+        })
+        const ETAPAS = Object.keys(GRAFOS).sort()
+        const SVGNS = 'http://www.w3.org/2000/svg'
+
+        // Bandas: de arriba hacia abajo; el dominio queda abajo y lo externo a la derecha
+        const BANDAS = [
+          { capa: 'composicion', etiqueta: 'composición', y: 22, h: 50, slots: ['composition'] },
+          { capa: 'presentacion', etiqueta: 'presentación', y: 78, h: 72, slots: ['views', 'serializers', 'urls', 'identidad', 'cmd'] },
+          { capa: 'aplicacion', etiqueta: 'aplicación', y: 156, h: 72, slots: ['inscribir', 'errores', 'dto', 'puertos'] },
+          { capa: 'infraestructura', etiqueta: 'infraestructura', y: 234, h: 72, slots: ['models', 'email', 'repositorio_django', 'smtp', 'memoria', 'fallo'] },
+          { capa: 'dominio', etiqueta: 'dominio', y: 312, h: 72, slots: ['errores', 'reglas', 'modelos'] },
+        ]
+        const BANDA_DE = { puerto: 'aplicacion' }
+        const X0 = 124, PASO = 124, NW = 118, NH = 28, ZONA_W = 880
+        const EXTERNOS = { ORM: { x: 950, y: 186, w: 130, h: 32 }, SMTP: { x: 950, y: 270, w: 130, h: 32 } }
+        const COLOR = {
+          presentacion: '#7b5ea7', aplicacion: '#2f6db5', dominio: '#2e8b57', puerto: '#be1c1d',
+          infraestructura: '#6f6f6e', composicion: '#c98a1b', externo: '#3b3b3b',
+        }
+
+        function clave(id) {
+          const m = id.replace('activities.', '')
+          if (m.startsWith('management.commands.')) return 'cmd'
+          const ultimo = m.split('.').pop()
+          return { api_urls: 'urls', emails: 'email' }[ultimo] || ultimo
+        }
+
+        function etiqueta(id) {
+          const m = id.replace('activities.', '')
+          return m.startsWith('management.commands.') ? 'cmd inscribir' : m.split('.').pop()
+        }
+
+        function el(nombre, attrs, texto) {
+          const e = document.createElementNS(SVGNS, nombre)
+          for (const k in attrs) e.setAttribute(k, attrs[k])
+          if (texto !== undefined) e.textContent = texto
+          return e
+        }
+
+        function violacion(origen, destino, nodos) {
+          const interior = /\.(application|domain)\./.test(origen)
+          if (!interior) return false
+          if (destino === 'ORM' || destino === 'SMTP') return true
+          return nodos[destino] && nodos[destino].capa === 'infraestructura'
+        }
+
+        function dibujar(grafo, svg, opciones) {
+          svg.textContent = ''
+          const defs = el('defs', {})
+          ;[['gris', '#6f6f6e'], ['rojo', '#be1c1d']].forEach(([n, c]) => {
+            const m = el('marker', { id: `h4-punta-${n}-${opciones.uid}`, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 9, markerHeight: 9, markerUnits: 'userSpaceOnUse', orient: 'auto' })
+            m.appendChild(el('path', { d: 'M0,0 L10,5 L0,10 z', fill: c }))
+            defs.appendChild(m)
+          })
+          svg.appendChild(defs)
+
+          BANDAS.forEach((b) => {
+            svg.appendChild(el('rect', { x: 6, y: b.y, width: ZONA_W, height: b.h, rx: 8, fill: COLOR[b.capa], 'fill-opacity': 0.09, stroke: COLOR[b.capa], 'stroke-opacity': 0.35 }))
+            svg.appendChild(el('text', { x: 16, y: b.y + b.h / 2 + 4, class: 'h4-banda', fill: COLOR[b.capa] }, b.etiqueta))
+          })
+          svg.appendChild(el('rect', { x: 930, y: 22, width: 164, height: 362, rx: 8, fill: '#3b3b3b', 'fill-opacity': 0.06, stroke: '#3b3b3b', 'stroke-opacity': 0.3, 'stroke-dasharray': '4 4' }))
+          svg.appendChild(el('text', { x: 1012, y: 16, class: 'h4-banda', 'text-anchor': 'middle', fill: '#3b3b3b' }, 'externos'))
+
+          // nodos con posición fija por ranura
+          const nodos = {}
+          grafo.nodos.forEach((n) => {
+            if (n.capa === 'externo') {
+              const p = EXTERNOS[n.id]
+              nodos[n.id] = { ...n, ...p, externo: true, cx: p.x + p.w / 2, cy: p.y + p.h / 2 }
+              return
+            }
+            const banda = BANDAS.find((b) => b.capa === (BANDA_DE[n.capa] || n.capa))
+            if (!banda) return // módulos sin capa (admin, apps, seed, tests): se omiten
+            const k = banda.slots.indexOf(clave(n.id))
+            if (k < 0) return
+            const x = banda.capa === 'composicion' ? X0 : X0 + k * PASO
+            const y = banda.y + (banda.h - NH) / 2
+            nodos[n.id] = { ...n, x, y, w: NW, h: NH, cx: x + NW / 2, cy: y + NH / 2 }
+          })
+
+          // aristas: lado de salida/llegada según posición relativa
+          const aristas = grafo.aristas
+            .filter((a) => nodos[a.from] && nodos[a.to] && !nodos[a.from].externo)
+            .map((a) => ({ ...a, mala: violacion(a.from, a.to, nodos) }))
+          const lados = {}
+          aristas.forEach((a) => {
+            const o = nodos[a.from], d = nodos[a.to]
+            let lo, ld
+            if (d.externo) { lo = 'der'; ld = 'izq' }
+            else if (Math.abs(o.cy - d.cy) < 4) { lo = o.cx < d.cx ? 'der' : 'izq'; ld = o.cx < d.cx ? 'izq' : 'der' }
+            else if (d.cy > o.cy) { lo = 'abajo'; ld = 'arriba' }
+            else { lo = 'arriba'; ld = 'abajo' }
+            a.lo = lo; a.ld = ld
+            ;(lados[a.from + '|' + lo] = lados[a.from + '|' + lo] || []).push({ a, extremo: 'o' })
+            ;(lados[a.to + '|' + ld] = lados[a.to + '|' + ld] || []).push({ a, extremo: 'd' })
+          })
+          Object.entries(lados).forEach(([k, lista]) => {
+            const [id, lado] = k.split('|')
+            const n = nodos[id]
+            lista.sort((p, q) => {
+              const otro = (r) => nodos[r.extremo === 'o' ? r.a.to : r.a.from]
+              return lado === 'der' || lado === 'izq' ? otro(p).cy - otro(q).cy : otro(p).cx - otro(q).cx
+            })
+            lista.forEach((r, i) => {
+              const d = (i - (lista.length - 1) / 2) * (lado === 'der' || lado === 'izq' ? 7 : 12)
+              const punto = lado === 'der' ? [n.x + n.w, n.cy + d] : lado === 'izq' ? [n.x, n.cy + d]
+                : lado === 'abajo' ? [n.cx + d, n.y + n.h] : [n.cx + d, n.y]
+              r.a['p' + r.extremo] = punto
+            })
+          })
+
+          const capaAristas = el('g', {})
+          svg.appendChild(capaAristas)
+          aristas.forEach((a) => {
+            const [x1, y1] = a.po, [x2, y2] = a.pd
+            let d
+            if (a.lo === 'der' || a.lo === 'izq') {
+              const dx = Math.max(24, Math.abs(x2 - x1) / 2) * (a.lo === 'der' ? 1 : -1)
+              d = `M${x1},${y1} C${x1 + dx},${y1} ${x2 - dx},${y2} ${x2},${y2}`
+            } else {
+              const dy = Math.max(14, Math.abs(y2 - y1) / 2) * (a.lo === 'abajo' ? 1 : -1)
+              d = `M${x1},${y1} C${x1},${y1 + dy} ${x2},${y2 - dy} ${x2},${y2}`
+            }
+            const p = el('path', {
+              d, class: 'h4-arista' + (a.mala ? ' mala' : ''), fill: 'none',
+              'marker-end': `url(#h4-punta-${a.mala ? 'rojo' : 'gris'}-${opciones.uid})`,
+              'data-de': a.from, 'data-a': a.to,
+            })
+            p.appendChild(el('title', {}, `${a.from.replace('activities.', '')} → ${a.to.replace('activities.', '')}${a.mala ? ' (el interior depende de afuera)' : ''}`))
+            capaAristas.appendChild(p)
+          })
+
+          Object.values(nodos).forEach((n) => {
+            const g = el('g', { class: 'h4-nodo', 'data-id': n.id })
+            g.appendChild(el('rect', { x: n.x, y: n.y, width: n.w, height: n.h, rx: 6, fill: COLOR[n.capa] }))
+            g.appendChild(el('text', { x: n.cx, y: n.cy + 4, class: 'h4-etq' }, n.externo ? n.id : etiqueta(n.id)))
+            g.appendChild(el('title', {}, n.id.replace('activities.', '')))
+            svg.appendChild(g)
+          })
+
+          const malas = aristas.filter((a) => a.mala).length
+          const interior = Object.keys(nodos).some((id) => /\.(application|domain)\./.test(id))
+          return { total: aristas.length, malas, interior }
+        }
+
+        document.querySelectorAll('.h4').forEach((raiz, indice) => {
+          const desde = raiz.dataset.desde || ETAPAS[0]
+          const hasta = raiz.dataset.hasta || ETAPAS[ETAPAS.length - 1]
+          const rango = ETAPAS.filter((e) => e >= desde && e <= hasta)
+          let actual = rango.includes(raiz.dataset.inicial) ? raiz.dataset.inicial : rango[0]
+          const fijo = raiz.hasAttribute('data-fijo')
+
+          raiz.innerHTML = `
+            ${fijo ? '' : `<div class="h4-barra">
+              <button type="button" data-h4="prev" aria-label="etapa anterior">◀</button>
+              <input type="range" min="0" max="${rango.length - 1}" step="1" data-h4="slider" aria-label="etapa" />
+              <button type="button" data-h4="next" aria-label="etapa siguiente">▶</button>
+              <span class="h4-chips">${rango.map((e, i) => `<button type="button" class="chip" data-h4="ir" data-i="${i}">${e}</button>`).join('')}</span>
+            </div>`}
+            <div class="h4-resumen" data-h4="resumen"></div>
+            <svg class="h4-svg" viewBox="0 0 1100 392" role="img" aria-label="Grafo de imports entre módulos"></svg>
+            <div class="h4-leyenda">
+              <span class="chip-capa capa-presentacion">presentación</span>
+              <span class="chip-capa capa-aplicacion">aplicación</span>
+              <span class="chip-capa capa-dominio">dominio</span>
+              <span class="chip-capa capa-puerto">puertos</span>
+              <span class="chip-capa capa-infraestructura">infraestructura</span>
+              <span class="chip-capa capa-composicion">composición</span>
+              <span class="h4-ley-arista"><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" stroke="#6f6f6e" stroke-width="2" stroke-dasharray="5 3" /></svg> import</span>
+              <span class="h4-ley-arista mala"><svg width="36" height="10"><line x1="0" y1="5" x2="36" y2="5" stroke="#be1c1d" stroke-width="3.5" /></svg> el interior (application/domain) depende de afuera</span>
+            </div>`
+          const svg = raiz.querySelector('svg.h4-svg')
+          if (raiz.dataset.resaltar === 'violaciones') svg.classList.add('solo-violaciones')
+          const resumen = raiz.querySelector('[data-h4="resumen"]')
+          const slider = raiz.querySelector('[data-h4="slider"]')
+
+          function mostrar(i) {
+            i = Math.max(0, Math.min(rango.length - 1, i))
+            actual = rango[i]
+            const grafo = GRAFOS[actual]
+            const r = dibujar(grafo, svg, { uid: indice })
+            const veredicto = !r.interior
+              ? '<span class="neutro">todavía no hay capas internas</span>'
+              : r.malas
+                ? `<span class="mal">✘ ${r.malas} import${r.malas > 1 ? 's' : ''} del interior hacia afuera</span>`
+                : '<span class="bien">✔ el interior no importa nada de afuera</span>'
+            resumen.innerHTML = `<b>${grafo.rama}</b> · ${r.total} imports entre módulos · ${veredicto}`
+            if (slider) slider.value = i
+            raiz.querySelectorAll('[data-h4="ir"]').forEach((b) => b.classList.toggle('activo', Number(b.dataset.i) === i))
+          }
+
+          // al pasar el mouse por un nodo, se atenúa el resto de las flechas
+          svg.addEventListener('mouseover', (e) => {
+            const nodo = e.target.closest('.h4-nodo')
+            svg.classList.toggle('foco', !!nodo)
+            svg.querySelectorAll('.h4-arista').forEach((a) =>
+              a.classList.toggle('rel', !!nodo && (a.dataset.de === nodo.dataset.id || a.dataset.a === nodo.dataset.id)),
+            )
+          })
+          svg.addEventListener('mouseleave', () => {
+            svg.classList.remove('foco')
+            svg.querySelectorAll('.h4-arista.rel').forEach((a) => a.classList.remove('rel'))
+          })
+
+          raiz.addEventListener('click', (e) => {
+            e.stopPropagation() // no interferir con la navegación de reveal
+            const b = e.target.closest('button')
+            if (!b) return
+            const paso = b.dataset.h4
+            const i = rango.indexOf(actual)
+            if (paso === 'prev') mostrar(i - 1)
+            else if (paso === 'next') mostrar(i + 1)
+            else if (paso === 'ir') mostrar(Number(b.dataset.i))
+            b.blur() // que las flechas del teclado sigan siendo de reveal
+          })
+          if (slider) {
+            slider.addEventListener('input', () => mostrar(Number(slider.value)))
+            slider.addEventListener('change', () => slider.blur())
+          }
+          mostrar(rango.indexOf(actual))
         })
       })()
     </script>

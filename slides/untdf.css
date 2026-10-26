@@ -1177,3 +1177,240 @@ pre.manual code {
 }
 
 .print-pdf .minimapa.flotante { display: none; }
+
+/* =====================================================================
+   Bloques 1–5 — extensiones
+   ===================================================================== */
+
+.rama-etiqueta small { font-size: 0.85em; color: #aaa; }
+.rama-etiqueta small::before { content: '· '; }
+
+/* ---------- 1.4 · Una pregunta por línea ---------- */
+.fila-pregunta {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 0.9em;
+  align-items: center;
+  margin-bottom: 0.4em;
+}
+
+.fila-pregunta pre { margin: 0.2em 0 0; }
+.fila-pregunta pre code { max-height: 200px; }
+
+.globo {
+  position: relative;
+  margin: 0;
+  padding: 0.5em 0.8em;
+  border-radius: 14px;
+  background: var(--fondo-suave);
+  border-left: 6px solid var(--untdf-rojo);
+  font-size: 0.62em;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.globo small { display: block; margin-top: 0.2em; font-weight: 400; color: var(--untdf-gris); }
+.globo b { color: var(--untdf-rojo); }
+
+/* ---------- 1.5 · Tabla de capas (colores de la paleta) ---------- */
+.tabla-capas { font-size: 0.62em; }
+.tabla-capas .chip-capa { font-size: 0.95em; }
+.tabla-capas td:first-child { border-left: 8px solid var(--capa); white-space: nowrap; }
+.tabla-capas tr[class*='capa-'] td { background: color-mix(in srgb, var(--capa) 8%, #fff) !important; vertical-align: middle; }
+.tabla-capas code.ej {
+  display: block;
+  padding: 0.25em 0.5em;
+  border-radius: 6px;
+  background: var(--code-bg);
+  color: #f0f0f0;
+  font-size: 0.8em;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.machete-capas { font-size: 0.72em; }
+.machete-capas td { padding-top: 0.7em; padding-bottom: 0.7em; }
+
+/* ---------- 4.1 · Pila de capas + H1 en miniatura ---------- */
+.pila-capas { display: flex; flex-direction: column; gap: 0.35em; margin-top: 0.3em; }
+
+.pila-capas > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+  padding: 0.55em 0.9em;
+  border-radius: 10px;
+  background: var(--capa);
+  color: #fff;
+}
+
+.pila-capas > div b { font-size: 0.8em; }
+.pila-capas > div span { font-size: 0.62em; opacity: 0.95; }
+
+.h1-mini {
+  padding: 0.5em 0.6em;
+  border-radius: 10px;
+  background: var(--code-bg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+
+.mini-linea { height: 6px; margin-bottom: 3px; border-radius: 2px; background: #4a4a4a; }
+.mini-linea.vacia { background: transparent; height: 4px; }
+.mini-linea[class*='capa-'] { background: var(--capa); }
+
+/* ---------- Problema / aviso al pie de una anatomía ---------- */
+.problema {
+  margin: 0.5em 0 0;
+  padding: 0.5em 0.8em;
+  border-radius: 8px;
+  border-left: 6px solid var(--untdf-rojo);
+  background: var(--fondo-suave);
+  font-size: 0.55em;
+}
+
+.anatomia.vista.baja pre code { max-height: 300px; }
+.diff.alto { max-height: 420px; font-size: 0.34em; }
+.arboles .arbol { font-size: 0.45em; }
+
+/* ---------- 2.2 · Mochila ---------- */
+.mochila {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  align-items: center;
+  font-size: 0.5em;
+}
+
+.mochila span { font-weight: 800; color: var(--untdf-rojo); }
+.mochila i {
+  padding: 0.1em 0.7em;
+  border-radius: 99px;
+  background: var(--fondo-suave);
+  border: 1px solid #ddd;
+  font-style: normal;
+  font-weight: 700;
+}
+.mochila small { color: var(--untdf-gris); }
+
+/* ---------- 2.5 · Capas vs. tiers ---------- */
+.capas-vs-tiers { font-size: 0.7em; }
+.capas-vs-tiers .proceso {
+  padding: 0.5em 0.6em 0.4em;
+  border: 3px dashed var(--untdf-rojo);
+  border-radius: 12px;
+}
+.capas-vs-tiers .proceso > b { display: block; margin-bottom: 0.3em; color: var(--untdf-rojo); font-size: 0.8em; }
+.capas-vs-tiers .banda {
+  margin-bottom: 0.25em;
+  padding: 0.35em 0.8em;
+  border-radius: 8px;
+  background: var(--capa);
+  color: #fff;
+  font-weight: 700;
+}
+.capas-vs-tiers .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em; }
+.capas-vs-tiers .tiers .caja { font-size: 0.85em; }
+
+/* ---------- 2.6 · Grilla de ejes ---------- */
+.grilla-ejes { display: grid; margin-top: 0.4em; font-size: 0.6em; }
+.grilla-ejes > * { grid-area: 1 / 1; }
+.grilla-ejes .celdas,
+.grilla-ejes .resaltes {
+  display: grid;
+  grid-template-columns: 9em repeat(3, 1fr);
+  grid-template-rows: 2.2em repeat(4, 2.6em);
+  gap: 4px;
+}
+.grilla-ejes .enc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--untdf-gris);
+  color: #fff;
+  font-weight: 800;
+}
+.grilla-ejes .enc:first-child { background: transparent; }
+.grilla-ejes .fil {
+  display: flex;
+  align-items: center;
+  padding-left: 0.7em;
+  border-radius: 8px;
+  background: var(--capa);
+  color: #fff;
+  font-weight: 700;
+}
+.grilla-ejes .cel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--fondo-suave);
+  text-align: center;
+}
+.grilla-ejes .resaltes { pointer-events: none; }
+.grilla-ejes .resalte { border-radius: 10px; border: 4px solid var(--untdf-rojo); background: rgba(190, 28, 29, 0.12); }
+.grilla-ejes .resalte.fila { grid-column: 1 / -1; grid-row: 3; }
+.grilla-ejes .resalte.columna { grid-column: 4; grid-row: 1 / -1; }
+.pie-ejes { display: grid; margin-top: 0.4em; font-size: 0.7em; }
+.pie-ejes > p { grid-area: 1 / 1; margin: 0; }
+
+/* ---------- H4 · Grafo de imports por etapa ---------- */
+.h4 { margin-top: 0.1em; }
+
+.h4-barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.5em;
+}
+
+.h4-barra button {
+  padding: 0.2em 0.8em;
+  border: 0;
+  border-radius: 99px;
+  background: var(--untdf-rojo);
+  color: #fff;
+  font: 700 1em var(--r-main-font);
+  cursor: pointer;
+}
+
+.h4-barra input[type='range'] { width: 240px; accent-color: var(--untdf-rojo); }
+.h4-chips { display: inline-flex; flex-wrap: wrap; gap: 0.25em; margin-left: 0.4em; }
+.h4-barra .chip { background: var(--fondo-suave); color: var(--texto); border: 1px solid #ccc; font-family: var(--r-code-font); }
+.h4-barra .chip.activo { background: var(--untdf-rojo); color: #fff; border-color: var(--untdf-rojo); }
+
+.h4-resumen { margin: 0.3em 0 0.1em; font-size: 0.5em; }
+.h4-resumen b { font-family: var(--r-code-font); color: var(--untdf-rojo); }
+.h4-resumen .mal { color: var(--untdf-rojo); font-weight: 800; }
+.h4-resumen .bien { color: var(--ok); font-weight: 800; }
+.h4-resumen .neutro { color: var(--untdf-gris); font-weight: 700; }
+
+.h4-svg { display: block; width: 100%; height: auto; }
+.h4-svg text { font-family: var(--r-main-font); }
+.h4-svg .h4-banda { font-size: 12px; font-weight: 800; }
+.h4-svg .h4-etq { fill: #fff; font-size: 11.5px; font-weight: 700; text-anchor: middle; pointer-events: none; }
+.h4-svg .h4-nodo rect { stroke: #fff; stroke-width: 1.5; }
+.h4-svg .h4-arista { stroke: #6f6f6e; stroke-width: 1.6; stroke-dasharray: 5 3; opacity: 0.7; }
+.h4-svg .h4-arista.mala { stroke: var(--untdf-rojo); stroke-width: 3.2; stroke-dasharray: none; opacity: 1; }
+.h4-svg.solo-violaciones .h4-arista:not(.mala) { opacity: 0.12; }
+.h4-svg.foco .h4-arista { opacity: 0.08; }
+.h4-svg.foco .h4-arista.rel { opacity: 1; }
+
+.h4-leyenda { display: flex; flex-wrap: wrap; gap: 0.4em; align-items: center; font-size: 0.5em; }
+.h4-leyenda .chip-capa { font-size: 1.1em; }
+.h4-leyenda .h4-ley-arista { display: inline-flex; align-items: center; gap: 0.3em; margin-left: 0.6em; }
+.h4-leyenda .h4-ley-arista.mala { color: var(--untdf-rojo); font-weight: 700; }
+
+/* ---------- H1: las cuatro preguntas siempre visibles ---------- */
+.h1-preguntas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.4em; margin-top: 0.3em; font-size: 0.42em; }
+.h1-preguntas span {
+  padding: 0.25em 0.6em;
+  border-left: 6px solid var(--capa);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--capa) 14%, #fff);
+  line-height: 1.25;
+}
+.h1-preguntas b { display: block; color: var(--capa); }
+
+.reveal section.seccion > .numero:first-child { margin-top: 140px; }
