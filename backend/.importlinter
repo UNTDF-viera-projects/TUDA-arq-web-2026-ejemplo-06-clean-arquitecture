@@ -1,7 +1,9 @@
 # La regla de dependencias, verificable: `lint-imports` (o `python manage.py test`).
 
 [importlinter]
-root_package = activities
+root_packages =
+    activities
+    notificaciones
 include_external_packages = True
 
 [importlinter:contract:dominio]
@@ -40,3 +42,22 @@ layers =
     activities.infrastructure
     activities.application
     activities.domain
+
+[importlinter:contract:interfaz-publica]
+name = Inscripciones solo usa la interfaz pública de notificaciones
+type = forbidden
+source_modules =
+    activities
+forbidden_modules =
+    notificaciones.canales
+    notificaciones.tipos
+# api.py importa canales y tipos por dentro: eso está permitido.
+allow_indirect_imports = True
+
+[importlinter:contract:independencia]
+name = Notificaciones no conoce a inscripciones
+type = forbidden
+source_modules =
+    notificaciones
+forbidden_modules =
+    activities
