@@ -46,3 +46,4 @@ Repo: `modular-capas-v2`. Base code: `../modular-capas` commits `63d3cb5` (activ
 - L9: "los chicos vieron grpc, creo qeu sería un mejor ejemplo de presentación/entrada eso que cli ? no te parece? al menos en el gráfico de la slide 2" → hexagon in 0.3 shows gRPC; teacher chose "Rama opcional (recomendado)": e13 keeps CLI, `opcional-entrada-grpc` from e14; storyboard 11.3 added.
 - L10: "Al script de etapas podés agregarle un selector así puedo solo escribir ./scripts/etapa.sh y que me ofrezca una lista con cuál etapa quiero ir" → done (0888a32).
 - L11: "instalalo pero solo localmente para este repo con pnpm" (archify) → project-local install; A1/A2 generated in archify/.
+- L12: "Un detallecito que serían interesante es poder hacerle click a p1 p2 p3 (en la parte superior derecha) y que recuerde cuál era la pregunta" → sent to slides worker mvphcbun-4-vjt1 (popover in minimap).

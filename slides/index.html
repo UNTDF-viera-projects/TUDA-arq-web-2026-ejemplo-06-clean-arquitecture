@@ -582,15 +582,9 @@
         <section data-rama="e01" data-p1="no" data-p2="no" data-p3="no" data-titulo="1 · El caso y el dolor">
           <h2>Tres preguntas que esta vista no puede responder</h2>
           <div class="tres-col" style="margin-top: 0.8em">
-            <div class="tarjeta pregunta" data-p="P1" style="font-size: 0.85em">
-              ¿Cómo pruebo la <strong>regla de cupo</strong> sin levantar HTTP, base de datos ni SMTP?
-            </div>
-            <div class="tarjeta pregunta gris" data-p="P2" style="font-size: 0.85em">
-              Si mañana el correo sale por una <strong>API</strong> (o por WhatsApp), ¿qué código tengo que tocar?
-            </div>
-            <div class="tarjeta pregunta alerta" data-p="P3" style="font-size: 0.85em">
-              Si quiero inscribir desde la <strong>terminal</strong> (o desde un script de carga), ¿reescribo la lógica?
-            </div>
+            <div class="tarjeta pregunta" data-p="P1" data-pregunta="p1" style="font-size: 0.85em"></div>
+            <div class="tarjeta pregunta gris" data-p="P2" data-pregunta="p2" style="font-size: 0.85em"></div>
+            <div class="tarjeta pregunta alerta" data-p="P3" data-pregunta="p3" style="font-size: 0.85em"></div>
           </div>
           <p class="chico muted" style="margin-top: 1.2em">
             Quedan fijas en el minimapa (arriba a la derecha) hasta el final: cada rama que las resuelve las tilda.
@@ -1439,6 +1433,1666 @@ OK</div></div>
           </aside>
         </section>
 
+        <!-- ================= BLOQUE 6 · RECAPITULAR ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="6 · Recapitular">
+          <div class="numero">6</div>
+          <h2>Recapitular</h2>
+          <p>Dónde quedamos y qué falta para llegar al destino</p>
+          <aside class="notes">
+            Este bloque está pensado para abrir un encuentro nuevo: en siete minutos volvemos al punto donde quedó
+            el recorrido (e06). Si los bloques 5 y 7 se dan seguidos, se pasa rápido.
+          </aside>
+        </section>
+
+        <!-- 6.1 Dónde quedamos -->
+        <section data-rama="e06" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="6 · Recapitular">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e06</b> <small>e06-carpetas-por-capa</small></div>
+          <h2>Dónde quedamos <span class="herramienta">🛠 H2</span></h2>
+          <div class="h2" data-hecho-hasta="e06">
+            <div class="h2-arbol">
+              <div class="arbol" data-arbol="e14:backend/activities"><ul><li class="dir"><span class="nombre">application/</span><ul><li class="hoja capa-aplicacion"><span class="nombre">dto.py</span></li><li class="hoja capa-aplicacion"><span class="nombre">inscribir.py</span></li><li class="hoja capa-puerto"><span class="nombre">puertos.py</span></li></ul></li><li class="dir"><span class="nombre">domain/</span><ul><li class="hoja capa-dominio"><span class="nombre">errores.py</span></li><li class="hoja capa-dominio"><span class="nombre">modelos.py</span></li><li class="hoja capa-dominio"><span class="nombre">reglas.py</span></li></ul></li><li class="dir"><span class="nombre">infrastructure/</span><ul><li class="dir"><span class="nombre">db/</span><ul><li class="hoja capa-infraestructura"><span class="nombre">repositorio_django.py</span></li></ul></li><li class="dir"><span class="nombre">notificaciones/</span><ul><li class="hoja capa-infraestructura"><span class="nombre">fallo.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">memoria.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">smtp.py</span></li></ul></li></ul></li><li class="dir"><span class="nombre">management/</span><ul><li class="dir"><span class="nombre">commands/</span><ul><li class="hoja capa-presentacion"><span class="nombre">inscribir.py</span></li><li class="hoja"><span class="nombre">seed_activities.py</span></li></ul></li></ul></li><li class="dir"><span class="nombre">presentation/</span><ul><li class="dir"><span class="nombre">http/</span><ul><li class="hoja capa-presentacion"><span class="nombre">serializers.py</span></li><li class="hoja capa-presentacion"><span class="nombre">urls.py</span></li><li class="hoja capa-presentacion"><span class="nombre">views.py</span></li></ul></li><li class="hoja capa-presentacion"><span class="nombre">identidad.py</span></li></ul></li><li class="dir"><span class="nombre">tests/</span><ul><li class="hoja capa-tests"><span class="nombre">fakes.py</span></li><li class="hoja capa-tests"><span class="nombre">test_arquitectura.py</span></li><li class="hoja capa-tests"><span class="nombre">test_cli.py</span></li><li class="hoja capa-tests"><span class="nombre">test_composicion.py</span></li><li class="hoja capa-tests"><span class="nombre">test_contrato_api.py</span></li><li class="hoja capa-tests"><span class="nombre">test_inscribir.py</span></li><li class="hoja capa-tests"><span class="nombre">test_reglas.py</span></li></ul></li><li class="hoja"><span class="nombre">admin.py</span></li><li class="hoja"><span class="nombre">apps.py</span></li><li class="hoja capa-composicion"><span class="nombre">composition.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">models.py</span></li></ul></div>
+              <p class="h2-leyenda"><span class="ok">En color</span>: ya existe en <code>e06</code> · <strong>en gris</strong>: falta. Clic en un archivo o en una pieza del hexágono.</p>
+              <a class="enlace-herramienta" href="archify/mapa-del-destino.html" target="_blank" rel="noopener">Ver mapa interactivo ↗</a>
+            </div>
+            <div class="h2-der">
+              <div class="h2-hex"></div>
+              <div class="h2-info">Pensá: <strong>¿qué falta?</strong> Hay capas y una regla pura, pero ningún puerto, ningún adaptador con nombre y nadie que componga las piezas.</div>
+            </div>
+            <div class="h2-previo" hidden><div class="arbol" data-arbol="e06:backend/activities"><ul><li class="dir"><span class="nombre">application/</span><ul><li class="hoja capa-aplicacion"><span class="nombre">inscribir.py</span></li></ul></li><li class="dir"><span class="nombre">domain/</span><ul><li class="hoja capa-dominio"><span class="nombre">errores.py</span></li><li class="hoja capa-dominio"><span class="nombre">reglas.py</span></li></ul></li><li class="dir"><span class="nombre">infrastructure/</span><ul><li class="hoja capa-infraestructura"><span class="nombre">email.py</span></li></ul></li><li class="dir"><span class="nombre">management/</span><ul><li class="dir"><span class="nombre">commands/</span><ul><li class="hoja"><span class="nombre">seed_activities.py</span></li></ul></li></ul></li><li class="dir"><span class="nombre">presentation/</span><ul><li class="dir"><span class="nombre">http/</span><ul><li class="hoja capa-presentacion"><span class="nombre">serializers.py</span></li><li class="hoja capa-presentacion"><span class="nombre">urls.py</span></li><li class="hoja capa-presentacion"><span class="nombre">views.py</span></li></ul></li></ul></li><li class="dir"><span class="nombre">tests/</span><ul><li class="hoja capa-tests"><span class="nombre">test_contrato_api.py</span></li><li class="hoja capa-tests"><span class="nombre">test_reglas.py</span></li></ul></li><li class="hoja"><span class="nombre">admin.py</span></li><li class="hoja"><span class="nombre">apps.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">models.py</span></li></ul></div></div>
+          </div>
+          <aside class="notes">
+            Volver al mapa de la apertura, ahora con memoria: lo que ya existe en e06 está en color y lo que falta, en
+            gris. Hacer clic en archivos grises (composition.py, puertos.py, modelos.py) y preguntar a la clase para qué
+            servirían. Lo que ya tenemos: presentación delgada, un caso de uso, reglas puras y los errores en el dominio.
+            Lo que falta: los puertos, los adaptadores con nombre, la composición y un dominio con entidades propias.
+            Estado de las preguntas: P1 a medias, P2 y P3 abiertas. El botón “Ver mapa interactivo” abre, en otra
+            pestaña, el diagrama de arquitectura de e14 generado con archify (funciona sin conexión).
+          </aside>
+        </section>
+
+        <!-- 6.2 El problema en una flecha -->
+        <section data-rama="e06" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="6 · Recapitular">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e06</b> <small>e06-carpetas-por-capa</small></div>
+          <h2>El problema, en una flecha <span class="herramienta">🛠 H4</span></h2>
+          <div class="h4" data-inicial="e06" data-fijo data-resaltar="violaciones"></div>
+          <p style="margin: 0.2em 0 0; font-size: 0.5em; display: flex; align-items: center; gap: 0.6em; flex-wrap: wrap">
+            <span class="muted">application/inscribir.py · e06:</span>
+            <code class="ej" data-incluir="e06:backend/activities/application/inscribir.py" data-lineas="3-3">from django.db import transaction</code>
+            <code class="ej" data-incluir="e06:backend/activities/application/inscribir.py" data-lineas="5-5">from ..infrastructure.email import send_enrollment_confirmation</code>
+          </p>
+          <p class="frase" style="font-size: 0.75em; margin: 0.15em 0 0"><em>Aplicación → infraestructura.</em> El negocio depende del mecanismo.</p>
+          <aside class="notes">
+            El mismo grafo de 4.9, ahora detenido en e06 y con una sola idea: la flecha roja que va de aplicación hacia
+            infraestructura. Las tres líneas de abajo son el origen real: el caso de uso importa la transacción del ORM
+            y la función que envía el correo. Mientras esa flecha exista, el negocio no se puede probar ni mover sin
+            llevarse el mecanismo. La pregunta del bloque 7: ¿cómo damos vuelta esa flecha?
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 7 · INVERSIÓN E INYECCIÓN DE DEPENDENCIAS ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="7 · Inversión e inyección">
+          <div class="numero">7</div>
+          <h2>Inversión e inyección de dependencias</h2>
+          <p>Dar vuelta una flecha y pasar lo que se necesita</p>
+          <aside class="notes">
+            Dos ideas que se confunden todo el tiempo y que acá vamos a separar: una decide de qué depende cada parte
+            (DIP) y la otra decide cómo le llega lo que necesita (DI).
+          </aside>
+        </section>
+
+        <!-- 7.1 DIP -->
+        <section data-rama="e06" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="7 · Inversión e inyección">
+          <h2>DIP: depender de un contrato propio</h2>
+          <div class="antes-despues">
+            <div class="tarjeta alerta">
+              <h3>Antes (<code>e06</code>)</h3>
+              <div class="flujo">
+                <div class="caja" style="background: var(--capa-aplicacion); border-color: var(--capa-aplicacion); color: #fff">Inscribir<small>aplicación</small></div>
+                <div class="flecha" style="color: var(--untdf-rojo)">⇢<small>importa</small></div>
+                <div class="caja" style="background: var(--capa-infraestructura); border-color: var(--capa-infraestructura); color: #fff">email.py → SMTP<small>infraestructura</small></div>
+              </div>
+              <p class="chico" style="margin: 0">El negocio depende del mecanismo.</p>
+            </div>
+            <div class="tarjeta fragment" style="border-top-color: var(--capa-puerto)">
+              <h3>Después (<code>e07</code>)</h3>
+              <div class="flujo">
+                <div class="caja" style="background: var(--capa-aplicacion); border-color: var(--capa-aplicacion); color: #fff">Inscribir<small>aplicación</small></div>
+                <div class="flecha" style="color: var(--untdf-rojo)">⇢<small>usa</small></div>
+                <div class="caja roja">Notificador<small>puerto (contrato)</small></div>
+                <div class="flecha" style="color: var(--untdf-rojo)">⇠<small>implementa</small></div>
+                <div class="caja" style="background: var(--capa-infraestructura); border-color: var(--capa-infraestructura); color: #fff">NotificadorSMTP<small>infraestructura</small></div>
+              </div>
+              <p class="chico" style="margin: 0">La flecha de SMTP <strong>giró</strong>: ahora apunta al contrato.</p>
+            </div>
+          </div>
+          <p class="frase fragment" style="font-size: 0.95em; margin-top: 0.7em">
+            La aplicación <em>define</em> lo que necesita; el mecanismo se <em>adapta</em> a eso.
+          </p>
+          <p class="chico muted fragment" style="margin-top: 0.3em">
+            Flecha roja discontinua = dependencia de código (quién importa a quién). Esto es el <strong>principio de inversión de dependencias</strong>.
+          </p>
+          <aside class="notes">
+            Antes: Inscribir importa el correo (a través de email.py). Después: Inscribir importa solo Notificador, un
+            contrato que él mismo define; y el adaptador SMTP importa ese contrato para cumplirlo. La dependencia de
+            código se invirtió: la flecha que salía del negocio hacia SMTP ahora entra desde SMTP hacia el negocio.
+            Importante: no cambió quién llama a quién en ejecución (eso lo vemos en 7.4); cambió quién importa a quién.
+          </aside>
+        </section>
+
+        <!-- 7.2 DI -->
+        <section data-sincronizar data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="7 · Inversión e inyección">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e07</b> <small>e07-puerto-notificador</small></div>
+          <h2>DI: recibir la implementación desde afuera</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/application/inscribir.py · e07</span>
+              <pre class="chico"><code class="python" data-line-numbers="2-3|43-44|45-47" data-incluir="e07:backend/activities/application/inscribir.py" data-lineas="21-67">class Inscribir:
+    def __init__(self, notificador: Notificador):
+        self.notificador = notificador
+
+    def ejecutar(self, participante, actividad_id) -&gt; ResultadoInscripcion:
+        with transaction.atomic():
+            try:
+                actividad = Activity.objects.select_for_update().get(id=actividad_id)
+            except Activity.DoesNotExist as error:
+                raise ActividadNoEncontrada() from error
+
+            inscripcion = Enrollment.objects.filter(
+                participant=participante,
+                activity=actividad,
+            ).first()
+            if inscripcion is not None:
+                return ResultadoInscripcion(inscripcion, creada=False)
+
+            exigir_cupo(actividad.capacity, actividad.enrollments.count())
+
+            inscripcion = Enrollment.objects.create(
+                participant=participante,
+                activity=actividad,
+            )
+
+        self._notificar(participante.user, actividad)
+        return ResultadoInscripcion(inscripcion, creada=True)
+
+    def _notificar(self, usuario, actividad):
+        destinatario = (usuario.email or "").strip()
+        if not destinatario:
+            logger.warning(
+                "No se envió la confirmación: %s no tiene email.", usuario.username
+            )
+            return
+
+        confirmacion = ConfirmacionInscripcion(
+            destinatario=destinatario,
+            nombre=usuario.get_full_name() or usuario.username,
+            actividad=actividad.title,
+            inicia_en=actividad.starts_at,
+        )
+        try:
+            self.notificador.enviar(confirmacion)
+        except ErrorNotificacion:
+            # La inscripción ya quedó confirmada: el correo se pierde, pero se registra.
+            logger.exception("No se pudo enviar la confirmación a %s", destinatario)</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>El constructor recibe</b> un <code>notificador</code>: cualquier objeto con <code>enviar()</code>.</li>
+                <li data-step="2" data-n="2"><b>Lo usa sin saber quién es</b>: <code>self.notificador.enviar(...)</code>.</li>
+                <li data-step="3" data-n="3"><b>Traduce el fallo</b>: si el notificador falla, la inscripción queda y el error va al log.</li>
+              </ul>
+              <span class="archivo">presentation/http/views.py · quién lo arma hoy</span>
+              <pre class="emails"><code class="python" data-incluir="e07:backend/activities/presentation/http/views.py" data-lineas="172-174">            # Por ahora la vista arma el caso de uso con su notificador.
+            inscribir = Inscribir(notificador=NotificadorSMTP())
+            resultado = inscribir.ejecutar(participant, activity_id)</code></pre>
+              <p class="problema"><strong>Un constructor alcanza.</strong> No hace falta un contenedor de DI.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Inyección de dependencias es solo esto: en vez de crear el notificador adentro, Inscribir lo recibe por el
+            constructor. Hoy lo arma la vista (abajo a la derecha: Inscribir(notificador=NotificadorSMTP())); en e09 esa
+            responsabilidad se muda a composition.py. Ojo con lo que NO cambió: si el notificador falla, el contrato
+            HTTP de e01 se mantiene (la inscripción queda y el error se registra). No hace falta ningún framework de
+            inyección: un constructor con un parámetro alcanza.
+          </aside>
+        </section>
+
+        <!-- 7.3 DIP ≠ DI -->
+        <section data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="7 · Inversión e inyección">
+          <h2>DIP ≠ DI</h2>
+          <p class="chico" style="margin: 0 0 0.3em"><strong>DIP</strong> decide <em>de qué</em> depende una parte. <strong>DI</strong> decide <em>cómo le llega</em>.</p>
+          <table class="tabla-2x2">
+            <thead>
+              <tr><th></th><th>Con DI (se lo pasan por el constructor)</th><th>Sin DI (lo busca o lo crea ella)</th></tr>
+            </thead>
+            <tbody>
+              <tr class="fragment">
+                <th>Con DIP<br /><small>depende de un contrato propio</small></th>
+                <td><strong>Nuestro <code>e07</code></strong>: <code>Inscribir(notificador: Notificador)</code>.</td>
+                <td>Depende del contrato <code>Notificador</code>, pero lo obtiene de un global o de un registro: no lo recibe.</td>
+              </tr>
+              <tr class="fragment">
+                <th>Sin DIP<br /><small>depende de la clase concreta</small></th>
+                <td>Se inyecta, pero con el tipo concreto: <code>Inscribir(notificador: NotificadorSMTP)</code>. Hay DI, el negocio sigue atado al mecanismo.</td>
+                <td><strong>Nuestro <code>e06</code></strong>: importa <code>send_enrollment_confirmation</code> y lo llama directo.</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="chico fragment" style="margin-top: 0.5em">
+            Se puede inyectar una clase concreta <strong>sin</strong> invertir nada. Y se puede invertir sin un framework de inyección.
+          </p>
+          <aside class="notes">
+            Cuadro de dos por dos para separar los conceptos. Abajo a la derecha está nuestro e06: ni inversión ni
+            inyección. En e07 hacemos las dos cosas a la vez, por eso se confunden. Abajo a la izquierda es el error
+            más común: “inyecto el objeto, así que invertí la dependencia”; no, si el tipo declarado sigue siendo la
+            clase concreta, el negocio sigue dependiendo del mecanismo. El casillero de arriba a la derecha es el de un
+            localizador de servicios: depende de un contrato pero lo busca en vez de recibirlo.
+          </aside>
+        </section>
+
+        <!-- 7.4 H3 (primera vez) -->
+        <section data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="7 · Inversión e inyección">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e07</b> <small>e07-puerto-notificador</small></div>
+          <h2>Llamadas vs. dependencias <span class="herramienta">🛠 H3</span></h2>
+          <div class="h3" data-etapa="e07" data-sin-selector></div>
+          <aside class="notes">
+            Dos mapas distintos del mismo sistema. Apretar “Paso” para seguir un PUT: el pedido entra por la vista, pasa
+            por Inscribir, toca el ORM y las reglas y, al final, Inscribir le pide al puerto Notificador que avise y el
+            adaptador habla con SMTP. Las llamadas en ejecución no cambiaron: Inscribir sigue llegando a SMTP. Ahora
+            prender “Mostrar dependencias de código”: la flecha roja del adaptador apunta hacia el contrato, hacia el
+            interior. Esa es la inversión: las llamadas van hacia afuera, las dependencias de código apuntan hacia
+            adentro. Notar que todavía queda una flecha larga de Inscribir al ORM: la deshacemos en el bloque 10.
+            (En 11.2 esta misma herramienta suma el selector de entrada.)
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 8 · ARQUITECTURA HEXAGONAL ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="8 · Arquitectura hexagonal">
+          <div class="numero">8</div>
+          <h2>Arquitectura hexagonal</h2>
+          <p>Adentro y afuera, puertos y adaptadores</p>
+          <aside class="notes">
+            Pasamos del principio (DIP) al patrón que lo organiza: puertos y adaptadores, también llamada arquitectura
+            hexagonal. Es el mismo vocabulario que ya apareció en el mapa de la apertura.
+          </aside>
+        </section>
+
+        <!-- 8.1 El problema que plantea Cockburn -->
+        <section data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="8 · Arquitectura hexagonal">
+          <h2>El problema que plantea Cockburn</h2>
+          <div class="dos-col" style="grid-template-columns: 1.7fr 1fr; gap: 1em; align-items: center">
+            <figure class="figura-cockburn">
+              <img src="assets/cockburn-figura-1.png" width="276" height="163" alt="Figura 1 de Cockburn: la aplicación en el centro de un hexágono, rodeada de adaptadores" style="max-height: none; width: 100%" />
+              <figcaption>
+                Figura 1 · Alistair Cockburn, <em>Hexagonal Architecture</em> (2005), <code>alistair.cockburn.us/hexagonal-architecture</code>.
+                Imagen © Alistair Cockburn, sin modificar y sin traducir, incluida como referencia didáctica (no se le atribuye una licencia abierta).
+              </figcaption>
+            </figure>
+            <div>
+              <p style="margin: 0 0 0.5em; font-size: 0.8em">
+                Una aplicación que <strong>solo puede usarse por su interfaz</strong> y <strong>solo funciona con su base</strong>
+                no se puede probar ni reutilizar.
+              </p>
+              <div class="tarjeta fragment" style="font-size: 0.75em; margin-bottom: 0.5em">
+                Una vista que contiene reglas obliga a <strong>atravesar HTTP</strong> para ejercitarlas.
+                <br /><small class="muted">En <code>e01</code>: el <code>put()</code>.</small>
+              </div>
+              <div class="tarjeta alerta fragment" style="font-size: 0.75em">
+                Una regla que conoce SMTP obliga a <strong>tener correo</strong> para probarla.
+                <br /><small class="muted">En <code>e06</code>: <code>Inscribir</code> importa <code>send_mail</code>.</small>
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Cockburn parte de un problema que ya vivimos: la lógica de negocio se filtra hacia la interfaz o hacia la
+            base, y entonces no se puede ejercitar sin ellas. La figura muestra su propuesta: la aplicación al centro,
+            rodeada de adaptadores, de modo que cualquier cosa (un usuario, un test, un batch) pueda activarla y cualquier
+            mecanismo pueda reemplazarse. Los dos ejemplos de la derecha son nuestros: el put() de e01 y la aplicación
+            de e06 que importa send_mail. La figura es de Cockburn y se muestra sin modificar con su atribución; el
+            artículo completo es lectura sugerida.
+          </aside>
+        </section>
+
+        <!-- 8.2 Adentro y afuera -->
+        <section data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="8 · Arquitectura hexagonal">
+          <h2>Adentro y afuera</h2>
+          <div class="dos-col" style="grid-template-columns: 1.15fr 1fr; gap: 0.8em; align-items: center">
+            <div><svg class="hexagono" viewBox="0 0 580 420" role="img" aria-label="Hexágono con elementos adentro y afuera"><defs><marker id="h-punta-82" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2F6DB5"/></marker></defs><polygon class="borde" points="190,50 350,50 430,210 350,370 190,370 110,210"/><g class="fragment" data-fragment-index="1"><rect x="190" y="125" width="150" height="62" rx="8" fill="#2F6DB5"/><text x="265.0" y="161.0" style="font-size:15px">casos de uso</text><rect x="190" y="210" width="150" height="56" rx="8" fill="#2E8B57"/><text x="265.0" y="243.0" style="font-size:15px">reglas</text><text class="rotulo" x="265" y="85">ADENTRO</text></g><g class="fragment" data-fragment-index="2"><rect x="6" y="102" width="84" height="36" rx="8" fill="#9a9a9a"/><text x="48.0" y="125.0" style="font-size:15px">HTTP</text><line class="flecha-azul" x1="90" y1="120" x2="150" y2="120" style="marker-end:url(#h-punta-82)"/><rect x="6" y="162" width="84" height="36" rx="8" fill="#9a9a9a"/><text x="48.0" y="185.0" style="font-size:15px">CLI</text><line class="flecha-azul" x1="90" y1="180" x2="150" y2="180" style="marker-end:url(#h-punta-82)"/><rect x="6" y="222" width="84" height="36" rx="8" fill="#9a9a9a"/><text x="48.0" y="245.0" style="font-size:15px">Tests</text><line class="flecha-azul" x1="90" y1="240" x2="150" y2="240" style="marker-end:url(#h-punta-82)"/><text class="rotulo" x="48" y="95">AFUERA</text></g><g class="fragment" data-fragment-index="3"><rect x="462" y="100" width="114" height="40" rx="8" fill="#9a9a9a"/><text x="519.0" y="125.0" style="font-size:13px">Base de datos</text><rect x="462" y="266" width="114" height="40" rx="8" fill="#9a9a9a"/><text x="519.0" y="291.0" style="font-size:15px">Correo</text><text class="rotulo" x="519" y="85">AFUERA</text><line class="flecha-azul" x1="434" y1="120" x2="462" y2="120" style="marker-end:url(#h-punta-82)"/><line class="flecha-azul" x1="434" y1="286" x2="462" y2="286" style="marker-end:url(#h-punta-82)"/></g></svg></div>
+            <div>
+              <p class="chico fragment" data-fragment-index="1" style="margin: 0 0 0.4em"><strong>Adentro</strong>: los casos de uso y las reglas.</p>
+              <p class="chico fragment" data-fragment-index="2" style="margin: 0 0 0.4em"><strong>Afuera</strong> (entradas): HTTP, la CLI, los tests.</p>
+              <p class="chico fragment" data-fragment-index="3" style="margin: 0 0 0.4em"><strong>Afuera</strong> (salidas): la base, el correo.</p>
+              <p class="problema fragment" data-fragment-index="3">La forma de hexágono <strong>no significa seis partes</strong>: es solo un dibujo con espacio para varios lados.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Dibujar el hexágono vacío y agregar de a una cosa. Adentro: lo que es nuestro (casos de uso, reglas).
+            Afuera, por la izquierda, todo lo que activa la aplicación; por la derecha, todo lo que la aplicación
+            necesita. Aclarar el malentendido más común: seis lados no son seis componentes; Cockburn eligió el
+            hexágono para dejar sitio a varios puertos sin sugerir “arriba” y “abajo” como en las capas.
+          </aside>
+        </section>
+
+        <!-- 8.3 Puerto -->
+        <section data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="8 · Arquitectura hexagonal">
+          <h2>Puerto: un contrato en la frontera</h2>
+          <div class="dos-col" style="grid-template-columns: 1.15fr 1fr; gap: 0.8em; align-items: center">
+            <div><svg class="hexagono" viewBox="0 0 580 420" role="img" aria-label="Hexágono con un puerto en el borde"><defs><marker id="h-punta-83" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2F6DB5"/></marker></defs><polygon class="borde" points="190,50 350,50 430,210 350,370 190,370 110,210"/><rect x="190" y="125" width="150" height="62" rx="8" fill="#2F6DB5"/><text x="265.0" y="161.0" style="font-size:15px">Inscribir</text><rect x="190" y="210" width="150" height="56" rx="8" fill="#2E8B57"/><text x="265.0" y="243.0" style="font-size:15px">reglas</text><g class="fragment" data-fragment-index="1"><rect x="352" y="116" width="82" height="28" rx="14" fill="#BE1C1D"/><text x="393.0" y="135.0" style="font-size:13px">Notificar</text></g><g class="fragment" data-fragment-index="2"><rect x="462" y="100" width="114" height="60" rx="8" fill="none" stroke="#9a9a9a" stroke-width="3" stroke-dasharray="6 4"/><text x="519" y="135" style="fill:#6f6f6e;font-size:13px">¿SMTP? ¿API?</text><line class="flecha-azul" x1="434" y1="130" x2="462" y2="130" style="marker-end:url(#h-punta-83)"/></g><text class="rotulo" x="265" y="85">interior</text></svg></div>
+            <div>
+              <ul class="chico">
+                <li class="fragment" data-fragment-index="1">Lo <strong>define la aplicación</strong>, por su propósito: «notificar una confirmación».</li>
+                <li class="fragment" data-fragment-index="2">No dice cómo: no menciona SMTP ni correo, solo <em>qué necesita</em>.</li>
+                <li class="fragment" data-fragment-index="2">No es el puerto de red <code>1025</code> de Mailpit: acá “puerto” es un <strong>punto de conexión</strong> del interior.</li>
+              </ul>
+            </div>
+          </div>
+          <aside class="notes">
+            La palabra puerto confunde por el puerto de red. Acá es un contrato: una interfaz que el interior define
+            para lo que necesita del exterior (o para lo que ofrece). En nuestro caso, Notificador es un puerto y se
+            define por su propósito. La pregunta de la derecha del hexágono (¿SMTP? ¿una API?) es justamente la que el
+            puerto deja abierta, y es la pregunta P2.
+          </aside>
+        </section>
+
+        <!-- 8.4 Entrada y salida -->
+        <section data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="8 · Arquitectura hexagonal">
+          <h2>Entrada y salida</h2>
+          <div class="dos-col" style="grid-template-columns: 1.15fr 1fr; gap: 0.8em; align-items: center">
+            <div><svg class="hexagono" viewBox="0 0 580 420" role="img" aria-label="Hexágono con entrada a la izquierda y salida a la derecha"><defs><marker id="h-punta-84" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2F6DB5"/></marker></defs><polygon class="borde" points="190,50 350,50 430,210 350,370 190,370 110,210"/><rect x="190" y="125" width="150" height="62" rx="8" fill="#2F6DB5"/><text x="265.0" y="161.0" style="font-size:15px">Inscribir</text><rect x="190" y="210" width="150" height="56" rx="8" fill="#2E8B57"/><text x="265.0" y="243.0" style="font-size:15px">reglas</text><g class="fragment" data-fragment-index="1"><rect x="6" y="112" width="84" height="36" rx="8" fill="#7B5EA7"/><text x="48.0" y="135.0" style="font-size:15px">HTTP</text><line class="flecha-azul" x1="90" y1="130" x2="150" y2="130" style="marker-end:url(#h-punta-84)"/><rect x="6" y="172" width="84" height="36" rx="8" fill="#7B5EA7"/><text x="48.0" y="195.0" style="font-size:15px">CLI</text><line class="flecha-azul" x1="90" y1="190" x2="150" y2="190" style="marker-end:url(#h-punta-84)"/><rect x="6" y="232" width="84" height="36" rx="8" fill="#7B5EA7"/><text x="48.0" y="255.0" style="font-size:15px">Tests</text><line class="flecha-azul" x1="90" y1="250" x2="150" y2="250" style="marker-end:url(#h-punta-84)"/><text class="rotulo" x="48" y="82">ENTRADA</text><text class="rotulo" x="48" y="97">(driving)</text></g><g class="fragment" data-fragment-index="2"><rect x="352" y="116" width="82" height="28" rx="14" fill="#BE1C1D"/><text x="393.0" y="135.0" style="font-size:13px">Notificar</text><rect x="352" y="276" width="82" height="28" rx="14" fill="#BE1C1D"/><text x="393.0" y="295.0" style="font-size:13px">Persistir</text><rect x="462" y="100" width="114" height="60" rx="8" fill="#6F6F6E"/><text x="519.0" y="126.0" style="font-size:11px">SMTP</text><text x="519.0" y="146.0" style="font-size:11px">Memoria · Fallo</text><rect x="462" y="266" width="114" height="40" rx="8" fill="#6F6F6E"/><text x="519.0" y="291.0" style="font-size:15px">ORM</text><line class="flecha-azul" x1="434" y1="130" x2="462" y2="130" style="marker-end:url(#h-punta-84)"/><line class="flecha-azul" x1="434" y1="290" x2="462" y2="290" style="marker-end:url(#h-punta-84)"/><text class="rotulo" x="519" y="78">SALIDA</text><text class="rotulo" x="519" y="93">(driven)</text></g></svg></div>
+            <div>
+              <div class="tarjeta fragment" data-fragment-index="1" style="border-top-color: var(--capa-presentacion); font-size: 0.6em; margin-bottom: 0.5em">
+                <h3>Entrada (<em>driving</em>)</h3>
+                Quien <strong>activa</strong> la aplicación: HTTP, la CLI, los tests.
+              </div>
+              <div class="tarjeta fragment" data-fragment-index="2" style="border-top-color: var(--capa-puerto); font-size: 0.6em">
+                <h3>Salida (<em>driven</em>)</h3>
+                Lo que la aplicación <strong>necesita</strong>: notificar, persistir.
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            Dos lados con dos sentidos. Las entradas (driving, “conducen” a la aplicación) la activan: la llamada va de
+            afuera hacia adentro. Las salidas (driven, “son conducidas”) son lo que la aplicación pide: la llamada va
+            de adentro hacia afuera, por un puerto que define la propia aplicación. Los tests son una entrada más.
+          </aside>
+        </section>
+
+        <!-- 8.5 Adaptadores -->
+        <section data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="8 · Arquitectura hexagonal">
+          <h2>Adaptadores</h2>
+          <div class="dos-col" style="grid-template-columns: 1.25fr 1fr; gap: 0.8em; align-items: center">
+            <div><svg class="hexagono" viewBox="0 0 580 420" role="img" aria-label="Hexágono con nuestros adaptadores reales"><defs><marker id="h-punta-85" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2F6DB5"/></marker></defs><polygon class="borde" points="190,50 350,50 430,210 350,370 190,370 110,210"/><rect x="190" y="125" width="150" height="62" rx="8" fill="#2F6DB5"/><text x="265.0" y="161.0" style="font-size:15px">Inscribir</text><rect x="190" y="210" width="150" height="56" rx="8" fill="#2E8B57"/><text x="265.0" y="243.0" style="font-size:15px">reglas</text><g class="fragment" data-fragment-index="1"><rect x="352" y="116" width="82" height="28" rx="14" fill="#BE1C1D"/><text x="393.0" y="135.0" style="font-size:13px">Notificar</text><rect x="352" y="276" width="82" height="28" rx="14" fill="#BE1C1D"/><text x="393.0" y="295.0" style="font-size:13px">Persistir</text></g><g class="fragment" data-fragment-index="2"><rect x="6" y="102" width="84" height="36" rx="8" fill="#7B5EA7"/><text x="48.0" y="125.0" style="font-size:15px">HTTP</text><rect x="6" y="162" width="84" height="36" rx="8" fill="#7B5EA7"/><text x="48.0" y="185.0" style="font-size:15px">gRPC</text><text class="rotulo" x="48" y="211" style="font-size:10px">rama opcional</text><rect x="6" y="222" width="84" height="36" rx="8" fill="#7B5EA7"/><text x="48.0" y="245.0" style="font-size:15px">CLI</text><rect x="6" y="282" width="84" height="36" rx="8" fill="#7B5EA7"/><text x="48.0" y="305.0" style="font-size:15px">Tests</text><line class="flecha-azul" x1="90" y1="120" x2="150" y2="120" style="marker-end:url(#h-punta-85)"/><line class="flecha-azul" x1="90" y1="180" x2="120" y2="180" style="marker-end:url(#h-punta-85)"/><line class="flecha-azul" x1="90" y1="240" x2="120" y2="240" style="marker-end:url(#h-punta-85)"/><line class="flecha-azul" x1="90" y1="300" x2="150" y2="300" style="marker-end:url(#h-punta-85)"/><text class="rotulo" x="48" y="95">entradas</text></g><g class="fragment" data-fragment-index="3"><rect x="462" y="100" width="114" height="60" rx="8" fill="#6F6F6E"/><text x="519.0" y="126.0" style="font-size:11px">SMTP</text><text x="519.0" y="146.0" style="font-size:11px">Memoria · Fallo</text><rect x="462" y="266" width="114" height="40" rx="8" fill="#6F6F6E"/><text x="519.0" y="282.0" style="font-size:11px">Repositorio</text><text x="519.0" y="302.0" style="font-size:11px">Django</text><line class="flecha-azul" x1="434" y1="130" x2="462" y2="130" style="marker-end:url(#h-punta-85)"/><line class="flecha-azul" x1="434" y1="290" x2="462" y2="290" style="marker-end:url(#h-punta-85)"/><text class="rotulo" x="519" y="85">salidas</text></g></svg></div>
+            <div>
+              <p class="chico fragment" data-fragment-index="1" style="margin: 0 0 0.3em">Un <strong>adaptador</strong> traduce un mecanismo a un puerto (o un puerto a un mecanismo).</p>
+              <p class="chico fragment" data-fragment-index="3" style="margin: 0 0 0.3em"><strong>Un puerto, varios adaptadores</strong>: SMTP, memoria y fallo cumplen el mismo <code>Notificador</code>.</p>
+              <figure class="figura-cockburn fragment" data-fragment-index="3" style="margin: 0.2em 0 0">
+                <img src="assets/cockburn-figura-3.png" width="205" height="201" alt="Figura 3 de Cockburn: la aplicación con test harness y mock database como adaptadores alternativos" style="height: 250px; max-height: none; width: auto" />
+                <figcaption>
+                  Figura 3 · A. Cockburn (2005): el mismo puerto con adaptadores de prueba (<em>test harness</em>, <em>mock database</em>) y reales. © Alistair Cockburn, sin modificar.
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <aside class="notes">
+            Mostrar primero los puertos de nuestro destino (Notificar y Persistir), después las entradas y las salidas
+            reales. Un adaptador traduce: del mundo HTTP al caso de uso, del puerto Notificador a send_mail. Lo
+            interesante es que un puerto admite varios adaptadores: SMTP en producción, memoria en tests, fallo para
+            simular un servidor caído; la figura 3 de Cockburn dibuja la misma idea con un test harness y una base
+            simulada. gRPC aparece como entrada posible (rama opcional); el código real de ese adaptador está en
+            opcional-entrada-grpc y lo vemos en el bloque 11.
+          </aside>
+        </section>
+
+        <!-- 8.6 Capas y hexágono -->
+        <section data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="8 · Arquitectura hexagonal">
+          <h2>Capas y hexágono no se pelean <span class="herramienta">🛠 H2 · por rol</span></h2>
+          <div class="h2" data-colorear="rol">
+            <div class="h2-arbol">
+              <div class="arbol" data-arbol="e14:backend/activities"><ul><li class="dir"><span class="nombre">application/</span><ul><li class="hoja capa-aplicacion"><span class="nombre">dto.py</span></li><li class="hoja capa-aplicacion"><span class="nombre">inscribir.py</span></li><li class="hoja capa-puerto"><span class="nombre">puertos.py</span></li></ul></li><li class="dir"><span class="nombre">domain/</span><ul><li class="hoja capa-dominio"><span class="nombre">errores.py</span></li><li class="hoja capa-dominio"><span class="nombre">modelos.py</span></li><li class="hoja capa-dominio"><span class="nombre">reglas.py</span></li></ul></li><li class="dir"><span class="nombre">infrastructure/</span><ul><li class="dir"><span class="nombre">db/</span><ul><li class="hoja capa-infraestructura"><span class="nombre">repositorio_django.py</span></li></ul></li><li class="dir"><span class="nombre">notificaciones/</span><ul><li class="hoja capa-infraestructura"><span class="nombre">fallo.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">memoria.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">smtp.py</span></li></ul></li></ul></li><li class="dir"><span class="nombre">management/</span><ul><li class="dir"><span class="nombre">commands/</span><ul><li class="hoja capa-presentacion"><span class="nombre">inscribir.py</span></li><li class="hoja"><span class="nombre">seed_activities.py</span></li></ul></li></ul></li><li class="dir"><span class="nombre">presentation/</span><ul><li class="dir"><span class="nombre">http/</span><ul><li class="hoja capa-presentacion"><span class="nombre">serializers.py</span></li><li class="hoja capa-presentacion"><span class="nombre">urls.py</span></li><li class="hoja capa-presentacion"><span class="nombre">views.py</span></li></ul></li><li class="hoja capa-presentacion"><span class="nombre">identidad.py</span></li></ul></li><li class="dir"><span class="nombre">tests/</span><ul><li class="hoja capa-tests"><span class="nombre">fakes.py</span></li><li class="hoja capa-tests"><span class="nombre">test_arquitectura.py</span></li><li class="hoja capa-tests"><span class="nombre">test_cli.py</span></li><li class="hoja capa-tests"><span class="nombre">test_composicion.py</span></li><li class="hoja capa-tests"><span class="nombre">test_contrato_api.py</span></li><li class="hoja capa-tests"><span class="nombre">test_inscribir.py</span></li><li class="hoja capa-tests"><span class="nombre">test_reglas.py</span></li></ul></li><li class="hoja"><span class="nombre">admin.py</span></li><li class="hoja"><span class="nombre">apps.py</span></li><li class="hoja capa-composicion"><span class="nombre">composition.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">models.py</span></li></ul></div>
+              <div class="leyenda-capas">
+                <span class="chip-capa capa-aplicacion">interior (aplicación + dominio)</span>
+                <span class="chip-capa capa-puerto">puerto</span>
+                <span class="chip-capa capa-presentacion">adaptador de entrada</span>
+                <span class="chip-capa capa-infraestructura">adaptador de salida</span>
+                <span class="chip-capa capa-composicion">composición</span>
+              </div>
+            </div>
+            <div class="h2-der">
+              <div class="h2-hex"></div>
+              <div class="h2-info">Las <strong>capas</strong> ordenan el interior; el <strong>hexágono</strong> ordena la frontera. El destino usa las dos: el mismo árbol, ahora coloreado por <em>rol</em>.</div>
+            </div>
+          </div>
+          <aside class="notes">
+            El mismo árbol final, pero coloreado por el rol en el hexágono en vez de por capa. Las capas siguen
+            ordenando lo que hay adentro (dominio abajo, aplicación arriba) y el hexágono ordena la frontera: qué es
+            entrada, qué es salida, dónde están los puertos y quién compone. No son enfoques rivales: nuestro destino
+            usa los dos. Clic en cualquier archivo para ver a qué pieza del hexágono pertenece y qué importa.
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 9 · PUERTO DE SALIDA: NOTIFICAR ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="9 · Puerto de salida">
+          <div class="numero">9</div>
+          <h2>Puerto de salida: notificar</h2>
+          <p>Un contrato, tres implementaciones y un lugar donde elegir</p>
+          <aside class="notes">
+            Bajamos el patrón al código: las ramas e07, e08 y e09. Al final de este bloque P2 queda resuelta.
+          </aside>
+        </section>
+
+        <!-- 9.1 Anatomía del puerto -->
+        <section data-sincronizar data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="9 · Puerto de salida">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e07</b> <small>e07-puerto-notificador</small></div>
+          <h2>Anatomía del puerto</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/application/puertos.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="10|11-12|6-7|3" data-incluir="e07:backend/activities/application/puertos.py">from typing import Protocol
+
+from .dto import ConfirmacionInscripcion
+
+
+class ErrorNotificacion(Exception):
+    """El mecanismo no pudo entregar la confirmación."""
+
+
+class Notificador(Protocol):
+    def enviar(self, confirmacion: ConfirmacionInscripcion) -&gt; None:
+        """Entrega la confirmación o lanza ErrorNotificacion."""</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>El puerto</b>: un <code>Protocol</code> definido por la aplicación, por su propósito.</li>
+                <li data-step="2" data-n="2"><b>Una operación</b>: <code>enviar(confirmacion) -&gt; None</code>. No dice cómo; el éxito es no lanzar.</li>
+                <li data-step="3" data-n="3"><b>El único fallo que conoce</b>: <code>ErrorNotificacion</code>. Cada adaptador traduce los suyos a este.</li>
+                <li data-step="4" data-n="4"><b>Datos propios</b>: recibe una <code>ConfirmacionInscripcion</code>, no un mensaje de correo.</li>
+              </ul>
+              <span class="archivo">application/dto.py</span>
+              <pre class="emails"><code class="python" data-incluir="e07:backend/activities/application/dto.py">from dataclasses import dataclass
+from datetime import datetime
+
+
+@dataclass(frozen=True)
+class ConfirmacionInscripcion:
+    """Lo que la aplicación necesita comunicar, sin detalles de correo."""
+
+    destinatario: str
+    nombre: str
+    actividad: str
+    inicia_en: datetime</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            Tres piezas: el contrato (Notificador, un Protocol de Python: tipado estructural, sin herencia), el error
+            propio (ErrorNotificacion) y los datos (ConfirmacionInscripcion, una dataclass inmutable). Ni una línea
+            menciona correo, SMTP o Django: el nombre y la firma hablan del propósito, no del mecanismo. Fíjense
+            también que el DTO tiene destinatario, nombre, actividad e inicio: lo que hace falta comunicar, no el
+            asunto ni el cuerpo del mensaje (eso es decisión del adaptador).
+          </aside>
+        </section>
+
+        <!-- 9.2 El caso de uso recibe el puerto -->
+        <section data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="9 · Puerto de salida">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e07</b> <small>e07-puerto-notificador</small></div>
+          <h2>El caso de uso recibe el puerto</h2>
+          <p class="chico" style="margin: 0 0 0.3em">
+            <code>inscribir()</code> pasa a ser la clase <code>Inscribir</code>: <strong>desaparece el import de <code>send_mail</code></strong> (vía <code>email.py</code>) y aparece <code>self.notificador.enviar(...)</code>.
+          </p>
+          <span class="archivo">application/inscribir.py · e06 → e07</span>
+          <div class="diff alto" data-contexto="1" data-diff="e06..e07:backend/activities/application/inscribir.py"><span class="l hunk">@@ -1 +1,2 @@</span><span class="l add">+import logging</span><span class="l ctx"> from dataclasses import dataclass</span><span class="l hunk">@@ -4,6 +5,9 @@</span><span class="l ctx"> </span><span class="l del">-from ..infrastructure.email import send_enrollment_confirmation</span><span class="l del">-from ..models import Activity, Enrollment</span><span class="l ctx"> from ..domain.errores import ActividadNoEncontrada</span><span class="l ctx"> from ..domain.reglas import exigir_cupo</span><span class="l add">+from ..models import Activity, Enrollment</span><span class="l add">+from .dto import ConfirmacionInscripcion</span><span class="l add">+from .puertos import ErrorNotificacion, Notificador</span><span class="l add">+</span><span class="l add">+logger = logging.getLogger(__name__)</span><span class="l ctx"> </span><span class="l hunk">@@ -16,24 +20,48 @@</span><span class="l ctx"> </span><span class="l del">-def inscribir(participante, actividad_id):</span><span class="l del">-    with transaction.atomic():</span><span class="l add">+class Inscribir:</span><span class="l add">+    def __init__(self, notificador: Notificador):</span><span class="l add">+        self.notificador = notificador</span><span class="l add">+</span><span class="l add">+    def ejecutar(self, participante, actividad_id) -&gt; ResultadoInscripcion:</span><span class="l add">+        with transaction.atomic():</span><span class="l add">+            try:</span><span class="l add">+                actividad = Activity.objects.select_for_update().get(id=actividad_id)</span><span class="l add">+            except Activity.DoesNotExist as error:</span><span class="l add">+                raise ActividadNoEncontrada() from error</span><span class="l add">+</span><span class="l add">+            inscripcion = Enrollment.objects.filter(</span><span class="l add">+                participant=participante,</span><span class="l add">+                activity=actividad,</span><span class="l add">+            ).first()</span><span class="l add">+            if inscripcion is not None:</span><span class="l add">+                return ResultadoInscripcion(inscripcion, creada=False)</span><span class="l add">+</span><span class="l add">+            exigir_cupo(actividad.capacity, actividad.enrollments.count())</span><span class="l add">+</span><span class="l add">+            inscripcion = Enrollment.objects.create(</span><span class="l add">+                participant=participante,</span><span class="l add">+                activity=actividad,</span><span class="l add">+            )</span><span class="l add">+</span><span class="l add">+        self._notificar(participante.user, actividad)</span><span class="l add">+        return ResultadoInscripcion(inscripcion, creada=True)</span><span class="l add">+</span><span class="l add">+    def _notificar(self, usuario, actividad):</span><span class="l add">+        destinatario = (usuario.email or "").strip()</span><span class="l add">+        if not destinatario:</span><span class="l add">+            logger.warning(</span><span class="l add">+                "No se envió la confirmación: %s no tiene email.", usuario.username</span><span class="l add">+            )</span><span class="l add">+            return</span><span class="l add">+</span><span class="l add">+        confirmacion = ConfirmacionInscripcion(</span><span class="l add">+            destinatario=destinatario,</span><span class="l add">+            nombre=usuario.get_full_name() or usuario.username,</span><span class="l add">+            actividad=actividad.title,</span><span class="l add">+            inicia_en=actividad.starts_at,</span><span class="l add">+        )</span><span class="l ctx">         try:</span><span class="l del">-            actividad = Activity.objects.select_for_update().get(id=actividad_id)</span><span class="l del">-        except Activity.DoesNotExist as error:</span><span class="l del">-            raise ActividadNoEncontrada() from error</span><span class="l del">-</span><span class="l del">-        inscripcion = Enrollment.objects.filter(</span><span class="l del">-            participant=participante,</span><span class="l del">-            activity=actividad,</span><span class="l del">-        ).first()</span><span class="l del">-        if inscripcion is not None:</span><span class="l del">-            return ResultadoInscripcion(inscripcion, creada=False)</span><span class="l del">-</span><span class="l del">-        exigir_cupo(actividad.capacity, actividad.enrollments.count())</span><span class="l del">-</span><span class="l del">-        inscripcion = Enrollment.objects.create(</span><span class="l del">-            participant=participante,</span><span class="l del">-            activity=actividad,</span><span class="l del">-        )</span><span class="l del">-</span><span class="l del">-    send_enrollment_confirmation(participante.user, actividad)</span><span class="l del">-    return ResultadoInscripcion(inscripcion, creada=True)</span><span class="l add">+            self.notificador.enviar(confirmacion)</span><span class="l add">+        except ErrorNotificacion:</span><span class="l add">+            # La inscripción ya quedó confirmada: el correo se pierde, pero se registra.</span><span class="l add">+            logger.exception("No se pudo enviar la confirmación a %s", destinatario)</span></div>
+          <aside class="notes">
+            Mirar el diff de arriba hacia abajo: el import de infrastructure.email (rojo) se reemplaza por imports del
+            puerto y del DTO (verde); la función pasa a ser una clase con constructor; y la línea que llamaba a
+            send_enrollment_confirmation ahora arma una ConfirmacionInscripcion y llama a self.notificador.enviar(...).
+            Un detalle que no cambia: sigue atrapando el error y registrándolo, así que si el correo falla, la
+            inscripción queda. Todavía hay imports de Django (transaction, modelos): esos desaparecen en el bloque 10.
+          </aside>
+        </section>
+
+        <!-- 9.3 Anatomía del adaptador SMTP -->
+        <section data-sincronizar data-rama="e07" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="9 · Puerto de salida">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e07</b> <small>e07-puerto-notificador</small></div>
+          <h2>Anatomía del adaptador SMTP</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/infrastructure/notificaciones/smtp.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="10-11|14-20|21-28|29-30" data-incluir="e07:backend/activities/infrastructure/notificaciones/smtp.py">from smtplib import SMTPException
+
+from django.conf import settings
+from django.core.mail import send_mail
+
+from ...application.dto import ConfirmacionInscripcion
+from ...application.puertos import ErrorNotificacion
+
+
+class NotificadorSMTP:
+    """Implementa el puerto Notificador con el correo de Django (Mailpit en desarrollo)."""
+
+    def enviar(self, confirmacion: ConfirmacionInscripcion) -&gt; None:
+        asunto = f"Inscripción confirmada: {confirmacion.actividad}"
+        cuerpo = (
+            f"Hola {confirmacion.nombre},\n\n"
+            f"Tu inscripción a «{confirmacion.actividad}» quedó confirmada.\n"
+            f"Inicio: {confirmacion.inicia_en.isoformat()}\n\n"
+            "Arquitecturas Web — UNTDF\n"
+        )
+        try:
+            send_mail(
+                asunto,
+                cuerpo,
+                settings.DEFAULT_FROM_EMAIL,
+                [confirmacion.destinatario],
+                fail_silently=False,
+            )
+        except (SMTPException, OSError) as error:
+            raise ErrorNotificacion(str(error)) from error</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Implementa el puerto</b>: tiene <code>enviar(confirmacion)</code>; no hereda de nada.</li>
+                <li data-step="2" data-n="2"><b>Traduce el DTO</b> a asunto y cuerpo: ese formato es cosa del mecanismo.</li>
+                <li data-step="3" data-n="3"><b>Usa el mecanismo</b>: <code>send_mail</code> de Django, hacia Mailpit.</li>
+                <li data-step="4" data-n="4"><b>Traduce el error</b>: <code>SMTPException</code> / <code>OSError</code> → <code>ErrorNotificacion</code>.</li>
+              </ul>
+              <p class="problema fragment"><strong>Éxito</strong> = el servidor aceptó el mensaje, <em>no</em> que alguien lo haya leído.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            El adaptador es el único archivo que conoce Django mail y SMTP. Cumple el puerto por estructura (tiene el
+            método), arma el mensaje a partir del DTO, llama a send_mail y, si algo falla en la red o en el protocolo,
+            lo traduce a ErrorNotificacion para que la aplicación no tenga que conocer excepciones de SMTP. Aclarar qué
+            significa éxito: el servidor de correo aceptó el mensaje; no hay garantía de entrega ni de lectura.
+          </aside>
+        </section>
+
+        <!-- 9.4 Memoria y fallo -->
+        <section class="codigo-compacto" data-rama="e08" data-p1="parcial" data-p2="no" data-p3="no" data-contrato="si" data-titulo="9 · Puerto de salida">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e08</b> <small>e08-adaptadores-memoria-y-fallo</small></div>
+          <h2>Memoria y fallo: el mismo puerto, otros adaptadores</h2>
+          <div class="dos-col" style="grid-template-columns: 1fr 1fr; gap: 0.8em; margin-bottom: 0.2em">
+            <div>
+              <span class="archivo">infrastructure/notificaciones/memoria.py</span>
+              <pre class="chico" style="font-size: 0.42em"><code class="python" data-incluir="e08:backend/activities/infrastructure/notificaciones/memoria.py">from ...application.dto import ConfirmacionInscripcion
+
+
+class NotificadorMemoria:
+    """Guarda las confirmaciones en una lista: sirve para tests y demos sin correo."""
+
+    def __init__(self):
+        self.enviadas: list[ConfirmacionInscripcion] = []
+
+    def enviar(self, confirmacion: ConfirmacionInscripcion) -&gt; None:
+        self.enviadas.append(confirmacion)</code></pre>
+            </div>
+            <div>
+              <span class="archivo">infrastructure/notificaciones/fallo.py</span>
+              <pre class="chico" style="font-size: 0.42em"><code class="python" data-incluir="e08:backend/activities/infrastructure/notificaciones/fallo.py">from ...application.dto import ConfirmacionInscripcion
+from ...application.puertos import ErrorNotificacion
+
+
+class NotificadorFallo:
+    """Falla siempre: reproduce un servidor de correo caído de forma predecible."""
+
+    def enviar(self, confirmacion: ConfirmacionInscripcion) -&gt; None:
+        raise ErrorNotificacion("Fallo simulado")</code></pre>
+            </div>
+          </div>
+          <div class="dos-col" style="grid-template-columns: 1fr 1fr; gap: 0.8em">
+            <div>
+              <span class="archivo">tests/test_inscribir.py · notificar con los datos correctos</span>
+              <pre class="chico" style="font-size: 0.42em"><code class="python" data-incluir="e08:backend/activities/tests/test_inscribir.py" data-lineas="28-38">    def test_pide_notificar_una_vez_con_los_datos_de_la_inscripcion(self):
+        notificador = NotificadorMemoria()
+
+        Inscribir(notificador).ejecutar(self.participante, self.actividad.id)
+        Inscribir(notificador).ejecutar(self.participante, self.actividad.id)
+
+        self.assertEqual(len(notificador.enviadas), 1)
+        confirmacion = notificador.enviadas[0]
+        self.assertEqual(confirmacion.destinatario, "ada@example.com")
+        self.assertEqual(confirmacion.nombre, "Ada")
+        self.assertEqual(confirmacion.actividad, "Diseño de una API")</code></pre>
+            </div>
+            <div>
+              <span class="archivo">tests/test_inscribir.py · si el notificador falla</span>
+              <pre class="chico" style="font-size: 0.42em"><code class="python" data-incluir="e08:backend/activities/tests/test_inscribir.py" data-lineas="50-61">    def test_si_el_notificador_falla_la_inscripcion_se_conserva(self):
+        with self.assertLogs("activities", level="ERROR"):
+            resultado = Inscribir(NotificadorFallo()).ejecutar(
+                self.participante, self.actividad.id
+            )
+
+        self.assertTrue(resultado.creada)
+        self.assertTrue(
+            Enrollment.objects.filter(
+                participant=self.participante, activity=self.actividad
+            ).exists()
+        )</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            Dos adaptadores muy chicos. NotificadorMemoria guarda las confirmaciones en una lista: sirve para tests y
+            demos sin correo. NotificadorFallo siempre lanza ErrorNotificacion: reproduce un servidor caído de forma
+            predecible. Con ellos, los tests de abajo comprueban el caso de uso sin SMTP: el primero verifica que se
+            pidió notificar una sola vez con los datos correctos (aunque se inscriba dos veces); el segundo, que si el
+            notificador falla la inscripción se conserva. En esta rama el total llega a 22 tests; los de contrato
+            siguen idénticos.
+          </aside>
+        </section>
+
+        <!-- 9.5 La composición -->
+        <section data-sincronizar data-rama="e09" data-p1="parcial" data-p2="si" data-p3="no" data-contrato="si" data-titulo="9 · Puerto de salida">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e09</b> <small>e09-composicion</small></div>
+          <h2>La composición</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/composition.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="11-15|18-25|28-29" data-incluir="e09:backend/activities/composition.py">"""Raíz de composición: el único lugar que conoce las implementaciones concretas."""
+
+from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
+
+from .application.inscribir import Inscribir
+from .infrastructure.notificaciones.fallo import NotificadorFallo
+from .infrastructure.notificaciones.memoria import NotificadorMemoria
+from .infrastructure.notificaciones.smtp import NotificadorSMTP
+
+NOTIFICADORES = {
+    "smtp": NotificadorSMTP,
+    "memoria": NotificadorMemoria,
+    "fallo": NotificadorFallo,
+}
+
+
+def construir_notificador():
+    try:
+        return NOTIFICADORES[settings.NOTIFICADOR]()
+    except KeyError as error:
+        opciones = ", ".join(NOTIFICADORES)
+        raise ImproperlyConfigured(
+            f"NOTIFICADOR={settings.NOTIFICADOR!r} no existe. Opciones: {opciones}"
+        ) from error
+
+
+def construir_inscribir() -&gt; Inscribir:
+    return Inscribir(notificador=construir_notificador())</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>El catálogo</b>: qué implementaciones existen y con qué nombre.</li>
+                <li data-step="2" data-n="2"><b>La elección</b> según <code>NOTIFICADOR</code>; un nombre desconocido es un error de configuración.</li>
+                <li data-step="3" data-n="3"><b>El armado</b>: <code>construir_inscribir()</code> devuelve un <code>Inscribir</code> listo.</li>
+              </ul>
+              <span class="archivo">presentation/http/views.py · put() · e09</span>
+              <pre class="emails"><code class="python" data-incluir="e09:backend/activities/presentation/http/views.py" data-lineas="170-172">        try:
+            inscribir = construir_inscribir()
+            resultado = inscribir.ejecutar(participant, activity_id)</code></pre>
+              <div class="tarjeta tilde fragment" style="margin-top: 0.3em">
+                <b class="ok">P2 ☑</b> Si mañana el correo sale por otra vía: un archivo nuevo en <code>infrastructure/notificaciones/</code> y una línea en <code>NOTIFICADORES</code>. <code>Inscribir</code> no se toca.
+              </div>
+            </div>
+          </div>
+          <aside class="notes">
+            composition.py es el único lugar que conoce las implementaciones concretas y las combina: elige el
+            notificador por la variable NOTIFICADOR (smtp, memoria o fallo) y arma Inscribir. La vista ya no sabe qué
+            notificador hay: pide construir_inscribir() y llama a ejecutar. Acá se tilda P2: agregar WhatsApp o una API
+            es sumar un adaptador y una línea en el diccionario. Por eso en el minimapa P2 pasa a ☑. (En la rama hay un
+            test de la composición: elige el notificador según la configuración y rechaza un nombre desconocido.)
+          </aside>
+        </section>
+
+        <!-- 9.6 H5 -->
+        <section data-rama="e09" data-p1="parcial" data-p2="si" data-p3="no" data-contrato="si" data-titulo="9 · Puerto de salida">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e09</b> <small>e09-composicion</small></div>
+          <h2>Cambiá el adaptador <span class="herramienta">🛠 H5</span> <span class="herramienta" style="background: var(--capa-aplicacion)">🧪 en vivo</span></h2>
+          <div class="h5" id="h5">
+            <div class="h5-barra">
+              <span>Adaptador:</span>
+              <button type="button" class="chip activo" data-h5-ad="smtp">SMTP</button>
+              <button type="button" class="chip" data-h5-ad="memoria">Memoria</button>
+              <button type="button" class="chip" data-h5-ad="fallo">Fallo</button>
+              <code>NOTIFICADOR=<b data-h5="valor">smtp</b></code>
+              <span class="sep"></span>
+              <span>Quién:</span>
+              <select data-h5="quien" aria-label="participante">
+                <option value="ada">Ada</option>
+                <option value="grace">Grace</option>
+                <option value="linus">Linus</option>
+              </select>
+              <button type="button" data-h5="inscribir">Inscribir</button>
+              <button type="button" class="sec" data-h5="reiniciar">Reiniciar</button>
+            </div>
+            <div class="h5-grid">
+              <div class="h5-col" style="border-top-color: var(--capa-aplicacion)">
+                <h4>Respuesta del <code>PUT</code></h4>
+                <div data-h5="resultado"></div>
+                <div class="h5-cupo" data-h5="cupo"></div>
+                <div data-h5="cupo-texto"></div>
+                <ul class="h5-lista" data-h5="inscriptos"></ul>
+              </div>
+              <div class="h5-col" style="border-top-color: var(--capa-infraestructura)">
+                <h4>Mailpit · bandeja de entrada</h4>
+                <div class="mailpit"><div data-h5="bandeja"></div></div>
+              </div>
+              <div class="h5-col" style="border-top-color: var(--capa-dominio)">
+                <h4><code>NotificadorMemoria.enviadas</code></h4>
+                <ul class="h5-lista" data-h5="memoria"></ul>
+              </div>
+            </div>
+            <div class="h5-log" data-h5="log" aria-label="log del backend"></div>
+          </div>
+          <p class="chico" style="margin: 0.15em 0 0; font-size: 0.5em">
+            <strong>Con cualquier adaptador el <code>PUT</code> responde 201</strong> (200 si ya estaba): con <em>Fallo</em> la inscripción queda y el error <strong>solo va al log</strong>. En vivo:
+            <code>NOTIFICADOR=fallo docker compose up backend</code> y mirar <code>GET /me/enrollments</code>.
+          </p>
+          <aside class="notes">
+            Simulación en el navegador (no toca ningún servidor): elegir un adaptador y apretar Inscribir. Con SMTP
+            llega un correo a la bandeja simulada de Mailpit; con Memoria queda en la lista (y no llega nada a Mailpit);
+            con Fallo no llega nada, el log muestra el error, pero la respuesta es 201 y la inscripción queda. Repetir
+            el clic con la misma persona: 200 y sin otro aviso. Con el cupo en 3, la cuarta persona recibe 409. Después
+            hacerlo en vivo: NOTIFICADOR=fallo docker compose up backend, inscribirse en la UI y ver que GET
+            /me/enrollments muestra la inscripción pero el correo se perdió y solo queda en el log. Así se comportaba ya
+            e01 (emails.py atrapaba la excepción) y la red de seguridad de e02 lo fija. Es el momento de mencionar que
+            el fallo ocurre después del commit; lo retomamos en 14.3. Las líneas del log son ilustrativas: el formato
+            real depende de la configuración de logging.
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 10 · PUERTO DE PERSISTENCIA ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="10 · Puerto de persistencia">
+          <div class="numero">10</div>
+          <h2>Puerto de persistencia</h2>
+          <p>Un dominio sin Django y un repositorio como frontera</p>
+          <aside class="notes">
+            Queda una flecha roja: Inscribir sigue hablando con el ORM. Este bloque la elimina con tres ramas (e10, e11,
+            e12) y al final P1 queda resuelta.
+          </aside>
+        </section>
+
+        <!-- 10.1 El caso de uso todavía usa el ORM -->
+        <section data-rama="e09" data-p1="parcial" data-p2="si" data-p3="no" data-contrato="si" data-titulo="10 · Puerto de persistencia">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e09</b> <small>e09-composicion</small></div>
+          <h2>El caso de uso todavía usa el ORM <span class="herramienta">🛠 H4</span></h2>
+          <div class="h4" data-inicial="e09" data-fijo data-resaltar="violaciones"></div>
+          <p style="margin: 0.2em 0 0; font-size: 0.5em; display: flex; align-items: center; gap: 0.6em; flex-wrap: wrap">
+            <span class="muted">application/inscribir.py · e09:</span>
+            <code class="ej" data-incluir="e09:backend/activities/application/inscribir.py" data-lineas="28-28">                actividad = Activity.objects.select_for_update().get(id=actividad_id)</code>
+          </p>
+          <p style="font-size: 0.6em; margin: 0.15em 0 0">Para probar la regla de cupo con <code>Inscribir</code> hace falta <strong>una base de datos</strong>: queda <strong>una flecha</strong> aplicación → ORM.</p>
+          <aside class="notes">
+            El grafo en e09: el notificador ya quedó resuelto (la flecha hacia SMTP desapareció), pero Inscribir
+            todavía importa la transacción del ORM y los modelos Activity y Enrollment. Las líneas de abajo muestran
+            la consulta con select_for_update dentro de la aplicación. Mientras eso siga ahí, P1 no se resuelve: para
+            probar Inscribir hace falta una base. Plan de tres pasos: primero un dominio con entidades propias (e10),
+            después un puerto de repositorio con su adaptador Django (e11) y por último un repositorio en memoria para
+            probar sin base (e12).
+          </aside>
+        </section>
+
+        <!-- 10.2 Dominio puro -->
+        <section data-sincronizar data-rama="e10" data-p1="parcial" data-p2="si" data-p3="no" data-contrato="si" data-titulo="10 · Puerto de persistencia">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e10</b> <small>e10-dominio-puro</small></div>
+          <h2>Dominio puro</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/activities/domain/modelos.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="1|8-12|15-21|24-28" data-incluir="e10:backend/activities/domain/modelos.py">"""Entidades del dominio: datos con significado, sin saber cómo se guardan."""
+
+from dataclasses import dataclass
+from datetime import datetime
+from uuid import UUID
+
+
+@dataclass(frozen=True)
+class Participante:
+    id: UUID
+    nombre: str
+    email: str
+
+
+@dataclass(frozen=True)
+class Actividad:
+    id: UUID
+    titulo: str
+    inicia_en: datetime
+    capacidad: int
+    inscriptos: int
+
+
+@dataclass(frozen=True)
+class Inscripcion:
+    participante_id: UUID
+    actividad_id: UUID
+    creada_en: datetime</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Datos con significado</b>, sin saber cómo se guardan: solo <code>dataclasses</code>, <code>datetime</code> y <code>uuid</code>.</li>
+                <li data-step="2" data-n="2"><b><code>Participante</code></b>: id, nombre y email.</li>
+                <li data-step="3" data-n="3"><b><code>Actividad</code></b>: incluye <code>inscriptos</code>, que calcula el repositorio.</li>
+                <li data-step="4" data-n="4"><b><code>Inscripcion</code></b>: quién, dónde y cuándo.</li>
+              </ul>
+              <span class="archivo">domain/reglas.py · e10</span>
+              <pre class="emails"><code class="python" data-incluir="e10:backend/activities/domain/reglas.py" data-lineas="5-11">def hay_cupo(actividad: Actividad) -&gt; bool:
+    return actividad.inscriptos &lt; actividad.capacidad
+
+
+def exigir_cupo(actividad: Actividad) -&gt; None:
+    if not hay_cupo(actividad):
+        raise CupoAgotado()</code></pre>
+              <p class="problema fragment">Las reglas de <code>e05</code> ahora reciben <strong>entidades</strong>, no números sueltos.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Primer paso: entidades propias, dataclasses inmutables que no importan Django. Los modelos del ORM
+            (Activity, Enrollment) siguen existiendo, pero como detalle de persistencia. Actividad trae el campo
+            inscriptos para que la regla de cupo se pueda evaluar sin consultar nada: quién lo calcula es tema del
+            repositorio (la próxima rama). Las reglas de e05 (hay_cupo, exigir_cupo) ahora reciben una Actividad.
+            También aparece presentation/identidad.py, que traduce el usuario autenticado al Participante del dominio.
+          </aside>
+        </section>
+
+        <!-- 10.3 Anatomía del puerto y del adaptador de repositorio -->
+        <section data-sincronizar data-rama="e11" data-p1="parcial" data-p2="si" data-p3="no" data-contrato="si" data-titulo="10 · Puerto de persistencia">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e11</b> <small>e11-puerto-repositorio</small></div>
+          <h2 style="font-size: 1.3em">Anatomía del puerto y del adaptador de repositorio</h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">infrastructure/db/repositorio_django.py · adaptador</span>
+              <pre class="chico"><code class="python" data-line-numbers="8-9|11-12|14-25|42-47" data-incluir="e11:backend/activities/infrastructure/db/repositorio_django.py">from django.db import transaction
+
+from ...domain.errores import ActividadNoEncontrada
+from ...domain.modelos import Actividad, Inscripcion
+from ...models import Activity, Enrollment
+
+
+class RepositorioDjango:
+    """Implementa RepositorioInscripciones con el ORM de Django."""
+
+    def transaccion(self):
+        return transaction.atomic()
+
+    def obtener_actividad_para_inscribir(self, actividad_id):
+        try:
+            fila = Activity.objects.select_for_update().get(id=actividad_id)
+        except Activity.DoesNotExist as error:
+            raise ActividadNoEncontrada() from error
+        return Actividad(
+            id=fila.id,
+            titulo=fila.title,
+            inicia_en=fila.starts_at,
+            capacidad=fila.capacity,
+            inscriptos=fila.enrollments.count(),
+        )
+
+    def buscar_inscripcion(self, participante_id, actividad_id):
+        fila = Enrollment.objects.filter(
+            participant_id=participante_id,
+            activity_id=actividad_id,
+        ).first()
+        return None if fila is None else _a_inscripcion(fila)
+
+    def crear_inscripcion(self, participante_id, actividad_id):
+        fila = Enrollment.objects.create(
+            participant_id=participante_id,
+            activity_id=actividad_id,
+        )
+        return _a_inscripcion(fila)
+
+
+def _a_inscripcion(fila: Enrollment) -&gt; Inscripcion:
+    return Inscripcion(
+        participante_id=fila.participant_id,
+        actividad_id=fila.activity_id,
+        creada_en=fila.enrolled_at,
+    )</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Implementa el puerto</b> con el ORM de Django.</li>
+                <li data-step="2" data-n="2"><b>La transacción</b> queda encapsulada acá: <code>transaction.atomic()</code>.</li>
+                <li data-step="3" data-n="3"><b>El bloqueo y la traducción</b>: <code>select_for_update</code>, fila ORM → <code>Actividad</code>, <code>DoesNotExist</code> → <code>ActividadNoEncontrada</code>.</li>
+                <li data-step="4" data-n="4"><b>Modelo ORM ↔ entidad</b>: <code>_a_inscripcion</code> traduce la fila.</li>
+              </ul>
+              <span class="archivo">application/puertos.py · el puerto</span>
+              <pre class="emails" style="font-size: 0.31em"><code class="python" data-incluir="e11:backend/activities/application/puertos.py" data-lineas="18-32">class RepositorioInscripciones(Protocol):
+    def transaccion(self) -&gt; AbstractContextManager:
+        """Agrupa las operaciones siguientes: se confirman todas o ninguna."""
+
+    def obtener_actividad_para_inscribir(self, actividad_id: UUID) -&gt; Actividad:
+        """Reserva la actividad hasta el fin de la transacción.
+
+        Lanza ActividadNoEncontrada si no existe.
+        """
+
+    def buscar_inscripcion(
+        self, participante_id: UUID, actividad_id: UUID
+    ) -&gt; Inscripcion | None: ...
+
+    def crear_inscripcion(self, participante_id: UUID, actividad_id: UUID) -&gt; Inscripcion: ...</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            A la derecha, abajo: el puerto. Lo escribe la aplicación pensando en lo que necesita (abrir una unidad de
+            trabajo, obtener la actividad para inscribir, buscar una inscripción, crearla), no en SQL. A la izquierda:
+            el adaptador Django. Es el único lugar que conoce el ORM: encapsula la transacción y el bloqueo
+            (select_for_update), cuenta los inscriptos y traduce modelos del ORM a entidades del dominio y errores del
+            ORM a errores del dominio. Con esto application/inscribir.py ya no importa Django (verificable en el grafo
+            de e11 en adelante).
+          </aside>
+        </section>
+
+        <!-- 10.4 Probar el interior completo -->
+        <section data-sincronizar data-rama="e12" data-p1="si" data-p2="si" data-p3="no" data-contrato="si" data-titulo="10 · Puerto de persistencia">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e12</b> <small>e12-repositorio-en-memoria</small></div>
+          <h2>Probar el interior completo 🧪</h2>
+          <div class="anatomia vista baja">
+            <div>
+              <span class="archivo">backend/activities/tests/test_inscribir.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="17-29|31-39|49-56|69-76" data-incluir="e12:backend/activities/tests/test_inscribir.py">from datetime import datetime
+from uuid import uuid4
+
+from django.test import SimpleTestCase
+
+from ..application.inscribir import Inscribir
+from ..domain.errores import ActividadNoEncontrada, CupoAgotado
+from ..domain.modelos import Actividad, Participante
+from ..infrastructure.notificaciones.fallo import NotificadorFallo
+from ..infrastructure.notificaciones.memoria import NotificadorMemoria
+from .fakes import RepositorioEnMemoria
+
+
+class InscribirTests(SimpleTestCase):
+    """El caso de uso aislado: sin base de datos, sin SMTP y sin HTTP."""
+
+    def setUp(self):
+        self.ada = Participante(id=uuid4(), nombre="Ada", email="ada@example.com")
+        self.grace = Participante(id=uuid4(), nombre="Grace", email="")
+        self.actividad = Actividad(
+            id=uuid4(),
+            titulo="Diseño de una API",
+            inicia_en=datetime(2026, 3, 23, 18, 0),
+            capacidad=1,
+            inscriptos=0,
+        )
+        self.repositorio = RepositorioEnMemoria([self.actividad])
+        self.notificador = NotificadorMemoria()
+        self.inscribir = Inscribir(self.repositorio, self.notificador)
+
+    def test_crea_la_inscripcion_y_pide_notificar(self):
+        resultado = self.inscribir.ejecutar(self.ada, self.actividad.id)
+
+        self.assertTrue(resultado.creada)
+        self.assertEqual(len(self.repositorio.inscripciones), 1)
+        confirmacion = self.notificador.enviadas[0]
+        self.assertEqual(confirmacion.destinatario, "ada@example.com")
+        self.assertEqual(confirmacion.nombre, "Ada")
+        self.assertEqual(confirmacion.actividad, "Diseño de una API")
+
+    def test_repetir_devuelve_la_misma_inscripcion_sin_notificar_de_nuevo(self):
+        primera = self.inscribir.ejecutar(self.ada, self.actividad.id)
+        segunda = self.inscribir.ejecutar(self.ada, self.actividad.id)
+
+        self.assertFalse(segunda.creada)
+        self.assertEqual(segunda.inscripcion, primera.inscripcion)
+        self.assertEqual(len(self.notificador.enviadas), 1)
+
+    def test_sin_cupo_no_inscribe_ni_notifica(self):
+        self.inscribir.ejecutar(self.grace, self.actividad.id)
+
+        with self.assertRaises(CupoAgotado):
+            self.inscribir.ejecutar(self.ada, self.actividad.id)
+
+        self.assertEqual(len(self.repositorio.inscripciones), 1)
+        self.assertEqual(self.notificador.enviadas, [])
+
+    def test_actividad_inexistente(self):
+        with self.assertRaises(ActividadNoEncontrada):
+            self.inscribir.ejecutar(self.ada, uuid4())
+
+    def test_sin_email_inscribe_sin_notificar(self):
+        with self.assertLogs("activities", level="WARNING"):
+            resultado = self.inscribir.ejecutar(self.grace, self.actividad.id)
+
+        self.assertTrue(resultado.creada)
+        self.assertEqual(self.notificador.enviadas, [])
+
+    def test_si_el_notificador_falla_la_inscripcion_se_conserva(self):
+        inscribir = Inscribir(self.repositorio, NotificadorFallo())
+
+        with self.assertLogs("activities", level="ERROR"):
+            resultado = inscribir.ejecutar(self.ada, self.actividad.id)
+
+        self.assertTrue(resultado.creada)
+        self.assertEqual(len(self.repositorio.inscripciones), 1)</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Armado</b>: <code>RepositorioEnMemoria</code> + <code>NotificadorMemoria</code>; <code>SimpleTestCase</code>, sin base.</li>
+                <li data-step="2" data-n="2"><b>Crea y pide notificar</b> con los datos correctos.</li>
+                <li data-step="3" data-n="3"><b>Sin cupo</b>: no inscribe ni notifica.</li>
+                <li data-step="4" data-n="4"><b>Notificador caído</b>: la inscripción se conserva.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="dos-col" style="grid-template-columns: 1.5fr 1fr; gap: 0.6em; margin-top: 0.1em; align-items: center">
+            <div class="terminal" style="font-size: 0.42em">
+              <div class="barra"><i></i><i></i><i></i><span>terminal 🧪</span></div>
+              <div class="cuerpo"><div class="cmd">docker compose exec backend python manage.py test activities.tests.test_inscribir activities.tests.test_reglas</div><div class="salida">Found 11 test(s).
+System check identified no issues (0 silenced).
+...........
+Ran 11 tests in 0.001s
+
+OK</div></div>
+            </div>
+            <div class="tarjeta tilde fragment"><b class="ok">P1 ☑</b> La regla de cupo y el caso de uso completo se prueban <strong>sin HTTP, sin base y sin SMTP</strong>: 11 tests en ~1 ms (la suite completa con base: ≈ 2 s).</div>
+          </div>
+          <aside class="notes">
+            Este es el pago de todo el recorrido. Los tests de arriba usan un repositorio en memoria y un notificador
+            en memoria: son SimpleTestCase, no crean base de datos. Los 11 tests (6 del caso de uso + 5 de las reglas)
+            corren en aproximadamente un milisegundo; la suite completa de la rama (27 tests) tarda cerca de dos
+            segundos porque incluye los de contrato, que sí usan la base (tiempos medidos localmente). Comparar con
+            e01: para probar la regla de cupo había que levantar HTTP, la base y SMTP. P1 se tilda. La salida de la
+            terminal es la real de la rama e12; una línea de log (“No se envió la confirmación: Grace no tiene email”)
+            puede mezclarse con los puntos y se omitió en la slide.
+          </aside>
+        </section>
+
+        <!-- 10.5 ¿Vale la pena? -->
+        <section data-rama="e12" data-p1="si" data-p2="si" data-p3="no" data-contrato="si" data-titulo="10 · Puerto de persistencia">
+          <h2>¿Vale la pena?</h2>
+          <div class="balanza" style="font-size: 0.85em">
+            <div class="tarjeta" style="border-top-color: var(--capa-dominio)">
+              <h3>Lo que ganamos</h3>
+              <ul>
+                <li>Tests del caso de uso <strong>rápidos y sin infraestructura</strong>.</li>
+                <li>Cambiar un mecanismo sin tocar el negocio.</li>
+                <li>La regla de dependencias se puede <strong>verificar</strong> (bloque 12).</li>
+              </ul>
+            </div>
+            <div class="fulcro" aria-hidden="true">⚖</div>
+            <div class="tarjeta alerta">
+              <h3>Lo que cuesta</h3>
+              <ul>
+                <li><strong>Mapeo duplicado</strong>: <code>Activity</code> ↔ <code>Actividad</code>, <code>Enrollment</code> ↔ <code>Inscripcion</code>.</li>
+                <li><strong>Más archivos</strong> y más saltos para leer un flujo.</li>
+                <li>El ORM de Django ya es casi un repositorio.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="cuando" style="font-size: 0.75em">
+            <div class="tarjeta fragment" style="border-top-color: var(--ok)"><strong>Cuándo sí</strong>: reglas ricas, varios mecanismos (varios canales de entrada o de salida), necesidad de tests rápidos.</div>
+            <div class="tarjeta gris fragment"><strong>Cuándo no</strong>: un CRUD simple, sin reglas propias y con un único mecanismo.</div>
+          </div>
+          <aside class="notes">
+            Un cierre honesto: esta organización tiene costo. El mapeo duplicado entre entidades del dominio y modelos
+            del ORM es el más visible (miren _a_inscripcion en el repositorio), y el ORM de Django ya se parece mucho a
+            un repositorio, así que envolverlo es una decisión que hay que justificar. Se justifica cuando las reglas
+            son ricas, cuando hay más de un mecanismo o cuando los tests rápidos importan. En un CRUD simple, no. Por
+            eso GET /activities todavía usa el ORM directo en e14 (es parte del ejercicio decidir si vale la pena).
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 11 · OTRA ENTRADA: CLI Y gRPC ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="11 · Otra entrada">
+          <div class="numero">11</div>
+          <h2>Otra entrada: CLI y gRPC</h2>
+          <p>El mismo interior, activado de otra manera</p>
+          <aside class="notes">
+            Tercera pregunta: si quiero inscribir desde la terminal, ¿reescribo la lógica? La respuesta se ve en un
+            archivo de 38 líneas.
+          </aside>
+        </section>
+
+        <!-- 11.1 Anatomía del comando -->
+        <section data-sincronizar data-rama="e13" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="11 · Otra entrada">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e13</b> <small>e13-entrada-cli</small></div>
+          <h2>Anatomía del comando</h2>
+          <div class="anatomia vista baja">
+            <div>
+              <span class="archivo">backend/activities/management/commands/inscribir.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="16-18|20-24|26-29|30-33|35-38" data-incluir="e13:backend/activities/management/commands/inscribir.py">"""Adaptador de entrada por consola: el mismo caso de uso que usa la API HTTP."""
+
+from uuid import UUID
+
+from django.contrib.auth import get_user_model
+from django.core.management.base import BaseCommand, CommandError
+
+from activities.composition import construir_inscribir
+from activities.domain.errores import ActividadNoEncontrada, CupoAgotado
+from activities.presentation.identidad import participante_actual
+
+
+class Command(BaseCommand):
+    help = "Inscribe a un usuario en una actividad."
+
+    def add_arguments(self, parser):
+        parser.add_argument("usuario", help="Nombre de usuario, por ejemplo: demo")
+        parser.add_argument("actividad_id", type=UUID, help="UUID de la actividad")
+
+    def handle(self, *args, usuario, actividad_id, **options):
+        try:
+            user = get_user_model().objects.get(username=usuario)
+        except get_user_model().DoesNotExist as error:
+            raise CommandError(f"El usuario {usuario!r} no existe.") from error
+
+        try:
+            resultado = construir_inscribir().ejecutar(
+                participante_actual(user), actividad_id
+            )
+        except ActividadNoEncontrada as error:
+            raise CommandError("La actividad no existe.") from error
+        except CupoAgotado as error:
+            raise CommandError("No hay cupos disponibles.") from error
+
+        if resultado.creada:
+            self.stdout.write(self.style.SUCCESS("Inscripción creada."))
+        else:
+            self.stdout.write("Ya estaba inscripto: no se cambió nada.")</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Argumentos</b>: usuario y UUID de la actividad.</li>
+                <li data-step="2" data-n="2"><b>Identidad</b>: el usuario o un error legible.</li>
+                <li data-step="3" data-n="3"><b>El mismo caso de uso</b>: <code>construir_inscribir()</code> de <code>composition.py</code>.</li>
+                <li data-step="4" data-n="4"><b>Errores → mensajes</b> y exit code ≠ 0.</li>
+                <li data-step="5" data-n="5"><b>Salida por consola</b>: creada o ya estaba.</li>
+              </ul>
+              <div class="tarjeta tilde fragment"><b class="ok">P3 ☑</b> Inscribir desde la terminal <strong>no reescribe la lógica</strong>: es otro adaptador de entrada con la misma forma que la vista.</div>
+            </div>
+          </div>
+          <div class="terminal" style="font-size: 0.42em; margin-top: 0.2em">
+            <div class="barra"><i></i><i></i><i></i><span>terminal 🧪</span></div>
+            <div class="cuerpo"><div class="fragment"><div class="cmd">docker compose exec backend python manage.py inscribir ada &lt;uuid-de-la-actividad&gt;</div><div class="salida">Inscripción creada.</div></div><div class="fragment"><div class="cmd">docker compose exec backend python manage.py inscribir ada &lt;uuid-de-la-actividad&gt;</div><div class="salida">Ya estaba inscripto: no se cambió nada.</div></div></div>
+          </div>
+          <aside class="notes">
+            El comando de Django es un adaptador de entrada: parsea argumentos, resuelve la identidad, llama al mismo
+            Inscribir que arma composition.py (el que usa la vista HTTP) y traduce errores a mensajes con exit code
+            distinto de cero (CommandError). Cero reglas, cero SQL, cero SMTP. Por eso P3 se tilda. Las salidas de la
+            terminal son los mensajes reales del comando (verificados por el test de la rama e13); el UUID se obtiene
+            de la API o del admin. Los tests de la rama corren con NOTIFICADOR=memoria para no depender de Mailpit.
+          </aside>
+        </section>
+
+        <!-- 11.2 H3 con selector -->
+        <section data-rama="e13" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="11 · Otra entrada">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e13</b> <small>e13-entrada-cli</small></div>
+          <h2>Dos entradas, un interior <span class="herramienta">🛠 H3</span></h2>
+          <div class="h3" data-etapa="e14"></div>
+          <aside class="notes">
+            Misma herramienta de 7.4, ahora con el hexágono completo (la versión de e14, con repositorio y composición)
+            y un selector de entrada. Elegir HTTP, avanzar los pasos; después cambiar a CLI: solo cambia el primer
+            nodo y el texto del primer y del último paso; los pasos 3 a 6 (repositorio, regla, creación, notificación)
+            son idénticos. Cambia el adaptador de entrada, el interior queda igual. gRPC aparece marcado como rama
+            opcional: lo vemos en la próxima slide. Prender las dependencias de código para ver que todas las flechas
+            rojas apuntan hacia adentro.
+          </aside>
+        </section>
+
+        <!-- 11.3 gRPC (rama opcional) -->
+        <section data-sincronizar data-rama="opcional-entrada-grpc" data-base="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="11 · Otra entrada">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>opcional-entrada-grpc</b> <small>sale de e14</small></div>
+          <h2>Y si la entrada es gRPC <span class="herramienta" style="background: var(--capa-composicion)">rama opcional</span></h2>
+          <div class="anatomia vista baja">
+            <div>
+              <span class="archivo">presentation/grpc/servicio.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="21,47-57|22-25|27-30|31-34|36-42" data-incluir="opcional-entrada-grpc:backend/activities/presentation/grpc/servicio.py">"""Adaptador de entrada gRPC: traduce el protocolo al caso de uso Inscribir."""
+
+from uuid import UUID
+
+import grpc
+from django.contrib.auth import get_user_model
+from django.db import close_old_connections
+from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.tokens import AccessToken
+
+from ...composition import construir_inscribir
+from ...domain.errores import ActividadNoEncontrada, CupoAgotado
+from ..identidad import participante_actual
+from . import inscripciones_pb2, inscripciones_pb2_grpc
+
+
+class ServicioInscripciones(inscripciones_pb2_grpc.InscripcionesServicer):
+    def Inscribir(self, request, context):
+        close_old_connections()  # cada llamada corre en un hilo del servidor gRPC
+        try:
+            usuario = _usuario_autenticado(context)
+            try:
+                actividad_id = UUID(request.actividad_id)
+            except ValueError:
+                context.abort(grpc.StatusCode.INVALID_ARGUMENT, "actividad_id no es un UUID.")
+
+            try:
+                resultado = construir_inscribir().ejecutar(
+                    participante_actual(usuario), actividad_id
+                )
+            except ActividadNoEncontrada:
+                context.abort(grpc.StatusCode.NOT_FOUND, "La actividad no existe.")
+            except CupoAgotado:
+                context.abort(grpc.StatusCode.FAILED_PRECONDITION, "No hay cupos disponibles.")
+
+            inscripcion = resultado.inscripcion
+            return inscripciones_pb2.InscribirResponse(
+                actividad_id=str(inscripcion.actividad_id),
+                participante_id=str(inscripcion.participante_id),
+                inscripta_en=inscripcion.creada_en.isoformat(),
+                creada=resultado.creada,
+            )
+        finally:
+            close_old_connections()
+
+
+def _usuario_autenticado(context):
+    """Misma identidad que la API HTTP: el access JWT, pero en la metadata."""
+    metadata = dict(context.invocation_metadata())
+    esquema, _, token = metadata.get("authorization", "").partition(" ")
+    if esquema != "Bearer" or not token:
+        context.abort(grpc.StatusCode.UNAUTHENTICATED, "Falta el token Bearer.")
+    try:
+        user_id = AccessToken(token)["user_id"]
+        return get_user_model().objects.get(id=user_id, is_active=True)
+    except (TokenError, KeyError, get_user_model().DoesNotExist):
+        context.abort(grpc.StatusCode.UNAUTHENTICATED, "Token inválido.")</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Identidad</b> desde la metadata: el mismo JWT, en <code>authorization</code>.</li>
+                <li data-step="2" data-n="2"><b>Traducir el pedido</b>: <code>actividad_id</code> a UUID (<code>INVALID_ARGUMENT</code> si no es).</li>
+                <li data-step="3" data-n="3"><b>Llamar al caso de uso</b>: el mismo <code>construir_inscribir()</code>.</li>
+                <li data-step="4" data-n="4"><b>Errores del dominio → códigos gRPC</b>: <code>NOT_FOUND</code>, <code>FAILED_PRECONDITION</code> (y <code>UNAUTHENTICATED</code> sin token).</li>
+                <li data-step="5" data-n="5"><b>Traducir la respuesta</b> al mensaje <code>InscribirResponse</code>.</li>
+              </ul>
+              <p class="problema fragment">Es otro <strong>proceso</strong> (servicio <code>grpc</code> de compose, puerto <code>50051</code>) con las mismas capas: <strong>capa ≠ tier</strong>, otra vez.</p>
+            </div>
+          </div>
+          <div class="terminal" style="font-size: 0.4em; margin-top: 0.2em">
+            <div class="barra"><i></i><i></i><i></i><span>terminal 🧪 · ejemplo con grpcurl</span></div>
+            <div class="cuerpo"><div class="cmd">grpcurl -plaintext -H "authorization: Bearer $TOKEN" -import-path backend -proto activities/presentation/grpc/inscripciones.proto -d '{"actividad_id": "&lt;uuid&gt;"}' localhost:50051 inscripciones.v1.Inscripciones/Inscribir</div><div class="comentario"># $TOKEN: el mismo access JWT que usa la API HTTP · responde InscribirResponse { actividad_id, participante_id, inscripta_en, creada }</div></div>
+          </div>
+          <aside class="notes">
+            Rama opcional, que sale de e14: opcional-entrada-grpc. Como ya vieron gRPC en la materia, sirve de segundo
+            ejemplo de adaptador de entrada: expone el mismo Inscribir que la vista HTTP y el comando. Cuatro pasos:
+            sacar la identidad de la metadata (el mismo access JWT, en la clave authorization), traducir el pedido,
+            llamar al caso de uso que arma composition.py y traducir los errores del dominio a códigos gRPC
+            (ActividadNoEncontrada a NOT_FOUND, CupoAgotado a FAILED_PRECONDITION; sin token, UNAUTHENTICATED). El
+            contrato está en inscripciones.proto. Es un proceso aparte (servicio grpc en compose, puerto 50051) pero
+            con las mismas capas: capa no es tier. La rama tiene 33 tests (los de e14 más los del servicio). El comando
+            grpcurl es un ejemplo de uso: la herramienta no está en el repo, hay que instalarla aparte.
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 12 · LA REGLA COMO TEST ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="12 · La regla como test">
+          <div class="numero">12</div>
+          <h2>La regla como test</h2>
+          <p>Que la dependencia hacia adentro no dependa de la memoria de nadie</p>
+          <aside class="notes">
+            Todo lo anterior se sostiene con disciplina. Este bloque convierte la regla de dependencias en un test que
+            falla.
+          </aside>
+        </section>
+
+        <!-- 12.1 Anatomía de .importlinter -->
+        <section data-sincronizar data-rama="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="12 · La regla como test">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e14</b> <small>e14-regla-como-test</small></div>
+          <h2>Anatomía de <code style="font-size: 0.85em">.importlinter</code></h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/.importlinter</span>
+              <pre class="chico"><code class="python" data-line-numbers="3-5|7-19|21-32|34-42" data-incluir="e14:backend/.importlinter"># La regla de dependencias, verificable: `lint-imports` (o `python manage.py test`).
+
+[importlinter]
+root_package = activities
+include_external_packages = True
+
+[importlinter:contract:dominio]
+name = El dominio no depende de nada: ni de Django ni de otras capas
+type = forbidden
+source_modules =
+    activities.domain
+forbidden_modules =
+    django
+    rest_framework
+    activities.application
+    activities.infrastructure
+    activities.presentation
+    activities.composition
+    activities.models
+
+[importlinter:contract:aplicacion]
+name = La aplicación conoce el dominio y sus puertos, no los mecanismos
+type = forbidden
+source_modules =
+    activities.application
+forbidden_modules =
+    django
+    rest_framework
+    activities.infrastructure
+    activities.presentation
+    activities.composition
+    activities.models
+
+[importlinter:contract:capas]
+name = Las capas solo dependen hacia adentro
+type = layers
+layers =
+    activities.presentation
+    activities.composition
+    activities.infrastructure
+    activities.application
+    activities.domain</code></pre>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>Configuración</b>: paquete raíz <code>activities</code>; <code>include_external_packages</code> para ver <code>django</code>.</li>
+                <li data-step="2" data-n="2"><b>Dominio</b>: no importa <code>django</code> ni ninguna otra capa.</li>
+                <li data-step="3" data-n="3"><b>Aplicación</b>: no importa Django ni <code>infrastructure</code>, <code>presentation</code> o <code>composition</code>.</li>
+                <li data-step="4" data-n="4"><b>Capas en orden</b>: presentation → composition → infrastructure → application → domain.</li>
+              </ul>
+              <span class="archivo">tests/test_arquitectura.py</span>
+              <pre class="emails"><code class="python" data-incluir="e14:backend/activities/tests/test_arquitectura.py" data-lineas="16-25">    def test_las_dependencias_apuntan_hacia_adentro(self):
+        # En un proceso aparte: import-linter configura su propio logging.
+        resultado = subprocess.run(
+            [sys.executable, "-c", LINT_IMPORTS],
+            cwd=settings.BASE_DIR,
+            capture_output=True,
+            text=True,
+        )
+
+        self.assertEqual(resultado.returncode, 0, resultado.stdout + resultado.stderr)</code></pre>
+            </div>
+          </div>
+          <aside class="notes">
+            import-linter lee un archivo de contratos y verifica el grafo real de imports. Tres contratos: el dominio no
+            depende de nada de afuera (ni Django ni otras capas); la aplicación conoce el dominio y sus puertos, no los
+            mecanismos; y las capas solo se importan hacia adentro. Abajo: el test de arquitectura que corre
+            lint-imports en un proceso aparte (import-linter configura su propio logging, por eso el subproceso) y
+            falla si alguien rompe un contrato. Así la regla se vuelve parte de python manage.py test.
+          </aside>
+        </section>
+
+        <!-- 12.2 Romperlo a propósito -->
+        <section data-rama="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="12 · La regla como test">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e14</b> <small>e14-regla-como-test</small></div>
+          <h2>Romperlo a propósito 🧪 <span class="herramienta">🛠 H4</span></h2>
+          <div class="apilado-fragmentos">
+            <div class="fragment fade-out" data-fragment-index="1">
+              <p class="chico" style="margin: 0 0 0.3em">Agregamos <code>from django.db import transaction</code> arriba de <code>application/inscribir.py</code> y corremos la regla:</p>
+              <div class="terminal" style="font-size: 0.46em">
+                <div class="barra"><i></i><i></i><i></i><span>terminal 🧪 · ../modular-capas-v2-codigo</span></div>
+                <div class="cuerpo"><div class="cmd">docker compose exec backend lint-imports</div><div class="salida">Contracts: 2 kept, 1 broken.
+
+Broken contracts
+----------------
+
+La aplicación conoce el dominio y sus puertos, no los mecanismos
+----------------------------------------------------------------
+
+activities.application is not allowed to import django:
+
+-   activities.application.inscribir -&gt; django (l.1)</div><div class="comentario"># y python manage.py test falla en tests/test_arquitectura.py: FAILED (failures=1)</div></div>
+              </div>
+              <p class="chico fragment" style="margin: 0.3em 0 0"><em>Siguiente</em>: el mismo grafo H4, recorriendo todas las etapas.</p>
+            </div>
+            <div class="fragment" data-fragment-index="1">
+              <div class="h4" data-inicial="e14" data-desde="e01" data-hasta="e14"></div>
+            </div>
+          </div>
+          <aside class="notes">
+            Primera mitad: romper la regla a propósito. Agregar el import de django.db.transaction al comienzo de
+            application/inscribir.py hace que lint-imports informe un contrato roto (la aplicación no puede importar
+            django) y que python manage.py test falle en el test de arquitectura. Es la salida real obtenida en una
+            copia de e14. Al avanzar, aparece el grafo H4 completo: deslizar de e01 a e14 y ver cómo el nodo único se
+            abre en capas y todas las flechas rojas desaparecen; en e14 el veredicto es “el interior no importa nada
+            de afuera”. Volver a retroceder con la flecha izquierda para ver la terminal otra vez.
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 13 · CORTE VERTICAL: MONOLITO MODULAR ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="13 · Corte vertical">
+          <div class="numero">13</div>
+          <h2>Corte vertical: monolito modular</h2>
+          <p>Conceptual, con una rama opcional para mirar el código</p>
+          <aside class="notes">
+            Volvemos a la grilla de 2.6: hasta acá recorrimos el eje horizontal. Este bloque mira el vertical. El
+            código vive solo en la rama opcional opcional-monolito-modular.
+          </aside>
+        </section>
+
+        <!-- 13.1 Volvemos a la grilla -->
+        <section data-rama="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="13 · Corte vertical">
+          <h2>Volvemos a la grilla</h2>
+          <div class="grilla-ejes" style="font-size: 0.8em">
+            <div class="celdas">
+            <div class="enc"></div>
+            <div class="enc">Actividades</div>
+            <div class="enc">Inscripciones</div>
+            <div class="enc">Notificaciones</div>
+
+            <div class="fil capa-presentacion">presentación</div>
+            <div class="cel"><code>ActivityListView</code></div>
+            <div class="cel"><code>EnrollmentDetailView</code></div>
+            <div class="cel">—</div>
+
+            <div class="fil capa-aplicacion">aplicación</div>
+            <div class="cel">listar, consultar</div>
+            <div class="cel">inscribir</div>
+            <div class="cel">enviar confirmación</div>
+
+            <div class="fil capa-dominio">dominio</div>
+            <div class="cel">capacidad</div>
+            <div class="cel">reglas de cupo</div>
+            <div class="cel">—</div>
+
+            <div class="fil capa-infraestructura">infraestructura</div>
+            <div class="cel">tabla <code>Activity</code></div>
+            <div class="cel">tabla <code>Enrollment</code></div>
+            <div class="cel">SMTP · Mailpit</div>
+            </div>
+            <div class="resaltes">
+              <div class="resalte columna fragment fade-in-then-out" data-fragment-index="1" style="grid-column: 3"></div>
+              <div class="resalte columna fragment" data-fragment-index="2" style="grid-column: 2"></div>
+              <div class="resalte columna fragment" data-fragment-index="2" style="grid-column: 3"></div>
+              <div class="resalte columna fragment" data-fragment-index="2" style="grid-column: 4"></div>
+            </div>
+          </div>
+          <div class="pie-ejes" style="font-size: 0.85em">
+            <p class="fragment fade-in-then-out" data-fragment-index="1">Recorrimos <strong>una columna</strong> (inscripciones) por todas sus filas: de la vista al ORM.</p>
+            <p class="fragment" data-fragment-index="2">¿Y si cortamos por <strong>columnas</strong>? Actividades, inscripciones, notificaciones: cada una con sus capas y <strong>un límite explícito</strong>.</p>
+          </div>
+          <aside class="notes">
+            Volver a la grilla de la slide 2.6. Todo el recorrido fue seguir una columna (inscripciones) de arriba
+            abajo: presentación, aplicación, dominio, infraestructura. El corte vertical propone mirar las columnas
+            como módulos con límites propios: actividades, inscripciones y notificaciones. Un monolito modular sigue
+            siendo un solo proceso, un deploy y una base; lo que cambia es que los límites internos son explícitos.
+            Los dos ejes no se excluyen: se combinan.
+          </aside>
+        </section>
+
+        <!-- 13.2 Un módulo con interfaz pública -->
+        <section data-sincronizar data-rama="opcional-monolito-modular" data-base="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="13 · Corte vertical">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>opcional-monolito-modular</b> <small>sale de e14 · opcional</small></div>
+          <h2>Un módulo con interfaz pública <span class="herramienta" style="background: var(--capa-composicion)">opcional en código</span></h2>
+          <div class="anatomia vista">
+            <div>
+              <span class="archivo">backend/notificaciones/api.py</span>
+              <pre class="chico"><code class="python" data-line-numbers="1|3-4|6|9-11" data-incluir="opcional-monolito-modular:backend/notificaciones/api.py">"""Interfaz pública del módulo de notificaciones."""
+
+from . import canales
+from .tipos import Correo, ErrorDeEnvio
+
+__all__ = ["Correo", "ErrorDeEnvio", "enviar"]
+
+
+def enviar(correo: Correo) -&gt; None:
+    """Envía el correo por el canal configurado (NOTIFICADOR) o lanza ErrorDeEnvio."""
+    canales.canal_configurado().enviar(correo)</code></pre>
+              <span class="archivo">backend/notificaciones/</span>
+              <div class="arbol" data-arbol="opcional-monolito-modular:backend/notificaciones"><ul><li class="hoja"><span class="nombre">api.py</span></li><li class="hoja"><span class="nombre">canales.py</span></li><li class="hoja capa-tests"><span class="nombre">tests.py</span></li><li class="hoja"><span class="nombre">tipos.py</span></li></ul></div>
+            </div>
+            <div>
+              <ul class="callouts">
+                <li data-step="1" data-n="1"><b>La puerta</b>: <code>api.py</code> es lo único que otros módulos pueden importar.</li>
+                <li data-step="2" data-n="2"><b>Por dentro</b> usa <code>canales</code> y <code>tipos</code>: detalles internos.</li>
+                <li data-step="3" data-n="3"><b>Lo público</b>: <code>Correo</code>, <code>ErrorDeEnvio</code>, <code>enviar</code>.</li>
+                <li data-step="4" data-n="4"><b><code>enviar(correo)</code></b>: el canal sale de <code>NOTIFICADOR</code>.</li>
+              </ul>
+              <span class="archivo">activities/infrastructure/notificaciones/modulo.py</span>
+              <pre class="emails"><code class="python" data-incluir="opcional-monolito-modular:backend/activities/infrastructure/notificaciones/modulo.py" data-lineas="7-27">class NotificadorModulo:
+    """Implementa el puerto Notificador con la interfaz pública del módulo notificaciones.
+
+    Para inscripciones, el otro módulo es un mecanismo más detrás de su puerto.
+    """
+
+    def enviar(self, confirmacion: ConfirmacionInscripcion) -&gt; None:
+        correo = notificaciones.Correo(
+            destinatario=confirmacion.destinatario,
+            asunto=f"Inscripción confirmada: {confirmacion.actividad}",
+            cuerpo=(
+                f"Hola {confirmacion.nombre},\n\n"
+                f"Tu inscripción a «{confirmacion.actividad}» quedó confirmada.\n"
+                f"Inicio: {confirmacion.inicia_en.isoformat()}\n\n"
+                "Arquitecturas Web — UNTDF\n"
+            ),
+        )
+        try:
+            notificaciones.enviar(correo)
+        except notificaciones.ErrorDeEnvio as error:
+            raise ErrorNotificacion(str(error)) from error</code></pre>
+              <p class="problema fragment">Mismo proceso, misma base, <strong>límite explícito</strong>: dos contratos más en <code>.importlinter</code> (inscripciones solo usa <code>api</code>; notificaciones no conoce a inscripciones).</p>
+            </div>
+          </div>
+          <aside class="notes">
+            Rama opcional (sale de e14): notificaciones pasa a ser un módulo propio, con api.py como única interfaz
+            pública. Para inscripciones, el módulo es un mecanismo más detrás de su puerto Notificador: el adaptador
+            NotificadorModulo (abajo) traduce la confirmación a un Correo y llama a notificaciones.enviar. Dos contratos
+            nuevos en .importlinter hacen cumplir el límite: fuera del módulo solo se importa api, y notificaciones no
+            importa nada de activities. Sigue siendo un proceso, un deploy y una base. La rama tiene 33 tests. El
+            detalle está en MONOLITO-MODULAR.md de esa rama.
+          </aside>
+        </section>
+
+        <!-- 13.3 Lo que queda abierto -->
+        <section data-rama="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="13 · Corte vertical">
+          <h2>Lo que queda abierto</h2>
+          <div class="flujo" style="margin: 1em 0 0.6em; font-size: 1.2em">
+            <div class="caja" style="font-size: 1em; padding: 0.9em 1.2em; border-color: var(--capa-dominio)">actividades<small><code style="background:none">Activity</code></small></div>
+            <div class="flecha" style="font-size: 2.2em; color: var(--untdf-rojo)">⇄<small style="font-size: 0.35em">¿?</small></div>
+            <div class="caja" style="font-size: 1em; padding: 0.9em 1.2em; border-color: var(--capa-aplicacion)">inscripciones<small><code style="background:none">Enrollment</code></small></div>
+          </div>
+          <div class="tres-col" style="margin-top: 0.6em">
+            <div class="tarjeta fragment" style="font-size: 0.8em">La <strong>FK</strong> <code>Enrollment → Activity</code> cruza el límite.</div>
+            <div class="tarjeta gris fragment" style="font-size: 0.8em">¿<strong>Quién es dueño</strong> de la tabla?</div>
+            <div class="tarjeta alerta fragment" style="font-size: 0.8em">¿Cómo consulto el <strong>cupo</strong> de otro módulo?</div>
+          </div>
+          <p class="frase fragment" style="font-size: 1.3em; margin-top: 1.2em"><em>Organizar antes de distribuir.</em></p>
+          <aside class="notes">
+            Separar actividades de inscripciones ya no es tan limpio como con notificaciones: Enrollment tiene una clave
+            foránea a Activity, el cupo de una actividad se calcula contando inscripciones, y la regla de cupo necesita
+            ambos datos a la vez. Preguntas abiertas: ¿quién es dueño de la tabla?, ¿cómo consulta un módulo el cupo
+            que vive en otro? No las resolvemos hoy: la idea es que, antes de pensar en separar procesos
+            (microservicios), conviene tener los límites claros dentro de un solo proceso. Organizar antes de
+            distribuir.
+          </aside>
+        </section>
+
+        <!-- ================= BLOQUE 14 · CIERRE, LÍMITES Y EJERCICIO ================= -->
+
+        <section class="seccion" data-background-color="#BE1C1D" data-state="fondo-rojo" data-titulo="14 · Cierre">
+          <div class="numero">14</div>
+          <h2>Cierre, límites y ejercicio</h2>
+          <p>Llegamos, qué no resuelve esto y una consigna para practicar</p>
+          <aside class="notes">
+            Cierre del recorrido: el mapa completo, el machete, los límites de lo que hicimos y el ejercicio.
+          </aside>
+        </section>
+
+        <!-- 14.1 Llegamos -->
+        <section data-rama="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="14 · Cierre">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>e14</b> <small>e14-regla-como-test</small></div>
+          <h2>Llegamos <span class="herramienta">🛠 H2</span></h2>
+          <div class="h2">
+            <div class="h2-arbol">
+              <div class="arbol" data-arbol="e14:backend/activities"><ul><li class="dir"><span class="nombre">application/</span><ul><li class="hoja capa-aplicacion"><span class="nombre">dto.py</span></li><li class="hoja capa-aplicacion"><span class="nombre">inscribir.py</span></li><li class="hoja capa-puerto"><span class="nombre">puertos.py</span></li></ul></li><li class="dir"><span class="nombre">domain/</span><ul><li class="hoja capa-dominio"><span class="nombre">errores.py</span></li><li class="hoja capa-dominio"><span class="nombre">modelos.py</span></li><li class="hoja capa-dominio"><span class="nombre">reglas.py</span></li></ul></li><li class="dir"><span class="nombre">infrastructure/</span><ul><li class="dir"><span class="nombre">db/</span><ul><li class="hoja capa-infraestructura"><span class="nombre">repositorio_django.py</span></li></ul></li><li class="dir"><span class="nombre">notificaciones/</span><ul><li class="hoja capa-infraestructura"><span class="nombre">fallo.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">memoria.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">smtp.py</span></li></ul></li></ul></li><li class="dir"><span class="nombre">management/</span><ul><li class="dir"><span class="nombre">commands/</span><ul><li class="hoja capa-presentacion"><span class="nombre">inscribir.py</span></li><li class="hoja"><span class="nombre">seed_activities.py</span></li></ul></li></ul></li><li class="dir"><span class="nombre">presentation/</span><ul><li class="dir"><span class="nombre">http/</span><ul><li class="hoja capa-presentacion"><span class="nombre">serializers.py</span></li><li class="hoja capa-presentacion"><span class="nombre">urls.py</span></li><li class="hoja capa-presentacion"><span class="nombre">views.py</span></li></ul></li><li class="hoja capa-presentacion"><span class="nombre">identidad.py</span></li></ul></li><li class="dir"><span class="nombre">tests/</span><ul><li class="hoja capa-tests"><span class="nombre">fakes.py</span></li><li class="hoja capa-tests"><span class="nombre">test_arquitectura.py</span></li><li class="hoja capa-tests"><span class="nombre">test_cli.py</span></li><li class="hoja capa-tests"><span class="nombre">test_composicion.py</span></li><li class="hoja capa-tests"><span class="nombre">test_contrato_api.py</span></li><li class="hoja capa-tests"><span class="nombre">test_inscribir.py</span></li><li class="hoja capa-tests"><span class="nombre">test_reglas.py</span></li></ul></li><li class="hoja"><span class="nombre">admin.py</span></li><li class="hoja"><span class="nombre">apps.py</span></li><li class="hoja capa-composicion"><span class="nombre">composition.py</span></li><li class="hoja capa-infraestructura"><span class="nombre">models.py</span></li></ul></div>
+              <p class="h2-leyenda"><span class="ok">Todo en color</span>: <strong>P1 ☑ P2 ☑ P3 ☑</strong> · contrato ✔ en las 15 ramas (<code>e00</code> … <code>e14</code>: de 11 a 30 tests).</p>
+            </div>
+            <div class="h2-der">
+              <div class="h2-hex"></div>
+              <div class="h2-info">Hacé clic en un archivo del árbol o en una pieza del hexágono: se ilumina su lugar y aparecen sus <strong>imports</strong> (los reales, calculados de <code>e14</code>).</div>
+            </div>
+          </div>
+          <aside class="notes">
+            El mapa de la apertura (0.3), ahora completo y con todo en color: cada archivo existe y cada pieza del
+            hexágono tiene su código. Hacer clic en archivos al azar y leer sus imports: todas las flechas rojas
+            apuntan hacia adentro (los adaptadores importan puertos y dominio; el dominio no importa nada). Las tres
+            preguntas están resueltas y el contrato HTTP sigue idéntico en las 15 ramas: los tests de contrato pasan
+            en todas (11 tests en e00 y e01, 30 en e14). gRPC aparece como entrada posible; su código está en la rama
+            opcional.
+          </aside>
+        </section>
+
+        <!-- 14.2 Machete final -->
+        <section data-rama="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="14 · Cierre">
+          <h2>Machete final 📸 <span style="font-size: 0.55em">Cómo se escribe cada componente</span></h2>
+          <table class="tabla-capas machete-final">
+            <thead>
+              <tr><th>Componente</th><th>Archivo</th><th>Qué sabe</th><th>Qué no sabe</th></tr>
+            </thead>
+            <tbody>
+              <tr class="capa-presentacion"><td><span class="chip-capa">entrada HTTP</span></td><td><code>presentation/http/views.py</code></td><td>request, identidad, códigos HTTP, el caso de uso</td><td>ORM, SMTP, reglas</td></tr>
+              <tr class="capa-presentacion"><td><span class="chip-capa">entrada CLI</span></td><td><code>management/commands/inscribir.py</code></td><td>argumentos, salida por consola, el caso de uso</td><td>HTTP</td></tr>
+              <tr class="capa-aplicacion"><td><span class="chip-capa">caso de uso</span></td><td><code>application/inscribir.py</code></td><td>el orden de la operación, los puertos</td><td>Django, SMTP, HTTP</td></tr>
+              <tr class="capa-dominio"><td><span class="chip-capa">regla</span></td><td><code>domain/reglas.py</code></td><td>el negocio (cupo, duplicados)</td><td>todo lo demás</td></tr>
+              <tr class="capa-dominio"><td><span class="chip-capa">entidad</span></td><td><code>domain/modelos.py</code></td><td>datos y significado</td><td>cómo se guardan</td></tr>
+              <tr class="capa-puerto"><td><span class="chip-capa">puerto</span></td><td><code>application/puertos.py</code></td><td><em>qué</em> necesita la aplicación</td><td><em>cómo</em> se hace</td></tr>
+              <tr class="capa-infraestructura"><td><span class="chip-capa">adaptador de salida</span></td><td><code>infrastructure/…</code></td><td>el mecanismo (ORM, SMTP) y cómo traducir errores</td><td>reglas, HTTP</td></tr>
+              <tr class="capa-composicion"><td><span class="chip-capa">composición</span></td><td><code>composition.py</code></td><td>qué implementación va con qué</td><td>— (es el único que conoce todo)</td></tr>
+            </tbody>
+          </table>
+          <div class="mochila" style="margin-top: 0.4em"><span>🎒 La mochila</span> <i>capas</i> <i>puertos y adaptadores</i> <i>monolito modular</i> <i>DIP</i> <i>DI</i> <i>cohesión</i> <i>acoplamiento</i></div>
+          <a class="enlace-herramienta" href="archify/repaso.html" target="_blank" rel="noopener">Página de repaso para el aula virtual ↗</a>
+          <aside class="notes">
+            Slide para sacarle una foto: cómo se escribe cada componente, qué sabe y qué no sabe. Es la regla de oro
+            en formato de tabla: cada componente conoce lo mínimo. Abajo, la mochila de la slide 2.2: los términos
+            que juntamos al principio. El botón abre, en otra pestaña, la página de repaso generada con archify (para
+            subir al aula virtual; funciona sin conexión).
+          </aside>
+        </section>
+
+        <!-- 14.3 Lo que la organización no resuelve -->
+        <section data-rama="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="14 · Cierre">
+          <h2 style="font-size: 1.3em">Lo que la organización no resuelve</h2>
+          <div class="pedido-linea" style="font-size: 0.7em">
+            <div>PUT<small>entra la petición</small></div>
+            <div class="tx">
+              <b>transacción</b>
+              <div class="pasos"><span>bloquear la actividad</span><span>reglas</span><span>crear la inscripción</span><span><strong>COMMIT</strong></span></div>
+            </div>
+            <div class="afuera fragment"><b>SMTP</b><small>la petición espera</small><small>falla <strong>después</strong> del commit</small></div>
+            <div>201<small>responde igual</small></div>
+          </div>
+          <div class="tres-col" style="margin-top: 0.4em">
+            <div class="tarjeta fragment" style="font-size: 0.75em"><strong>Síncrono</strong>: la petición espera a SMTP (<code>send_mail</code> bloquea).</div>
+            <div class="tarjeta alerta fragment" style="font-size: 0.75em"><strong>No es atómico</strong>: la base y el correo no forman una operación. Si el correo falla, la inscripción queda y el aviso se pierde.</div>
+            <div class="tarjeta gris fragment" style="font-size: 0.75em"><strong>Repetir no lo arregla</strong>: el <code>PUT</code> repetido responde 200 y no reenvía. Reintentar el envío a ciegas puede duplicar correos.</div>
+          </div>
+          <p class="chico fragment" style="margin: 0.8em 0 0; font-size: 1.1em">→ Tema siguiente: <strong>notificación pendiente</strong> y asincronía.</p>
+          <aside class="notes">
+            Lo que no resolvimos: reorganizar el código no cambia el comportamiento en runtime. El correo sigue siendo
+            síncrono (la petición espera a SMTP) y se envía después del commit, así que la base y el correo no forman
+            una operación atómica: si el servidor de correo falla, la inscripción queda y el aviso se pierde (lo vimos
+            en 9.6 con el adaptador de fallo). Repetir el PUT no lo arregla: la inscripción ya existe, responde 200 y no
+            reenvía (hay un test que lo fija). Y reintentar el envío a ciegas tiene su propio riesgo: si el servidor
+            aceptó el mensaje pero la respuesta se perdió, el reintento duplica el correo. La salida es un tema nuevo:
+            guardar la notificación como pendiente y enviarla de forma asíncrona (cola, reintentos, idempotencia).
+          </aside>
+        </section>
+
+        <!-- 14.4 Ejercicio -->
+        <section data-rama="ejercicio-cancelar-consultar" data-base="e14" data-p1="si" data-p2="si" data-p3="si" data-contrato="si" data-titulo="14 · Cierre">
+          <div class="rama-etiqueta">scripts/etapa.sh <b>ejercicio-cancelar-consultar</b> <small>sale de e14</small></div>
+          <h2>Ejercicio: Cancelar y Consultar</h2>
+          <div class="dos-col" style="grid-template-columns: 1.1fr 1fr; gap: 0.8em">
+            <div>
+              <p class="chico" style="margin: 0 0 0.3em">En <code>e14</code> solo <strong>inscribir</strong> sigue la arquitectura completa. Llevá <code>DELETE</code> y <code>GET /me/enrollments</code> al mismo patrón:</p>
+              <ul class="checklist chico">
+                <li><code>application/cancelar.py</code>: <code>Cancelar(repositorio)</code>, idempotente, libera el cupo.</li>
+                <li><code>application/consultar.py</code>: <code>ConsultarMisInscripciones(repositorio)</code>.</li>
+                <li>Los métodos nuevos, en el <strong>puerto</strong> y en sus dos adaptadores (Django y memoria).</li>
+                <li><code>composition.py</code> arma los casos de uso; las vistas solo traducen HTTP.</li>
+              </ul>
+              <p class="problema"><strong>Cómo sé que terminé</strong>: los tests de contrato siguen verdes · pasan <code>test_cancelar.py</code> y <code>test_consultar.py</code> · <code>lint-imports</code> pasa.</p>
+            </div>
+            <div>
+              <span class="archivo">tests/test_cancelar.py · hoy falla (no existe el caso de uso)</span>
+              <pre class="chico"><code class="python" data-incluir="ejercicio-cancelar-consultar:backend/activities/tests/test_cancelar.py" data-lineas="37-43">    def test_libera_el_cupo(self):
+        self.repositorio.crear_inscripcion(self.ada.id, self.actividad.id)
+
+        self.cancelar.ejecutar(self.ada, self.actividad.id)
+
+        actividad = self.repositorio.obtener_actividad(self.actividad.id)
+        self.assertEqual(actividad.inscriptos, 0)</code></pre>
+              <p class="chico muted" style="margin: 0.3em 0 0">La consigna completa (con pistas y preguntas) está en <code>EJERCICIO.md</code>. <strong>Fecha y entrega:</strong> las define el docente en el aula virtual.</p>
+            </div>
+          </div>
+          <aside class="notes">
+            La consigna aplica todo el patrón a dos operaciones que todavía usan el ORM desde la vista: cancelar y
+            consultar mis inscripciones. La rama ejercicio-cancelar-consultar sale de e14 e incluye EJERCICIO.md (con
+            pistas) y tests que fallan a propósito (hoy dos módulos de test dan error de importación porque faltan
+            application/cancelar.py y application/consultar.py). Los tests están escritos contra el repositorio en
+            memoria, así que corren sin base. Criterios: los tests de contrato siguen verdes, los nuevos pasan y
+            lint-imports pasa. Preguntas para la entrega: qué métodos agregaste al puerto y por qué, dónde quedó la
+            transacción de Cancelar, y si vale la pena llevar GET /activities a un caso de uso (argumentar con los
+            costos y beneficios de 10.5). La solución de referencia está en solucion-cancelar-consultar, para publicar
+            después de la entrega. La fecha de entrega la completa el docente.
+          </aside>
+        </section>
+
       </div>
     </div>
 
@@ -1448,6 +3102,14 @@ OK</div></div>
       <img src="assets/logo-untdf.svg" alt="UNTDF" />
       <span class="seccion-actual"></span>
     </footer>
+
+    <script type="application/json" id="preguntas">
+      {
+        "p1": { "texto": "¿Cómo pruebo la <strong>regla de cupo</strong> sin levantar HTTP, base de datos ni SMTP?", "resuelve": "e05 (parcial) → e12" },
+        "p2": { "texto": "Si mañana el correo sale por una <strong>API</strong> (o por WhatsApp), ¿qué código tengo que tocar?", "resuelve": "e07 → e09" },
+        "p3": { "texto": "Si quiero inscribir desde la <strong>terminal</strong> (o desde un script de carga), ¿reescribo la lógica?", "resuelve": "e13" }
+      }
+    </script>
 
     <div id="grafos" hidden>
       <script type="application/json" data-grafo="e01">{
@@ -4159,13 +5821,13 @@ OK</div></div>
       const ESTADO = { no: '☐', parcial: '◐', si: '☑' }
 
       function pintarMinimapa(el, datos) {
-        const actual = RAMAS.indexOf(datos.rama)
+        const actual = RAMAS.indexOf(datos.base || datos.rama) // las ramas opcionales salen de `data-base`
         const puntos = RAMAS.map(
           (r, i) => `<i class="${i === actual ? 'actual' : i < actual ? 'pasada' : ''}" title="${r}"></i>`,
         ).join('')
         const preguntas = datos.p1
           ? `<div class="mm-preguntas">${['p1', 'p2', 'p3']
-              .map((p) => `<span data-estado="${datos[p] || 'no'}">${p.toUpperCase()} ${ESTADO[datos[p] || 'no']}</span>`)
+              .map((p) => `<span data-p="${p}" data-estado="${datos[p] || 'no'}" role="button" title="Clic: ver la pregunta completa">${p.toUpperCase()} ${ESTADO[datos[p] || 'no']}</span>`)
               .join('')}</div>`
           : ''
         const contrato = datos.contrato === 'si' ? '<div class="mm-contrato">contrato ✔</div>' : ''
@@ -4503,6 +6165,677 @@ OK</div></div>
           }
           mostrar(rango.indexOf(actual))
         })
+      })()
+
+      // Minimapa: clic en P1/P2/P3 → popover con la pregunta completa (texto único en #preguntas)
+      const PREGUNTAS = JSON.parse(document.getElementById('preguntas').textContent)
+      ;(function () {
+        const ESTADO_TEXTO = { no: '☐ abierta', parcial: '◐ a medias', si: '☑ resuelta' }
+        const pop = document.createElement('div')
+        pop.id = 'pregunta-pop'
+        pop.className = 'pregunta-pop'
+        pop.hidden = true
+        pop.setAttribute('role', 'dialog')
+        document.body.appendChild(pop)
+        let abierta = null // { p, origen }
+
+        function cerrar() {
+          pop.hidden = true
+          abierta = null
+        }
+
+        function abrir(span) {
+          const p = span.dataset.p
+          const mm = span.closest('.minimapa')
+          const estado = span.dataset.estado
+          const d = PREGUNTAS[p]
+          pop.innerHTML =
+            `<div class="pp-cab"><b>${p.toUpperCase()}</b> <span class="pp-estado" data-estado="${estado}">${ESTADO_TEXTO[estado]}</span></div>` +
+            `<div class="pp-texto">${d.texto}</div>` +
+            `<div class="pp-donde">Se resuelve en: <b>${d.resuelve}</b></div>` +
+            '<div class="pp-pie">clic o Esc para cerrar</div>'
+          const r = mm.getBoundingClientRect()
+          pop.style.top = r.bottom + 8 + 'px'
+          pop.style.right = Math.max(8, window.innerWidth - r.right) + 'px'
+          pop.hidden = false
+          abierta = { p, mm }
+        }
+
+        document.addEventListener(
+          'click',
+          (e) => {
+            const span = e.target.closest('.mm-preguntas span[data-p]')
+            if (span) {
+              e.stopPropagation()
+              const mismo = abierta && abierta.p === span.dataset.p && abierta.mm === span.closest('.minimapa')
+              if (mismo) cerrar()
+              else abrir(span)
+              return
+            }
+            if (abierta) cerrar()
+          },
+          true,
+        )
+        // Esc cierra el popover sin que reveal abra la vista general
+        window.addEventListener(
+          'keydown',
+          (e) => {
+            if (e.key === 'Escape' && abierta) {
+              e.preventDefault()
+              e.stopImmediatePropagation()
+              cerrar()
+            }
+          },
+          true,
+        )
+        Reveal.on('slidechanged', cerrar)
+        window.__cerrarPreguntaPop = cerrar
+      })()
+
+      // Tarjetas de 1.7: salen de la misma fuente de texto que el popover
+      document.querySelectorAll('[data-pregunta]').forEach((t) => {
+        t.innerHTML = PREGUNTAS[t.dataset.pregunta].texto
+      })
+
+      // H2 · Explorador del destino (reutilizable: <div class="h2" data-hecho-hasta="e06"> · sin atributo = todo hecho)
+      ;(function () {
+        const SVGNS = 'http://www.w3.org/2000/svg'
+        const PREFIJO = 'backend/activities/'
+        const grafo = JSON.parse(document.querySelector('#grafos script[data-grafo="e14"]').textContent)
+        const porRuta = {}
+        grafo.nodos.forEach((n) => { if (n.ruta) porRuta[n.ruta.slice(PREFIJO.length)] = n })
+        const importaA = {}
+        grafo.aristas.forEach((a) => { (importaA[a.from] = importaA[a.from] || []).push(a.to) })
+        const NOMBRE_CAPA = {
+          presentacion: 'presentación', aplicacion: 'aplicación', dominio: 'dominio', puerto: 'puertos',
+          infraestructura: 'infraestructura', composicion: 'composición', tests: 'tests',
+        }
+
+        // archivo (ruta relativa a backend/activities) → piezas del hexágono
+        const MAPA = [
+          [/^application\/(inscribir|dto)\.py$/, ['app']],
+          [/^application\/puertos\.py$/, ['notificar', 'persistir']],
+          [/^domain\//, ['dominio']],
+          [/^presentation\//, ['http']],
+          [/^management\/commands\/inscribir\.py$/, ['cli']],
+          [/^tests\//, ['tests']],
+          [/^infrastructure\/notificaciones\//, ['correo']],
+          [/^infrastructure\/db\//, ['orm']],
+          [/^models\.py$/, ['orm']],
+          [/^composition\.py$/, ['composicion']],
+        ]
+        // modo "rol": colorea por rol en el hexágono (interior / puerto / entrada / salida / composición)
+        const ROL = {
+          app: 'aplicacion', dominio: 'aplicacion', notificar: 'puerto', persistir: 'puerto', http: 'presentacion', grpc: 'presentacion',
+          cli: 'presentacion', tests: 'presentacion', correo: 'infraestructura', orm: 'infraestructura', composicion: 'composicion',
+        }
+        const NOMBRE_ROL = {
+          aplicacion: 'interior', puerto: 'puerto', presentacion: 'adaptador de entrada', infraestructura: 'adaptador de salida', composicion: 'composición',
+        }
+        const piezasDe = (ruta) => (MAPA.find(([re]) => re.test(ruta)) || [null, []])[1]
+
+        // piezas del hexágono (mismas coordenadas y colores que el hexágono de 0.3, más la composición)
+        const ELEMS = [
+          { id: 'http', x: 6, y: 102, w: 84, h: 36, capa: 'presentacion', t: ['HTTP'], desc: 'Adaptador de entrada HTTP: request → caso de uso → response.' },
+          { id: 'grpc', x: 6, y: 162, w: 84, h: 36, capa: 'presentacion', t: ['gRPC'], estatico: true, opc: true, desc: 'gRPC es otro adaptador de entrada posible. No hay archivo en e14: vive en la rama opcional opcional-entrada-grpc.' },
+          { id: 'cli', x: 6, y: 222, w: 84, h: 36, capa: 'presentacion', t: ['CLI'], desc: 'Adaptador de entrada por consola: manage.py inscribir.' },
+          { id: 'tests', x: 6, y: 282, w: 84, h: 36, capa: 'tests', t: ['Tests'], desc: 'Los tests también son una entrada: activan el interior sin HTTP ni base.' },
+          { id: 'app', x: 190, y: 125, w: 150, h: 62, capa: 'aplicacion', t: ['Inscribir'], desc: 'Caso de uso: coordina los pasos y habla con los puertos.' },
+          { id: 'dominio', x: 190, y: 210, w: 150, h: 56, capa: 'dominio', t: ['dominio'], desc: 'Entidades, reglas y errores del negocio. No importa nada de afuera.' },
+          { id: 'notificar', x: 352, y: 116, w: 82, h: 28, rx: 14, capa: 'puerto', t: ['Notificar'], chico: true, desc: 'Puerto de salida Notificador: qué necesita la aplicación para avisar.' },
+          { id: 'persistir', x: 352, y: 276, w: 82, h: 28, rx: 14, capa: 'puerto', t: ['Persistir'], chico: true, desc: 'Puerto de salida RepositorioInscripciones: qué necesita la aplicación para guardar.' },
+          { id: 'correo', x: 462, y: 100, w: 114, h: 60, capa: 'infraestructura', t: ['SMTP', 'Memoria · Fallo'], chico: true, desc: 'Adaptadores de salida de notificación: SMTP (Mailpit), memoria y fallo.' },
+          { id: 'orm', x: 462, y: 266, w: 114, h: 40, capa: 'infraestructura', t: ['ORM'], desc: 'Adaptador de salida de persistencia: el repositorio Django y los modelos del ORM.' },
+          { id: 'composicion', x: 190, y: 382, w: 150, h: 30, capa: 'composicion', t: ['composition.py'], chico: true, desc: 'Composición: el único lugar que conoce todas las implementaciones.' },
+        ]
+        const COLOR = {
+          presentacion: '#7b5ea7', aplicacion: '#2f6db5', dominio: '#2e8b57', puerto: '#be1c1d',
+          infraestructura: '#6f6f6e', composicion: '#c98a1b', tests: '#1d8a99',
+        }
+        const el = (n, attrs, texto) => {
+          const e = document.createElementNS(SVGNS, n)
+          for (const k in attrs) e.setAttribute(k, attrs[k])
+          if (texto !== undefined) e.textContent = texto
+          return e
+        }
+        const bordeHacia = (a, b) => {
+          // punto del borde de `a` sobre la recta al centro de `b`
+          const ax = a.x + a.w / 2, ay = a.y + a.h / 2, bx = b.x + b.w / 2, by = b.y + b.h / 2
+          const dx = bx - ax, dy = by - ay
+          const t = 1 / Math.max(Math.abs(dx) / (a.w / 2 + 3), Math.abs(dy) / (a.h / 2 + 3), 1e-6)
+          return [ax + dx * t, ay + dy * t]
+        }
+
+        document.querySelectorAll('.h2').forEach((raiz, indice) => {
+          const hechoHasta = raiz.dataset.hechoHasta
+          const rolMode = raiz.dataset.colorear === 'rol'
+          const capaVista = (idPieza, capa) => (rolMode && ROL[idPieza] ? ROL[idPieza] : capa)
+          const nombreCapa = (c) => (rolMode ? NOMBRE_ROL[c] : NOMBRE_CAPA[c]) || c
+          const arbolEl = raiz.querySelector('.h2-arbol .arbol')
+          const hechos = new Set()
+          if (hechoHasta) {
+            raiz.querySelectorAll('.h2-previo .hoja').forEach((li) => hechos.add(rutaDe(li)))
+          }
+
+          function rutaDe(li) {
+            const partes = [li.querySelector(':scope > .nombre').textContent]
+            for (let p = li.parentElement.closest('li.dir'); p; p = p.parentElement.closest('li.dir')) {
+              partes.unshift(p.querySelector(':scope > .nombre').textContent.replace(/\/$/, ''))
+            }
+            return partes.join('/')
+          }
+
+          // hojas del árbol
+          const hojas = [...arbolEl.querySelectorAll('li.hoja')].map((li) => {
+            const ruta = rutaDe(li)
+            return { li, ruta, piezas: piezasDe(ruta), hecho: !hechoHasta || hechos.has(ruta) }
+          })
+          hojas.forEach((h) => {
+            h.li.dataset.ruta = h.ruta
+            if (!h.hecho) h.li.classList.add('pend')
+            if (rolMode && h.piezas.length) {
+              h.li.className = h.li.className.replace(/capa-\w+/g, '').trim() + ' capa-' + ROL[h.piezas[0]]
+            }
+          })
+
+          // hexágono
+          const contenedor = raiz.querySelector('.h2-hex')
+          const svg = el('svg', { viewBox: '0 0 580 430', role: 'img', 'aria-label': 'Hexágono con nuestros componentes' })
+          const defs = el('defs', {})
+          const marca = el('marker', { id: `h2-punta-${indice}`, viewBox: '0 0 10 10', refX: 8, refY: 5, markerWidth: 7, markerHeight: 7, orient: 'auto' })
+          marca.appendChild(el('path', { d: 'M0,0 L10,5 L0,10 z', fill: '#2f6db5' }))
+          const marcaRoja = el('marker', { id: `h2-punta-roja-${indice}`, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 8, markerHeight: 8, orient: 'auto' })
+          marcaRoja.appendChild(el('path', { d: 'M0,0 L10,5 L0,10 z', fill: '#be1c1d' }))
+          defs.append(marca, marcaRoja)
+          svg.appendChild(defs)
+          svg.appendChild(el('polygon', { class: 'borde', points: '190,50 350,50 430,210 350,370 190,370 110,210' }))
+          svg.appendChild(el('text', { class: 'rotulo', x: 265, y: 85 }, 'interior: aplicación + dominio'))
+          svg.appendChild(el('text', { class: 'rotulo', x: 48, y: 95 }, 'entradas'))
+          svg.appendChild(el('text', { class: 'rotulo', x: 519, y: 85 }, 'salidas'))
+          ;[[90, 120, 150, 120], [90, 180, 120, 180], [90, 240, 120, 240], [90, 300, 150, 300], [434, 130, 462, 130], [434, 290, 462, 290]].forEach(([x1, y1, x2, y2]) =>
+            svg.appendChild(el('line', { class: 'flecha-azul', x1, y1, x2, y2, style: `marker-end:url(#h2-punta-${indice})` })),
+          )
+          const capaDeps = el('g', {})
+          svg.appendChild(capaDeps)
+          const piezas = {}
+          ELEMS.forEach((e) => {
+            const g = el('g', { class: 'h2-el' + (e.estatico ? ' estatico' : ''), 'data-el': e.id })
+            g.appendChild(el('rect', { x: e.x, y: e.y, width: e.w, height: e.h, rx: e.rx || 8, fill: COLOR[capaVista(e.id, e.capa)] }))
+            const cx = e.x + e.w / 2, cy = e.y + e.h / 2
+            if (e.t.length === 1) g.appendChild(el('text', { x: cx, y: cy + 5, style: e.chico ? 'font-size:13px' : '' }, e.t[0]))
+            else e.t.forEach((linea, i) => g.appendChild(el('text', { x: cx, y: cy - 4 + i * 20, style: 'font-size:13px' }, linea)))
+            if (e.opc) g.appendChild(el('text', { class: 'opc', x: cx, y: e.y + e.h + 12, style: 'fill:#6f6f6e' }, 'rama opcional'))
+            svg.appendChild(g)
+            piezas[e.id] = { ...e, g }
+          })
+          contenedor.appendChild(svg)
+
+          // una pieza está "hecha" si algún archivo suyo existe en la etapa de referencia
+          Object.values(piezas).forEach((p) => {
+            if (p.estatico) return
+            const archivos = hojas.filter((h) => h.piezas.includes(p.id))
+            if (hechoHasta && !archivos.some((h) => h.hecho)) p.g.classList.add('pend')
+          })
+
+          const info = raiz.querySelector('.h2-info')
+          const AYUDA = info.innerHTML
+
+          function limpiar() {
+            hojas.forEach((h) => h.li.classList.remove('sel', 'rel'))
+            Object.values(piezas).forEach((p) => p.g.classList.remove('sel', 'rel'))
+            capaDeps.textContent = ''
+          }
+
+          // destino de un import → pieza del hexágono
+          function piezaDeNodo(id) {
+            if (id === 'ORM') return ['orm']
+            if (id === 'SMTP') return ['correo']
+            const n = grafo.nodos.find((x) => x.id === id)
+            return n && n.ruta ? piezasDe(n.ruta.slice(PREFIJO.length)) : []
+          }
+          const nombreCorto = (id) => id.replace('activities.', '')
+
+          function mostrar(seleccion, titulo, capa, descripcion, piezasSel) {
+            limpiar()
+            seleccion.forEach((h) => h.li.classList.add('sel'))
+            piezasSel.forEach((id) => piezas[id] && piezas[id].g.classList.add('sel'))
+
+            // imports de los archivos elegidos (del grafo de e14)
+            const destinos = new Map()
+            seleccion.forEach((h) => {
+              const nodo = porRuta[h.ruta]
+              if (!nodo) return
+              ;(importaA[nodo.id] || []).forEach((d) => { if (d !== nodo.id) destinos.set(d, true) })
+            })
+            const lista = [...destinos.keys()].filter((d) => !seleccion.some((h) => porRuta[h.ruta] && porRuta[h.ruta].id === d))
+            const chips = lista.map((d) => {
+              const n = grafo.nodos.find((x) => x.id === d)
+              const c = n && n.capa && n.capa !== 'externo' ? n.capa : ''
+              const etiqueta = d === 'ORM' ? 'ORM (django.db)' : d === 'SMTP' ? 'SMTP (django.core.mail)' : nombreCorto(d)
+              return `<span class="imp ${c ? 'capa-' + c : ''}">${etiqueta}</span>`
+            })
+            // flechas rojas hacia las piezas importadas
+            const relPiezas = new Set()
+            lista.forEach((d) => piezaDeNodo(d).forEach((id) => { if (!piezasSel.includes(id)) relPiezas.add(id) }))
+            relPiezas.forEach((id) => {
+              if (!piezas[id]) return
+              piezas[id].g.classList.add('rel')
+              const origen = piezas[piezasSel[0]]
+              if (!origen) return
+              const [x1, y1] = bordeHacia(origen, piezas[id])
+              const [x2, y2] = bordeHacia(piezas[id], origen)
+              capaDeps.appendChild(el('path', { class: 'h2-dep', d: `M${x1},${y1} L${x2},${y2}`, 'marker-end': `url(#h2-punta-roja-${indice})` }))
+            })
+            hojas.forEach((h) => {
+              const n = porRuta[h.ruta]
+              if (n && lista.includes(n.id)) h.li.classList.add('rel')
+            })
+
+            const aviso = !seleccion.some((h) => porRuta[h.ruta])
+              ? 'Este archivo no está en el grafo de imports (tests y archivos de Django que no son parte del hexágono).'
+              : chips.length ? '' : 'No importa a ningún otro módulo de la app.'
+            info.style.setProperty('--capa', capa ? COLOR[capa] : '#ccc')
+            info.innerHTML =
+              `<div><span class="ruta">${titulo}</span>${capa ? `<span class="chip-capa capa-${capa}">${nombreCapa(capa)}</span>` : ''}</div>` +
+              `<div>${descripcion}</div>` +
+              (chips.length ? `<div><span class="dep">importa →</span> ${chips.join('')}</div>` : `<div class="muted">${aviso}</div>`)
+          }
+
+          const DESC_FRAMEWORK = 'Django lo busca acá: es del framework, no forma parte del hexágono.'
+
+          function elegirArchivo(h) {
+            const piezasSel = h.piezas
+            const nodo = porRuta[h.ruta]
+            const capa = rolMode && piezasSel.length ? ROL[piezasSel[0]] : nodo ? nodo.capa : h.li.className.match(/capa-(\w+)/)?.[1] || ''
+            const desc = piezasSel.length ? piezas[piezasSel[0]].desc : DESC_FRAMEWORK
+            const pendiente = !h.hecho ? ' <b style="color:#be1c1d">Todavía no existe en ' + hechoHasta + '.</b>' : ''
+            mostrar([h], h.ruta, capa, desc + pendiente, piezasSel)
+          }
+
+          function elegirPieza(id) {
+            const p = piezas[id]
+            if (p.estatico) {
+              limpiar()
+              p.g.classList.add('sel')
+              const cv = capaVista(p.id, p.capa)
+              info.style.setProperty('--capa', COLOR[cv])
+              info.innerHTML = `<div><span class="ruta">${p.t[0]}</span><span class="chip-capa capa-${cv}">${nombreCapa(cv)}</span></div><div>${p.desc}</div>`
+              return
+            }
+            const archivos = hojas.filter((h) => h.piezas.includes(id))
+            const sel = archivos
+            mostrar(sel, p.t.join(' · ') + ` · ${archivos.length} archivo${archivos.length === 1 ? '' : 's'}`, capaVista(id, p.capa), p.desc, [id])
+          }
+
+          raiz.addEventListener('click', (e) => {
+            e.stopPropagation()
+            const li = e.target.closest('li.hoja')
+            const g = e.target.closest('.h2-el')
+            if (li && arbolEl.contains(li)) elegirArchivo(hojas.find((h) => h.li === li))
+            else if (g) elegirPieza(g.dataset.el)
+            else if (!e.target.closest('a')) { limpiar(); info.innerHTML = AYUDA; info.style.removeProperty('--capa') }
+          })
+        })
+      })()
+
+      // H3 · Llamadas vs. dependencias (reutilizable: <div class="h3" data-etapa="e07|e14" [data-sin-selector]>)
+      ;(function () {
+        const SVGNS = 'http://www.w3.org/2000/svg'
+        const el = (n, attrs, texto) => {
+          const e = document.createElementNS(SVGNS, n)
+          for (const k in attrs) e.setAttribute(k, attrs[k])
+          if (texto !== undefined) e.textContent = texto
+          return e
+        }
+        const COLOR = {
+          presentacion: '#7b5ea7', aplicacion: '#2f6db5', dominio: '#2e8b57', puerto: '#be1c1d',
+          infraestructura: '#6f6f6e', composicion: '#c98a1b', externo: '#3b3b3b',
+        }
+        // nodos comunes; `en` = etapas donde aparecen
+        const NODOS = {
+          entrada: { x: 10, y: 130, w: 130, h: 70, capa: 'presentacion', t: [''] },
+          composicion: { x: 215, y: 4, w: 140, h: 30, capa: 'composicion', t: ['composition.py'], en: ['e14'] },
+          inscribir: { x: 215, y: 110, w: 140, h: 66, capa: 'aplicacion', t: ['Inscribir'] },
+          reglas: { x: 215, y: 250, w: 140, h: 50, capa: 'dominio', t: ['dominio', 'exigir_cupo()'] },
+          repo: { x: 380, y: 100, w: 106, h: 30, capa: 'puerto', t: ['Repositorio'], en: ['e14'], rx: 15 },
+          notif: { x: 380, y: 300, w: 106, h: 30, capa: 'puerto', t: ['Notificador'], rx: 15 },
+          repodjango: { x: 530, y: 95, w: 130, h: 40, capa: 'infraestructura', t: ['RepositorioDjango'], en: ['e14'] },
+          smtp: { x: 530, y: 295, w: 130, h: 40, capa: 'infraestructura', t: ['NotificadorSMTP'] },
+          orm: { x: 690, y: 95, w: 110, h: 40, capa: 'externo', t: ['ORM · Postgres'] },
+          correo: { x: 690, y: 295, w: 110, h: 40, capa: 'externo', t: ['SMTP · Mailpit'] },
+        }
+        const ENTRADAS = {
+          http: { t: ['views.py', 'put()'], pie: 'presentation/http', pedido: 'PUT /me/enrollments/{id}', respuesta: '201 Created (200 si ya estaba)', paso1: 'La vista pide el caso de uso ya armado: <code>construir_inscribir()</code>.' },
+          cli: { t: ['inscribir.py', 'comando'], pie: 'management/commands', pedido: 'manage.py inscribir ada &lt;uuid&gt;', respuesta: '«Inscripción creada.» · exit 0', paso1: 'El comando pide el mismo caso de uso: <code>construir_inscribir()</code>.' },
+          grpc: { t: ['servicio.py', 'Inscribir() · opcional'], pie: 'presentation/grpc', pedido: 'InscribirRequest + JWT en la metadata', respuesta: 'InscribirResponse(creada=true)', paso1: 'El servicio gRPC pide el mismo caso de uso: <code>construir_inscribir()</code>.' },
+        }
+        // Cada llamada: pasos en los que se dibuja. d = trazo en coordenadas del svg.
+        const ETAPAS = {
+          e14: {
+            pasos: [
+              () => (E.paso1),
+              'Llama a <code>Inscribir.ejecutar(participante, actividad_id)</code>: lo único que sabe la entrada.',
+              'Pide la actividad y busca la inscripción por el <b>puerto</b> <code>Repositorio</code>; el adaptador usa el ORM (<code>select_for_update</code>).',
+              'Aplica la regla del dominio: <code>exigir_cupo(actividad)</code>.',
+              'Crea la inscripción por el mismo puerto.',
+              'Avisa por el <b>puerto</b> <code>Notificador</code>; el adaptador habla SMTP (<code>NOTIFICADOR=smtp</code>).',
+              () => `Devuelve <code>ResultadoInscripcion</code>; la entrada lo traduce: <b>${E.respuesta}</b>.`,
+            ],
+            llamadas: [
+              { id: 'c1', pasos: [1], d: 'M75,130 V19 H215', etq: 'construir_inscribir()', ex: 78, ey: 14 },
+              { id: 'c2', pasos: [2], d: 'M140,150 H215', etq: 'ejecutar()', ex: 177, ey: 144 },
+              { id: 'c3a', pasos: [3, 5], d: 'M355,128 C368,128 368,115 380,115' },
+              { id: 'c3b', pasos: [3, 5], d: 'M486,115 H530' },
+              { id: 'c3c', pasos: [3, 5], d: 'M660,115 H690', etq: 'SQL', ex: 675, ey: 108 },
+              { id: 'c4', pasos: [4], d: 'M285,176 V250', etq: 'exigir_cupo()', ex: 340, ey: 215 },
+              { id: 'c6a', pasos: [6], d: 'M355,160 C372,200 372,300 380,312' },
+              { id: 'c6b', pasos: [6], d: 'M486,311 H530' },
+              { id: 'c6c', pasos: [6], d: 'M660,311 H690', etq: 'SMTP', ex: 675, ey: 304 },
+              { id: 'c7', pasos: [7], d: 'M215,178 H140', retorno: true, etq: 'resultado', ex: 177, ey: 192 },
+            ],
+            deps: [
+              { d: 'M50,130 V12 H215', etq: 'importa', ex: 120, ey: 9 },
+              { d: 'M285,34 V110' },
+              { d: 'M355,19 L590,95' },
+              { d: 'M355,24 L590,295' },
+              { d: 'M355,140 L380,122' },
+              { d: 'M355,152 C365,200 365,290 380,306' },
+              { d: 'M530,326 H486', inversa: true, etq: 'importa el contrato', ex: 508, ey: 352 },
+              { d: 'M560,135 L355,268', etq: 'importa entidades', ex: 470, ey: 205 },
+              { d: 'M660,125 H690' },
+              { d: 'M660,321 H690' },
+              { d: 'M355,170 C395,230 395,255 355,268' },
+            ],
+            notaDeps: () =>
+              'Las flechas rojas apuntan <b>hacia el interior</b>: los adaptadores importan el contrato (Notificador) y el dominio; el interior no importa ningún mecanismo.' +
+              (E === ENTRADAS.http ? ' <small>(La vista todavía importa el ORM para <code>GET</code> y <code>DELETE</code>: es el ejercicio 14.4. La ruta del <code>PUT</code> no lo usa.)</small>' : ''),
+            ocultar: [],
+          },
+          e07: {
+            pasos: [
+              'La vista arma <code>Inscribir(notificador=NotificadorSMTP())</code> y llama a <code>ejecutar(participante, actividad_id)</code>.',
+              '<code>Inscribir</code> lee la actividad y busca la inscripción: todavía usa el <b>ORM directo</b>.',
+              'Aplica la regla del dominio: <code>exigir_cupo(...)</code>.',
+              'Crea la inscripción con el ORM.',
+              'Avisa por el <b>puerto</b> <code>Notificador</code>; el adaptador habla SMTP.',
+              () => `Devuelve <code>ResultadoInscripcion</code>; la vista responde <b>${E.respuesta}</b>.`,
+            ],
+            llamadas: [
+              { id: 'c1', pasos: [1], d: 'M140,150 H215', etq: 'ejecutar()', ex: 177, ey: 144 },
+              { id: 'c2', pasos: [2, 4], d: 'M355,125 C500,125 560,115 690,115', etq: 'ORM', ex: 560, ey: 104 },
+              { id: 'c3', pasos: [3], d: 'M285,176 V250', etq: 'exigir_cupo()', ex: 340, ey: 215 },
+              { id: 'c5a', pasos: [5], d: 'M355,160 C372,200 372,300 380,312' },
+              { id: 'c5b', pasos: [5], d: 'M486,311 H530' },
+              { id: 'c5c', pasos: [5], d: 'M660,311 H690', etq: 'SMTP', ex: 675, ey: 304 },
+              { id: 'c6', pasos: [6], d: 'M215,178 H140', retorno: true, etq: 'resultado', ex: 177, ey: 192 },
+            ],
+            deps: [
+              { d: 'M140,168 H215', etq: 'importa Inscribir', ex: 150, ey: 164 },
+              { d: 'M75,200 V395 H595 V335', etq: 'arma el adaptador', ex: 330, ey: 410 },
+              { d: 'M355,140 C500,150 560,130 690,125', etq: 'todavía directa', ex: 560, ey: 150 },
+              { d: 'M355,152 C365,200 365,290 380,306' },
+              { d: 'M530,326 H486', inversa: true, etq: 'importa el contrato', ex: 508, ey: 352 },
+              { d: 'M355,170 C395,230 395,255 355,268' },
+              { d: 'M660,321 H690' },
+            ],
+            notaDeps: () =>
+              'La <b>llamada</b> va de <code>Inscribir</code> a SMTP (derecha); la <b>dependencia</b> de código del adaptador apunta <b>al contrato</b> (izquierda): se invirtió. Queda una flecha roja larga: <code>Inscribir</code> → ORM (bloque 10).',
+            ocultar: ['composicion', 'repo', 'repodjango'],
+          },
+        }
+        let E = ENTRADAS.http // entrada elegida (la usan los textos dinámicos)
+
+        document.querySelectorAll('.h3').forEach((raiz) => {
+          const etapa = ETAPAS[raiz.dataset.etapa || 'e14']
+          const conSelector = !raiz.hasAttribute('data-sin-selector')
+          let entrada = 'http'
+          let paso = 0
+          let reproduciendo = null
+
+          raiz.innerHTML = `
+            <div class="h3-barra">
+              ${conSelector ? `<span>Entrada:</span>
+              <button type="button" class="chip activo" data-h3-entrada="http">HTTP</button>
+              <button type="button" class="chip" data-h3-entrada="cli">CLI</button>
+              <button type="button" class="chip" data-h3-entrada="grpc">gRPC <small>rama opcional</small></button>
+              <span class="sep"></span>` : ''}
+              <button type="button" class="sec" data-h3="ant" aria-label="paso anterior">◀</button>
+              <button type="button" data-h3="sig">Paso ▶</button>
+              <button type="button" class="sec" data-h3="play">▶▶ Reproducir</button>
+              <button type="button" class="sec" data-h3="reiniciar">↺</button>
+              <span class="sep"></span>
+              <label><input type="checkbox" data-h3="deps" /> Mostrar dependencias de código</label>
+            </div>
+            <div class="h3-cuerpo">
+              <svg class="h3-svg" viewBox="0 0 820 430" role="img" aria-label="Una petición recorriendo el hexágono"></svg>
+              <div class="h3-lateral"><ol data-h3="pasos"></ol><div class="h3-nota" data-h3="nota"></div></div>
+            </div>
+            <div class="h3-leyenda">
+              <span><svg width="40" height="10"><line x1="0" y1="5" x2="40" y2="5" stroke="#2f6db5" stroke-width="3.5" /></svg> llamada en ejecución (quién le pide qué a quién)</span>
+              <span><svg width="40" height="10"><line x1="0" y1="5" x2="40" y2="5" stroke="#be1c1d" stroke-width="2.4" stroke-dasharray="6 4" /></svg> dependencia de código (quién importa a quién)</span>
+            </div>`
+          const svg = raiz.querySelector('svg')
+          const lista = raiz.querySelector('[data-h3="pasos"]')
+          const nota = raiz.querySelector('[data-h3="nota"]')
+          const ocultos = etapa.ocultar
+          const visible = (id) => !ocultos.includes(id) && !(NODOS[id].en && !NODOS[id].en.includes(raiz.dataset.etapa || 'e14'))
+
+          const defs = el('defs', {})
+          ;[['azul', '#2f6db5'], ['rojo', '#be1c1d']].forEach(([n, c]) => {
+            const m = el('marker', { id: `h3-${n}-${raiz.dataset.etapa || 'e14'}`, viewBox: '0 0 10 10', refX: 9, refY: 5, markerWidth: 8, markerHeight: 8, markerUnits: 'userSpaceOnUse', orient: 'auto' })
+            m.appendChild(el('path', { d: 'M0,0 L10,5 L0,10 z', fill: c }))
+            defs.appendChild(m)
+          })
+          svg.appendChild(defs)
+          const idm = (n) => `url(#h3-${n}-${raiz.dataset.etapa || 'e14'})`
+          svg.appendChild(el('polygon', { class: 'borde', points: '200,48 370,48 410,210 370,372 200,372 160,210' }))
+          svg.appendChild(el('text', { class: 'rot', x: 285, y: 66 }, 'interior'))
+
+          const capaDeps = el('g', {})
+          svg.appendChild(capaDeps)
+          etapa.deps.forEach((d) => {
+            capaDeps.appendChild(el('path', { class: 'dep' + (d.inversa ? ' inversa' : ''), d: d.d, 'marker-end': idm('rojo') }))
+            if (d.etq) capaDeps.appendChild(el('text', { class: 'etq-dep', x: d.ex, y: d.ey }, d.etq))
+          })
+          const nodos = {}
+          Object.entries(NODOS).forEach(([id, n]) => {
+            if (!visible(id)) return
+            const g = el('g', { class: 'nodo' })
+            g.appendChild(el('rect', { x: n.x, y: n.y, width: n.w, height: n.h, rx: n.rx || 8, fill: COLOR[n.capa] }))
+            nodos[id] = { n, g, textos: [] }
+            const cx = n.x + n.w / 2, cy = n.y + n.h / 2
+            n.t.forEach((linea, i) => {
+              const t = el('text', { x: cx, y: n.t.length === 1 ? cy + 4 : cy - 3 + i * 15, style: i ? 'font-size:10.5px;font-weight:600' : '' }, linea)
+              g.appendChild(t)
+              nodos[id].textos.push(t)
+            })
+            svg.appendChild(g)
+          })
+          const capaLlamadas = el('g', {})
+          svg.appendChild(capaLlamadas)
+          const llamadas = etapa.llamadas.map((c) => {
+            const p = el('path', { class: 'llamada' + (c.retorno ? ' retorno' : ''), d: c.d, pathLength: 1, 'marker-end': idm('azul') })
+            capaLlamadas.appendChild(p)
+            let t = null
+            if (c.etq) { t = el('text', { class: 'etq etq-llamada', x: c.ex, y: c.ey }, c.etq); capaLlamadas.appendChild(t) }
+            return { ...c, p, t }
+          })
+          const pie = el('text', { class: 'rot', x: 75, y: 217 }, '')
+          svg.appendChild(pie)
+
+          const textoPaso = (i) => (typeof etapa.pasos[i] === 'function' ? etapa.pasos[i]() : etapa.pasos[i])
+
+          function dibujarEntrada() {
+            E = ENTRADAS[entrada]
+            const n = nodos.entrada
+            n.textos[0].textContent = E.t[0]
+            if (!n.textos[1]) {
+              const t = el('text', { x: n.n.x + n.n.w / 2, y: n.n.y + n.n.h / 2 + 12, style: 'font-size:10.5px;font-weight:600' }, '')
+              n.g.appendChild(t); n.textos.push(t)
+              n.textos[0].setAttribute('y', n.n.y + n.n.h / 2 - 3)
+            }
+            n.textos[1].textContent = E.t[1]
+            pie.textContent = E.pie
+            pie.setAttribute('x', n.n.x + n.n.w / 2)
+            pie.setAttribute('y', n.n.y + n.n.h + 14)
+          }
+
+          function renderPasos() {
+            lista.innerHTML = ''
+            etapa.pasos.forEach((_, i) => {
+              const li = document.createElement('li')
+              li.innerHTML = textoPaso(i)
+              li.className = i + 1 < paso ? 'hecho' : i + 1 === paso ? 'actual' : ''
+              lista.appendChild(li)
+            })
+          }
+
+          function aplicar() {
+            llamadas.forEach((c) => {
+              const actual = c.pasos.includes(paso)
+              const hecho = !actual && c.pasos.some((p) => p < paso)
+              const era = c.p.classList.contains('actual')
+              c.p.classList.toggle('hecho', hecho)
+              c.p.classList.toggle('actual', actual)
+              if (actual && !era) { c.p.style.animation = 'none'; void c.p.getBoundingClientRect(); c.p.style.animation = '' }
+              if (c.t) c.t.classList.toggle('actual', actual)
+            })
+            const pedidoEl = nodos.entrada.g
+            pedidoEl.classList.toggle('activo', paso === 1 || paso === etapa.pasos.length)
+            dibujarEntrada()
+            renderPasos()
+            const pasoDeNota = raiz.querySelector('[data-h3="deps"]').checked
+            nota.innerHTML = pasoDeNota ? etapa.notaDeps() : (entrada !== 'http' && paso >= 3 ? 'Mismos pasos 3–6 que con HTTP: <b>el interior no cambió</b>, solo cambió quién lo activa.' : '')
+          }
+
+          function ir(n) {
+            paso = Math.max(0, Math.min(etapa.pasos.length, n))
+            aplicar()
+          }
+          function parar() { if (reproduciendo) { clearInterval(reproduciendo); reproduciendo = null; raiz.querySelector('[data-h3="play"]').textContent = '▶▶ Reproducir' } }
+
+          raiz.addEventListener('click', (e) => {
+            e.stopPropagation()
+            const checkbox = e.target.closest('input[data-h3="deps"]')
+            if (checkbox) { svg.classList.toggle('ver-deps', checkbox.checked); aplicar(); checkbox.blur(); return }
+            const b = e.target.closest('button')
+            if (!b) return
+            if (b.dataset.h3Entrada) {
+              entrada = b.dataset.h3Entrada
+              raiz.querySelectorAll('[data-h3-entrada]').forEach((x) => x.classList.toggle('activo', x === b))
+              if (paso === 0) ir(1); else aplicar()
+            } else if (b.dataset.h3 === 'sig') { parar(); ir(paso + 1) }
+            else if (b.dataset.h3 === 'ant') { parar(); ir(paso - 1) }
+            else if (b.dataset.h3 === 'reiniciar') { parar(); ir(0) }
+            else if (b.dataset.h3 === 'play') {
+              if (reproduciendo) { parar(); return }
+              if (paso >= etapa.pasos.length) ir(0)
+              b.textContent = '❚❚ Pausa'
+              ir(paso + 1)
+              reproduciendo = setInterval(() => {
+                if (paso >= etapa.pasos.length) parar()
+                else ir(paso + 1)
+              }, 1500)
+            }
+            b.blur()
+          })
+          dibujarEntrada()
+          aplicar()
+        })
+      })()
+
+      // H5 · Cambiá el adaptador (simulación en JS: no toca ningún servidor)
+      ;(function () {
+        const raiz = document.getElementById('h5')
+        if (!raiz) return
+        const q = (k) => raiz.querySelector(`[data-h5="${k}"]`)
+        const CAPACIDAD = 3
+        const GENTE = {
+          ada: { nombre: 'Ada', email: 'ada@untdf.local' },
+          grace: { nombre: 'Grace', email: 'grace@untdf.local' },
+          linus: { nombre: 'Linus', email: 'linus@untdf.local' },
+        }
+        const ACTIVIDAD = 'Taller de Django'
+        let adaptador = 'smtp'
+        let inscripciones = [] // claves de GENTE, en orden
+        let bandeja = [] // Mailpit
+        let enviadas = [] // NotificadorMemoria.enviadas
+        let log = []
+        let ultimo = null // { codigo, texto }
+
+        const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        const hora = () => new Date().toTimeString().slice(0, 8)
+        const asunto = `Inscripción confirmada: ${ACTIVIDAD}`
+
+        function linea(nivel, texto) {
+          log.push(`<div><span class="lv ${nivel}">${nivel.toUpperCase()}</span> ${esc(hora())} ${texto}</div>`)
+          if (log.length > 40) log.shift()
+        }
+
+        function inscribir(clave) {
+          const persona = GENTE[clave]
+          const ya = inscripciones.includes(clave)
+          let codigo, texto
+          if (ya) {
+            codigo = 200
+            texto = 'Ya estaba inscripta: no se cambió nada ni se envió otro aviso.'
+          } else if (inscripciones.length >= CAPACIDAD) {
+            codigo = 409
+            texto = 'No hay cupos disponibles (capacity_exhausted).'
+          } else {
+            inscripciones.push(clave)
+            codigo = 201
+            texto = `Inscripción creada para ${persona.nombre}.`
+            if (adaptador === 'smtp') {
+              bandeja.unshift({ asunto, para: persona.email })
+              linea('info', `NotificadorSMTP.enviar → ${esc(persona.email)}`)
+            } else if (adaptador === 'memoria') {
+              enviadas.push({ destinatario: persona.email, nombre: persona.nombre, actividad: ACTIVIDAD })
+              linea('info', `NotificadorMemoria.enviar → ${esc(persona.email)} (solo en la lista)`)
+            } else {
+              linea('error', `activities.application.inscribir No se pudo enviar la confirmación a ${esc(persona.email)}`)
+              linea('error', 'ErrorNotificacion: Fallo simulado')
+              texto += ' El correo se perdió: solo quedó en el log.'
+            }
+          }
+          linea('info', `PUT /me/enrollments/${ACTIVIDAD.split(' ')[0].toLowerCase()}-id ${codigo}`)
+          ultimo = { codigo, texto }
+        }
+
+        function pintar() {
+          q('valor').textContent = adaptador
+          raiz.querySelectorAll('[data-h5-ad]').forEach((b) => b.classList.toggle('activo', b.dataset.h5Ad === adaptador))
+          const res = q('resultado')
+          res.innerHTML = ultimo
+            ? `<span class="h5-http c${ultimo.codigo}">${ultimo.codigo}</span> <span>${ultimo.texto}</span>`
+            : '<span class="h5-vacio">Todavía no se inscribió nadie. Elegí un adaptador y apretá «Inscribir».</span>'
+          q('cupo').innerHTML = Array.from({ length: CAPACIDAD }, (_, i) => `<i class="${i < inscripciones.length ? 'lleno' : ''}"></i>`).join('')
+          q('cupo-texto').textContent = `cupo: ${inscripciones.length} / ${CAPACIDAD}`
+          q('inscriptos').innerHTML = inscripciones.length
+            ? inscripciones.map((c) => `<li>${GENTE[c].nombre} · ${ACTIVIDAD}</li>`).join('')
+            : '<li class="h5-vacio" style="border-left-color:#ccc">(ninguna)</li>'
+          q('bandeja').innerHTML = bandeja.length
+            ? bandeja.map((m) => `<div class="correo"><b>${esc(m.asunto)}</b><span>actividades@untdf.local → ${esc(m.para)}</span></div>`).join('')
+            : `<div class="correo h5-vacio">${adaptador === 'smtp' ? 'Bandeja vacía' : 'No llega nada: este adaptador no habla SMTP'}</div>`
+          q('memoria').innerHTML = enviadas.length
+            ? enviadas.map((m) => `<li>ConfirmacionInscripcion(destinatario='${esc(m.destinatario)}', …)</li>`).join('')
+            : `<li class="h5-vacio" style="border-left-color:#ccc">${adaptador === 'memoria' ? '(enviadas = [])' : '(no se usa con este adaptador)'}</li>`
+          q('log').innerHTML = log.length ? log.join('') : '<span style="opacity:.6">(sin líneas todavía)</span>'
+          q('log').scrollTop = q('log').scrollHeight
+        }
+
+        raiz.addEventListener('click', (e) => {
+          e.stopPropagation()
+          const b = e.target.closest('button')
+          if (!b) return
+          if (b.dataset.h5Ad) adaptador = b.dataset.h5Ad
+          else if (b.dataset.h5 === 'inscribir') inscribir(q('quien').value)
+          else if (b.dataset.h5 === 'reiniciar') { inscripciones = []; bandeja = []; enviadas = []; log = []; ultimo = null }
+          pintar()
+          b.blur()
+        })
+        q('quien').addEventListener('change', () => q('quien').blur())
+        pintar()
       })()
     </script>
   </body>
