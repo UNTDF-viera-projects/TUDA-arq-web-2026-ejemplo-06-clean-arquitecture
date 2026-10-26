@@ -38,6 +38,7 @@ Las slides viven solo en `main`, pero no hace falta cambiar de rama para seguirl
 Para mostrar o correr una etapa sin salir de `main`, usá una carpeta aparte:
 
 ```bash
+scripts/etapa.sh              # menú: elegís la etapa por número (marca la actual)
 scripts/etapa.sh e05          # deja ../modular-capas-v2-codigo en e05-reglas-de-dominio
 cd ../modular-capas-v2-codigo && docker compose up --build
 scripts/etapa.sh e06          # avanza la misma carpeta a la etapa siguiente
