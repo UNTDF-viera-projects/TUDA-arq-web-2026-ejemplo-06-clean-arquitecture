@@ -23,12 +23,12 @@ Repo: `modular-capas-v2`. Base code: `../modular-capas` commits `63d3cb5` (activ
 - [x] T2 (S2, S9) Branches e00-e02 from modular-capas — inline — e00-base (cb7e714, c4d9023), e01 (eb468d8), e02 (b5d81cb)
 - [x] T3 (S4) Slides infrastructure: build.py with branch refs, diffs, tree, import graph; UNTDF theme; minimap — worker — main (slides/)
 - [x] T4 (S6, S7) Branches e03-e06 (layers) — inline — 682e0ca, 7c6ac20, fc92f07, d99f1c1
-- [ ] T5 (S1, S3, S4) Slides blocks 0-5 — blocks 0-1 done (worker), blocks 2-5 pending
+- [x] T5 (S1, S3, S4) Slides blocks 0-5 + H4 + 1.4/1.5 — worker — dfb806e
 - [x] T6 (S6, S7) Branches e07-e14 (ports and adapters) — inline — c9979f1 … 4fac3cc
-- [ ] T7 (S1, S3, S4) Slides blocks 6-14
+- [x] T7 (S1, S3, S4) Slides blocks 6-14 + P1-P3 popover — worker (timed out after writing) + inline review per 1-2 blocks — c5bf576
 - [x] T8 (S10, S11) Exercise branches cancel/query + optional modular monolith branch — inline — ejercicio-cancelar-consultar (fc61579, red on purpose), solucion-cancelar-consultar (a25836e, on top of ejercicio), opcional-monolito-modular
-- [ ] T9 (S4) Interactive tools H2-H5 (H1 done)
-- [ ] T10 (S8) Archify evaluation (offline) and pieces
+- [x] T9 (S4) Interactive tools H1-H5 — H1 01d182e, H4 dfb806e, H2/H3/H5 c5bf576 (H2 click and H5 adapters verified via scripted interaction)
+- [x] T10 (S8) Archify, project-local install; slides/archify/mapa-del-destino.html + repaso.html (offline-safe, finalize gates passed) — dfb806e
 - [x] T11 (S2, S6) `scripts/verificar-ramas.sh`: tests on every branch — all 15 green (11→30 tests)
 
 - [x] T12 (S4) Optional gRPC input adapter branch `opcional-entrada-grpc` — inline — 2eb6624 (33 tests; real server smoke OK)
@@ -47,3 +47,5 @@ Repo: `modular-capas-v2`. Base code: `../modular-capas` commits `63d3cb5` (activ
 - L10: "Al script de etapas podés agregarle un selector así puedo solo escribir ./scripts/etapa.sh y que me ofrezca una lista con cuál etapa quiero ir" → done (0888a32).
 - L11: "instalalo pero solo localmente para este repo con pnpm" (archify) → project-local install; A1/A2 generated in archify/.
 - L12: "Un detallecito que serían interesante es poder hacerle click a p1 p2 p3 (en la parte superior derecha) y que recuerde cuál era la pregunta" → sent to slides worker mvphcbun-4-vjt1 (popover in minimap).
+- L13: "Si no ve haciendo bloques más pequeños así no queda todo a medias ... de a un bloque o dos" → blocks 6-14 committed (c5bf576) and reviewed in batches of 1-2 blocks; Cockburn figures enlarged; P1-P3 popover verified (click opens, Esc closes without overview).
+- L14: Close evidence: scripts/verificar-ramas.sh → 18 branches green + ejercicio red as expected (e00 11 … e14 30, solucion 36, opcional-* 33); main (e14 merged, 32f2cb9) 30 tests OK; slides build 73 includes, 78 sections, no external resources.
