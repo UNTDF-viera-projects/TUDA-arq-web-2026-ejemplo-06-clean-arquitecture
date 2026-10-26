@@ -9,8 +9,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from ...domain.errores import ActividadNoEncontrada, CupoAgotado
-from ...application.inscribir import Inscribir
-from ...infrastructure.notificaciones.smtp import NotificadorSMTP
+from ...composition import construir_inscribir
 from ...models import Activity, Enrollment, Participant
 from .serializers import (
     ActivityOutSerializer,
@@ -169,8 +168,7 @@ class EnrollmentDetailView(APIView):
             return Response(INVALID_REQUEST, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            # Por ahora la vista arma el caso de uso con su notificador.
-            inscribir = Inscribir(notificador=NotificadorSMTP())
+            inscribir = construir_inscribir()
             resultado = inscribir.ejecutar(participant, activity_id)
         except ActividadNoEncontrada:
             return Response(ACTIVITY_NOT_FOUND, status=status.HTTP_404_NOT_FOUND)

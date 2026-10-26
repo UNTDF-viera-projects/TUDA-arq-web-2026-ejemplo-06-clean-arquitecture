@@ -28,6 +28,14 @@ docker compose up --build
 
 En la interfaz: iniciar sesión con `demo` / `demo`, inscribirse en una actividad y revisar el email en Mailpit.
 
+El notificador se elige con `NOTIFICADOR` (`smtp` por defecto, `memoria` o `fallo`):
+
+```bash
+NOTIFICADOR=fallo docker compose up --build
+```
+
+Con `fallo`, la inscripción se confirma igual (201) y el error queda en el log del backend.
+
 Detener:
 
 ```bash
