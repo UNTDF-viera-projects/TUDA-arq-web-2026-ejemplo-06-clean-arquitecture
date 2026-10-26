@@ -4,7 +4,8 @@ from django.db import transaction
 
 from ..emails import send_enrollment_confirmation
 from ..models import Activity, Enrollment
-from .errores import ActividadNoEncontrada, CupoAgotado
+from ..domain.errores import ActividadNoEncontrada
+from ..domain.reglas import exigir_cupo
 
 
 @dataclass
@@ -27,8 +28,7 @@ def inscribir(participante, actividad_id):
         if inscripcion is not None:
             return ResultadoInscripcion(inscripcion, creada=False)
 
-        if actividad.enrollments.count() >= actividad.capacity:
-            raise CupoAgotado()
+        exigir_cupo(actividad.capacity, actividad.enrollments.count())
 
         inscripcion = Enrollment.objects.create(
             participant=participante,
