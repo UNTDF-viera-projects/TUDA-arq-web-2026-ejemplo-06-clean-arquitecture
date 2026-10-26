@@ -1,0 +1,48 @@
+# Topología objetivo: Nginx (único punto de entrada) + Gunicorn + PostgreSQL.
+# Uso: cp .env.example .env && docker compose -f compose.prod.yaml up --build
+
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+      POSTGRES_DB: "${POSTGRES_DB}"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: prod.Dockerfile
+    env_file:
+      - .env
+    environment:
+      POSTGRES_HOST: db
+      DJANGO_DEBUG: "0"
+      DJANGO_ALLOWED_HOSTS: "localhost,127.0.0.1,backend,nginx"
+    command: >-
+      sh -c "python manage.py migrate --noinput &&
+      python manage.py seed_activities &&
+      gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    # Sin puertos al host: solo alcanzable por la red interna.
+
+  nginx:
+    build:
+      context: ./frontend
+      dockerfile: prod.Dockerfile
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+volumes:
+  pgdata:
