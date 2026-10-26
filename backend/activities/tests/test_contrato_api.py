@@ -8,7 +8,7 @@ from django.test import TestCase, override_settings
 from django.utils import timezone
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from .models import Activity, Enrollment, Participant
+from ..models import Activity, Enrollment, Participant
 
 
 User = get_user_model()
@@ -194,7 +194,7 @@ class ApiContractTests(TestCase):
         self.assertEqual(len(mail.outbox), 0)
 
     @override_settings(
-        EMAIL_BACKEND="activities.tests.FailingEmailBackend",
+        EMAIL_BACKEND="activities.tests.test_contrato_api.FailingEmailBackend",
     )
     def test_put_keeps_the_enrollment_when_email_fails(self):
         self.user.email = "ada@example.com"

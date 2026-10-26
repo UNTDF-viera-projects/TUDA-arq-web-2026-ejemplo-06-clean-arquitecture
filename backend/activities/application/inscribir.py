@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from django.db import transaction
 
-from ..emails import send_enrollment_confirmation
+from ..infrastructure.email import send_enrollment_confirmation
 from ..models import Activity, Enrollment
 from ..domain.errores import ActividadNoEncontrada
 from ..domain.reglas import exigir_cupo

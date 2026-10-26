@@ -1,7 +1,7 @@
 from django.test import SimpleTestCase
 
-from .domain.errores import CupoAgotado
-from .domain.reglas import exigir_cupo, hay_cupo
+from ..domain.errores import CupoAgotado
+from ..domain.reglas import exigir_cupo, hay_cupo
 
 
 class ReglaDeCupoTests(SimpleTestCase):

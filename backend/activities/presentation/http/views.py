@@ -8,9 +8,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .domain.errores import ActividadNoEncontrada, CupoAgotado
-from .application.inscribir import inscribir
-from .models import Activity, Enrollment, Participant
+from ...domain.errores import ActividadNoEncontrada, CupoAgotado
+from ...application.inscribir import inscribir
+from ...models import Activity, Enrollment, Participant
 from .serializers import (
     ActivityOutSerializer,
     EnrollmentOutSerializer,
