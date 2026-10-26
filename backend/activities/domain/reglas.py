@@ -1,10 +1,11 @@
 from .errores import CupoAgotado
+from .modelos import Actividad
 
 
-def hay_cupo(capacidad: int, inscriptos: int) -> bool:
-    return inscriptos < capacidad
+def hay_cupo(actividad: Actividad) -> bool:
+    return actividad.inscriptos < actividad.capacidad
 
 
-def exigir_cupo(capacidad: int, inscriptos: int) -> None:
-    if not hay_cupo(capacidad, inscriptos):
+def exigir_cupo(actividad: Actividad) -> None:
+    if not hay_cupo(actividad):
         raise CupoAgotado()

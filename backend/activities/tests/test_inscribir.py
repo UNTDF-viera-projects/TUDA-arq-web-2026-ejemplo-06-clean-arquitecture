@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from ..application.inscribir import Inscribir
 from ..domain.errores import CupoAgotado
+from ..domain.modelos import Participante
 from ..infrastructure.notificaciones.fallo import NotificadorFallo
 from ..infrastructure.notificaciones.memoria import NotificadorMemoria
 from ..models import Activity, Enrollment, Participant
@@ -18,7 +19,10 @@ class InscribirTests(TestCase):
         usuario = get_user_model().objects.create_user(
             username="ada", email="ada@example.com", first_name="Ada"
         )
-        self.participante = Participant.objects.create(name="Ada", user=usuario)
+        fila = Participant.objects.create(name="Ada", user=usuario)
+        self.participante = Participante(
+            id=fila.id, nombre="Ada", email="ada@example.com"
+        )
         self.actividad = Activity.objects.create(
             title="Diseño de una API",
             starts_at=timezone.make_aware(datetime(2026, 3, 23, 18, 0)),
@@ -56,6 +60,6 @@ class InscribirTests(TestCase):
         self.assertTrue(resultado.creada)
         self.assertTrue(
             Enrollment.objects.filter(
-                participant=self.participante, activity=self.actividad
+                participant_id=self.participante.id, activity=self.actividad
             ).exists()
         )
