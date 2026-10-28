@@ -31,7 +31,8 @@ elegir_con_menu() {
   local actual opciones=() rama asunto marca
   actual=$(rama_actual)
   for rama in $(ramas_de_la_clase); do
-    asunto=$(git -C "$raiz" log -1 --format=%s "$rama")
+    # El commit que describe la etapa: se saltean los de mantenimiento (chore:).
+    asunto=$(git -C "$raiz" log -1 --format=%s --invert-grep --grep='^chore:' "$rama")
     marca=""
     [ "$rama" = "$actual" ] && marca="  ← actual"
     opciones+=("$rama · $asunto$marca")
